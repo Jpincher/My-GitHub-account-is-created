@@ -49,10 +49,39 @@ function playWhoosh() {
   source.start();
   source.onended = () => ctx.close();
 }
+
+
+function playBeep() {
+  const AudioCtx = window.AudioContext || window.webkitAudioContext;
+  if (!AudioCtx) return;
+
+  const ctx = new AudioCtx();
+  const oscillator = ctx.createOscillator();
+  const gain = ctx.createGain();
+
+  oscillator.type = "sine";
+  oscillator.frequency.setValueAtTime(660, ctx.currentTime);
+  oscillator.frequency.exponentialRampToValueAtTime(
+    880, ctx.currentTime + 0.12
+  );
+
+  gain.gain.setValueAtTime(0.001, ctx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(
+    0.12, ctx.currentTime + 0.015
+  );
+  gain.gain.exponentialRampToValueAtTime(
+    0.001, ctx.currentTime + 0.15
+  );
+
+  oscillator.connect(gain);
+  gain.connect(ctx.destination);
+
+  oscillator.start();
+  oscillator.stop(ctx.currentTime + 0.15);
+  oscillator.onended = () => ctx.close();
+}
+
 </script>
 
-<button type="button" onclick="playWhoosh()" style="position:fixed;bottom:20px;right:20px;padding:12px 18px;background:#6947e8;color:white;border:0;border-radius:12px;cursor:pointer;font-weight:bold;z-index:1000;">
-  &#9835; Play Welcome Sound
-</button>
 
 </body></html>
