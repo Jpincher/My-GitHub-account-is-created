@@ -81,6 +81,49 @@ function playBeep() {
   oscillator.onended = () => ctx.close();
 }
 
+document.addEventListener("click", function(event) {
+  const link = event.target.closest("a[href]");
+  if (!link) return;
+
+  // Ignore clicks that open a new tab or use modifier keys.
+  if (event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey || event.ctrlKey ||
+      event.shiftKey || event.altKey ||
+      link.hasAttribute("download") ||
+      (link.target && link.target !== "_self")) return;
+
+  const destination = new URL(link.href, window.location.href);
+
+  // Ignore external websites and email links.
+  if (destination.origin !== window.location.origin) return;
+
+  // Ignore links that only move to a section of this page.
+  if (destination.pathname === window.location.pathname &&
+      destination.search === window.location.search) return;
+
+  // Only apply sounds to pages within this portfolio.
+  const siteRoot = "/My-GitHub-account-is-created/";
+  if (!destination.pathname.startsWith(siteRoot)) return;
+
+  // Homepage gets the whoosh; other pages get the beep.
+  const isHomepage =
+    destination.pathname === siteRoot ||
+    destination.pathname === siteRoot + "index.html";
+
+  if (isHomepage) {
+    playWhoosh();
+  } else {
+    playBeep();
+  }
+
+  // Allow the short sound to begin before changing pages.
+  event.preventDefault();
+  setTimeout(() => {
+    window.location.href = destination.href;
+  }, 180);
+});
+
 </script>
 
 
