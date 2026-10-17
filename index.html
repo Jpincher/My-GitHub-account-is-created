@@ -10,4 +10,49 @@
 <section class="section" id="pathways"><div class="wrap"><div class="kicker">Two ways to explore</div><h2>Choose the work most relevant to you.</h2><p class="section-lead">Each pathway will grow into a collection of interactive demonstrations, case studies and decision-support tools.</p><div class="cards"><article class="card"><div class="icon" aria-hidden="true">🎓</div><h3>Education &amp; Learning Design</h3><p>Learning experiences, instructional design, course development and practical teaching demonstrations.</p><a class="link" href="#learning-project">Explore learning projects →</a></article><article class="card teal"><div class="icon" aria-hidden="true">📈</div><h3>Business &amp; Leadership</h3><p>Commercial decision-making, organisational development, strategic planning and AI-assisted research.</p><a class="link" href="#business-project">Explore business projects →</a></article></div></div></section>
 <section class="section projects" id="projects"><div class="wrap"><div class="kicker">Selected work</div><h2>Projects in development</h2><p class="section-lead">These are planned portfolio demonstrations. Interactive tools and detailed case studies will be added as they are completed and tested.</p><div class="project-grid"><article class="project" id="learning-project"><div class="num">PROJECT 01 / LEARNING</div><h3>Interactive Learning Design</h3><p>Comparing approaches for different learner groups with navigable resources and activities.</p><span class="pill">In development</span></article><article class="project" id="business-project"><div class="num">PROJECT 02 / BUSINESS</div><h3>Commercial ROI Dashboard</h3><p>Explore the financial implications of alternative investment and product-development assumptions.</p><span class="pill">In development</span></article><article class="project"><div class="num">PROJECT 03 / AI + STRATEGY</div><h3>AI Market Intelligence</h3><p>Research-led market assessment combining education demand, competition and commercial opportunity.</p><span class="pill">In development</span></article></div></div></section>
 <section class="section about" id="about"><div class="wrap"><div class="kicker">My approach</div><h2>Experience made tangible.</h2><div class="about-panel"><strong>Why this portfolio exists</strong><p>Rather than simply describe what I can do, I want recruiters and collaborators to explore examples of how I think, analyse challenges, design solutions and communicate decisions. This site will evolve as new projects are completed.</p></div></div></section></main>
-<footer class="footer"><div class="wrap"><span>© <span id="year">2026</span> J Pincher · Interactive Professional Portfolio</span><a href="mailto:joff.2.22.22@gmail.com">Get in touch ↗</a></div></footer><script>document.getElementById('year').textContent=new Date().getFullYear();</script></body></html>
+<footer class="footer"><div class="wrap"><span>© <span id="year">2026</span> J Pincher · Interactive Professional Portfolio</span><a href="mailto:joff.2.22.22@gmail.com">Get in touch ↗</a></div></footer><script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+
+<script>
+function playWhoosh() {
+  const AudioCtx = window.AudioContext || window.webkitAudioContext;
+  if (!AudioCtx) return;
+
+  const ctx = new AudioCtx();
+  const duration = 0.6;
+  const buffer = ctx.createBuffer(
+    1, Math.floor(ctx.sampleRate * duration), ctx.sampleRate
+  );
+  const data = buffer.getChannelData(0);
+
+  for (let i = 0; i < data.length; i++) {
+    const progress = i / data.length;
+    const envelope = Math.sin(Math.PI * progress) ** 2;
+    data[i] = (Math.random() * 2 - 1) * envelope * 0.22;
+  }
+
+  const source = ctx.createBufferSource();
+  const filter = ctx.createBiquadFilter();
+  const gain = ctx.createGain();
+
+  source.buffer = buffer;
+  filter.type = "lowpass";
+  filter.frequency.setValueAtTime(2800, ctx.currentTime);
+  filter.frequency.exponentialRampToValueAtTime(
+    350, ctx.currentTime + duration
+  );
+
+  gain.gain.value = 0.45;
+  source.connect(filter);
+  filter.connect(gain);
+  gain.connect(ctx.destination);
+
+  source.start();
+  source.onended = () => ctx.close();
+}
+</script>
+
+<button type="button" onclick="playWhoosh()" style="position:fixed;bottom:20px;right:20px;padding:12px 18px;background:#6947e8;color:white;border:0;border-radius:12px;cursor:pointer;font-weight:bold;z-index:1000;">
+  &#9835; Play Welcome Sound
+</button>
+
+</body></html>
