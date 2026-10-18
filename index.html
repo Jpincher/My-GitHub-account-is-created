@@ -59,7 +59,7 @@ function playBeep() {
   const oscillator = ctx.createOscillator();
   const gain = ctx.createGain();
 
-  oscillator.type = "sine";
+  oscillator.type = "triangle";
   oscillator.frequency.setValueAtTime(660, ctx.currentTime);
   oscillator.frequency.exponentialRampToValueAtTime(
     880, ctx.currentTime + 0.12
