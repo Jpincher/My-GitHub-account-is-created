@@ -3,432 +3,76 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Explore Jonathan Pincher's interactive learning design demonstration, comparing learning experiences for secondary-school and university audiences.">
 <title>Interactive Learning Design | Jonathan Pincher</title>
 <style>
-:root {
-  --cream: #F3F5EB;
-  --sage: #E5EFE4;
-  --green: #253E35;
-  --muted: #50665B;
-  --border: #CAD8C8;
-  --white: #FFFFFF;
-}
 * { box-sizing: border-box; }
 body {
   margin: 0;
+  background: #F1F5EB;
+  color: #253E35;
   font-family: Arial, Helvetica, sans-serif;
-  color: var(--green);
-  background: var(--cream);
-  line-height: 1.65;
 }
-.container {
-  width: min(1100px, 100% - 40px);
-  margin-inline: auto;
-}
-a { color: inherit; }
-a:hover { text-decoration-thickness: 2px; }
-button, a { -webkit-tap-highlight-color: transparent; }
-:focus-visible {
-  outline: 3px solid #AB581F;
-  outline-offset: 5px;
-}
-.skip {
-  position: absolute;
-  top: -100px;
-  left: 20px;
-  padding: 12px;
-  background: white;
-  z-index: 10;
-}
-.skip:focus { top: 10px; }
-header {
-  padding: 28px 0 54px;
-  background: linear-gradient(120deg, #253E35, #587B66);
+nav {
+  background: #253E35;
   color: white;
+  padding: 18px 24px;
 }
-.breadcrumbs ol {
+nav ol {
   display: flex;
   flex-wrap: wrap;
   gap: 8px 12px;
-  padding: 0;
-  margin: 0 0 42px;
   list-style: none;
-  font-size: .9rem;
+  padding: 0;
+  margin: 0;
+  line-height: 1.6;
+  font-size: 14px;
 }
-.breadcrumbs li + li::before {
+nav li + li::before {
   content: "›";
   margin-right: 12px;
 }
-.breadcrumbs a { text-underline-offset: 4px; }
-.eyebrow {
-  font-size: .78rem;
-  font-weight: bold;
-  letter-spacing: .13em;
-  text-transform: uppercase;
+nav a { color: white; text-underline-offset: 4px; }
+a:focus-visible {
+  outline: 3px solid #E5C074;
+  outline-offset: 4px;
 }
-header .eyebrow { color: #DBE9D8; }
-h1, h2, h3 { line-height: 1.2; }
-h1 {
-  font-size: clamp(2.2rem, 5vw, 3.8rem);
-  max-width: 850px;
-  margin: 14px 0 20px;
+iframe {
+  display: block;
+  width: 100%;
+  height: calc(100vh - 65px);
+  height: calc(100dvh - 65px);
+  min-height: 650px;
+  border: 0;
+  background: #F1F5EB;
 }
-h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); }
-h3 { font-size: 1.15rem; }
-header p { max-width: 740px; font-size: 1.1rem; }
-main { padding: 42px 0 60px; }
-.intro { max-width: 800px; margin-bottom: 28px; }
-.muted { color: var(--muted); }
-.demo {
-  background: var(--sage);
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  padding: 30px;
+.project-link {
+  margin: 0;
+  padding: 12px 24px;
+  font-size: 14px;
 }
-.tabs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin: 22px 0;
-}
-button, .button {
-  font: inherit;
-  font-weight: bold;
-  border: 1px solid var(--green);
-  border-radius: 10px;
-  padding: 12px 18px;
-  cursor: pointer;
-  background: white;
-  color: var(--green);
-}
-.tabs button[aria-pressed="true"],
-.primary {
-  background: var(--green);
-  color: white;
-}
-button:hover { box-shadow: 0 3px 10px #253E3520; }
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 22px;
-}
-.card {
-  padding: 24px;
-  background: #FCFDF8;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-}
-.card h3 { margin-top: 0; }
-.label {
-  display: inline-block;
-  padding: 4px 10px;
-  border-radius: 20px;
-  background: var(--sage);
-  font-size: .8rem;
-  font-weight: bold;
-}
-fieldset { border: 0; padding: 0; margin: 20px 0; }
-legend { font-weight: bold; margin-bottom: 12px; }
-.choice {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-  margin: 10px 0;
-  padding: 12px;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  background: white;
-  cursor: pointer;
-}
-.choice input { margin-top: 7px; flex-shrink: 0; }
-.feedback {
-  margin-top: 18px;
-  padding: 16px;
-  border-left: 4px solid var(--green);
-  background: var(--sage);
-}
-.feedback:empty { display: none; }
-.email {
-  margin-top: 18px;
-  padding: 18px;
-  border-radius: 12px;
-  background: var(--cream);
-  border: 1px dashed #80977E;
-  overflow-wrap: anywhere;
-}
-section.explanation { margin-top: 42px; }
-details {
-  background: var(--sage);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 18px 22px;
-  margin-top: 12px;
-}
-summary { cursor: pointer; font-weight: bold; }
-.bottom-nav { margin-top: 38px; }
-.button { display: inline-block; text-decoration: none; }
-footer {
-  border-top: 1px solid var(--border);
-  padding: 24px 0;
-  font-size: .9rem;
-}
-[hidden] { display: none !important; }
-@media (max-width: 700px) {
-  .grid { grid-template-columns: 1fr; }
-  .demo { padding: 20px; }
-  .card { padding: 20px; }
-  .container { width: calc(100% - 32px); }
-  header { padding-bottom: 36px; }
-  .tabs button { flex: 1 1 200px; }
-}
+.project-link a { color: #253E35; }
 </style>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
+<nav aria-label="Breadcrumb">
+  <ol>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="education.html">Education &amp; Learning Design</a></li>
+    <li aria-current="page">Interactive Learning Design</li>
+  </ol>
+</nav>
 
-<header>
-  <div class="container">
-    <nav class="breadcrumbs" aria-label="Breadcrumb">
-      <ol>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="education.html">Education &amp; Learning Design</a></li>
-        <li aria-current="page">Interactive Learning Design</li>
-      </ol>
-    </nav>
-    <div class="eyebrow">Jonathan Pincher · Learning portfolio</div>
-    <h1>Interactive Learning Design</h1>
-    <p>One learning goal. Two different audiences. Explore how the
-      language, support and assessment change to help each audience
-      put learning into practice.</p>
-  </div>
-</header>
-
-<main id="main" class="container">
-  <div class="intro">
-    <div class="eyebrow">Try the experience</div>
-    <h2>Recognising a suspicious message</h2>
-    <p>This illustrative cybersecurity activity shows how a shared topic
-      can be adapted for secondary-school learners and university students.
-      Choose an audience, try the activity, then explore the design decisions.</p>
-  </div>
-
-  <section class="demo" aria-labelledby="demo-title">
-    <h2 id="demo-title">Choose your audience</h2>
-    <div class="tabs" role="group" aria-label="Learner audience">
-      <button type="button" id="school-button" aria-pressed="true">
-        Secondary-school learners
-      </button>
-      <button type="button" id="university-button" aria-pressed="false">
-        University students
-      </button>
-    </div>
-
-    <div id="audience-content">
-      <div class="grid">
-        <article class="card">
-          <span class="label" id="audience-label"></span>
-          <h3 id="activity-heading"></h3>
-          <p id="objective"></p>
-          <div class="email">
-            <strong>Example message — fictional</strong>
-            <p id="message"></p>
-          </div>
-          <p class="muted" id="support"></p>
-        </article>
-
-        <article class="card">
-          <h3>Your decision</h3>
-          <form id="activity-form">
-            <fieldset>
-              <legend id="question"></legend>
-              <label class="choice">
-                <input type="radio" name="answer" value="0" required>
-                <span id="answer-0"></span>
-              </label>
-              <label class="choice">
-                <input type="radio" name="answer" value="1">
-                <span id="answer-1"></span>
-              </label>
-              <label class="choice">
-                <input type="radio" name="answer" value="2">
-                <span id="answer-2"></span>
-              </label>
-            </fieldset>
-            <button type="submit" class="primary">Check my decision</button>
-          </form>
-          <div class="feedback" id="feedback" role="status"
-               aria-live="polite" aria-atomic="true"></div>
-        </article>
-      </div>
-
-      <div class="card" style="margin-top:22px">
-        <h3>Why this learning design?</h3>
-        <p id="rationale"></p>
-        <p><strong>Evidence of learning:</strong>
-          <span id="evidence"></span></p>
-      </div>
-    </div>
-    <noscript>
-      <p>This interactive comparison needs JavaScript enabled.
-        The design principles below are available without it.</p>
-    </noscript>
-  </section>
-
-  <section class="explanation" aria-labelledby="approach-title">
-    <div class="eyebrow">Behind the experience</div>
-    <h2 id="approach-title">Start with the learner and the outcome</h2>
-    <p>The intended outcome is practical: recognise warning signs and
-      choose a safe way to verify a message. The activity gives learners
-      a decision to make and feedback they can use immediately.</p>
-
-    <details>
-      <summary>Adapt the support to the audience</summary>
-      <p>The school example uses a familiar situation, short instructions
-        and clear prompts. The university example adds an institutional
-        context and asks learners to justify their judgement.
-        Age is a starting assumption; prior knowledge, accessibility needs
-        and learner feedback should guide further adaptation.</p>
-    </details>
-
-    <details>
-      <summary>Use assessment to reveal understanding</summary>
-      <p>A selected answer checks an initial decision. Asking learners
-        to explain the warning signs and their verification steps provides
-        stronger evidence that they can apply the learning.
-        This short demonstration does not establish competence by itself.</p>
-    </details>
-
-    <details>
-      <summary>Make the experience accessible</summary>
-      <p>The page uses responsive layouts, labelled answer choices,
-        keyboard-operable controls and feedback announced to screen readers.
-        Instructions use plain language, and feedback does not rely on
-        colour alone.</p>
-    </details>
-
-    <details>
-      <summary>Evaluate and improve</summary>
-      <p>In a live programme, I would review incorrect choices, learner
-        explanations and feedback to identify confusing wording or missing
-        support. A later activity with a different message would help check
-        whether learners can transfer their understanding.</p>
-    </details>
-  </section>
-
-  <nav class="bottom-nav" aria-label="Return navigation">
-    <a class="button" href="education.html">
-      ← Education &amp; Learning Design
+<main>
+  <p class="project-link">
+    <a href="Final%20Lesson%20Plans%20Jonathan_Pincher_Portfolio_Invitation.html">
+      Open the learning design project in a full page →
     </a>
-  </nav>
+  </p>
+
+  <iframe
+    src="Final%20Lesson%20Plans%20Jonathan_Pincher_Portfolio_Invitation.html"
+    title="Jonathan Pincher — One topic, two learning designs">
+  </iframe>
 </main>
-
-<footer>
-  <div class="container">
-    Jonathan Pincher · Illustrative learning design demonstration ·
-    <a href="index.html">Return to portfolio</a>
-  </div>
-</footer>
-
-<script>
-"use strict";
-
-const activities = {
-  school: {
-    label: "Secondary-school learners",
-    heading: "Pause before you click",
-    objective: "Learning goal: spot warning signs in a message and choose a safe next step.",
-    message: "You have won a gaming voucher! Claim it in the next 10 minutes. Follow this link and enter your school email password to collect your prize.",
-    support: "Look for pressure to act quickly, an unexpected reward and a request for your password.",
-    question: "What is the safest next step?",
-    answers: [
-      "Open the link to see whether the prize looks real.",
-      "Avoid the link and ask a trusted adult or school IT team for help.",
-      "Send the message to friends so they can claim a prize too."
-    ],
-    correct: 1,
-    feedback: [
-      "Opening the link is unnecessary. The unexpected prize, time pressure and password request are warning signs. Verify the message through a trusted route.",
-      "Good decision. Avoid the link and get help through a trusted route. The prize, time pressure and password request are warning signs.",
-      "Forwarding the message could put other people at risk. Avoid the link and ask a trusted adult or school IT team for help."
-    ],
-    rationale: "A familiar scenario and short prompts reduce the amount of unfamiliar information. Immediate feedback connects the decision to recognisable warning signs.",
-    evidence: "Ask the learner to name two warning signs and explain who they would contact for help."
-  },
-  university: {
-    label: "University students",
-    heading: "Assess the request and verify independently",
-    objective: "Learning goal: evaluate a suspicious institutional message and explain a safe verification process.",
-    message: "From: Student Finance Support <payments@campus-refund.example>. Your tuition refund is ready. Within 30 minutes, use the attached link to confirm your university password and bank details or the refund will be cancelled.",
-    support: "Consider the sender, the requested information, the urgency and how you could verify the claim without using the message.",
-    question: "Which response best manages the risk?",
-    answers: [
-      "Reply to the sender and ask whether the refund is genuine.",
-      "Use the link because the message refers to university finance.",
-      "Avoid the link, check through the official university portal and report the message using the university's process."
-    ],
-    correct: 2,
-    feedback: [
-      "A reply still relies on the unverified sender. Check the claim through an independently accessed official portal or a known university contact.",
-      "An institutional reference does not establish authenticity. The urgency and request for credentials and bank details warrant independent verification.",
-      "Good decision. An independently accessed official portal gives you a safer verification route. Follow the university's reporting process and do not share credentials through the message."
-    ],
-    rationale: "The scenario adds contextual detail and requires evaluation of several signals. Learners practise a verification process they could apply beyond this example.",
-    evidence: "Ask the learner to justify the decision using three warning signs and describe an independent verification route."
-  }
-};
-
-let currentAudience = "school";
-const schoolButton = document.getElementById("school-button");
-const universityButton = document.getElementById("university-button");
-const form = document.getElementById("activity-form");
-const feedback = document.getElementById("feedback");
-
-function showAudience(audience) {
-  currentAudience = audience;
-  const activity = activities[audience];
-
-  const fields = {
-    "audience-label": "label",
-    "activity-heading": "heading",
-    "objective": "objective",
-    "message": "message",
-    "support": "support",
-    "question": "question",
-    "rationale": "rationale",
-    "evidence": "evidence"
-  };
-
-  Object.entries(fields).forEach(([id, key]) => {
-    document.getElementById(id).textContent = activity[key];
-  });
-
-  activity.answers.forEach((answer, index) => {
-    document.getElementById("answer-" + index).textContent = answer;
-  });
-
-  schoolButton.setAttribute("aria-pressed", String(audience === "school"));
-  universityButton.setAttribute("aria-pressed", String(audience === "university"));
-  form.reset();
-  feedback.textContent = "";
-}
-
-schoolButton.addEventListener("click", () => showAudience("school"));
-universityButton.addEventListener("click", () => showAudience("university"));
-
-form.addEventListener("change", () => {
-  feedback.textContent = "";
-});
-
-form.addEventListener("submit", event => {
-  event.preventDefault();
-  const selected = form.querySelector('input[name="answer"]:checked');
-  if (!selected) return;
-  const activity = activities[currentAudience];
-  feedback.textContent = activity.feedback[Number(selected.value)];
-});
-
-showAudience("school");
-</script>
 </body>
 </html>
