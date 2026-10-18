@@ -70,14 +70,14 @@ function playBeep() {
     0.70, ctx.currentTime + 0.015
   );
   gain.gain.exponentialRampToValueAtTime(
-    0.001, ctx.currentTime + 0.15
+    0.001, ctx.currentTime + 0.35
   );
 
   oscillator.connect(gain);
   gain.connect(ctx.destination);
 
   oscillator.start();
-  oscillator.stop(ctx.currentTime + 0.15);
+  oscillator.stop(ctx.currentTime + 0.35);
   oscillator.onended = () => ctx.close();
 }
 
