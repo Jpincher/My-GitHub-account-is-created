@@ -1,0 +1,10 @@
+{
+  "name": "learning-portfolio-avatar-checks",
+  "private": true,
+  "scripts": {
+    "test": "node avatar-controls.cjs"
+  },
+  "devDependencies": {
+    "jsdom": "30.1.3"
+  }
+}
