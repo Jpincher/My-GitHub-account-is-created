@@ -2,7 +2,7 @@
 
 On every page with an avatar, place Mute/Unmute, Play/Pause/Resume and Stop together in that order, on one horizontal row immediately beneath the avatar. Align their bottom edges, use matching compact green styling and zero individual margins, and prevent wrapping at narrow widths. Retain keyboard focus indicators and translated labels. The final avatar layout stylesheet must follow legacy page styles.
 
-Do not reintroduce a separate Mute row when changing page content or rebuilding the project. Offer one translated “Start experience with sound” action on initial arrival, then automatically narrate subsequent page visits using the same audio element. Call audio.play() synchronously from the real start click. Do not fake browser clicks or restart sound merely because the viewer changes language before starting. Respect “Continue without sound” and both Mute controls across pages. Retain the visible Play fallback if the browser blocks playback.
+Do not reintroduce a separate Mute row when changing page content or rebuilding the project. Offer one translated “Start experience with sound” action on initial arrival, then automatically narrate subsequent page visits using the same audio element. Call audio.play() synchronously from the real start click. Do not fake browser clicks or restart sound merely because the viewer changes language before starting. Remove the start button immediately when clicked and do not show it again during internal navigation. Do not add a separate silent-browsing button or welcome panel. Centre the start button beneath the body-text column on the same horizontal row as the avatar's playback buttons, with both groups aligned along their bottom edges. Respect both Mute controls across pages. Retain the visible Play fallback if the browser blocks playback.
 
 Before publishing changes to the generated runtime, run the avatar layout regression check:
 
@@ -13,4 +13,4 @@ npm --prefix tests test
 
 This checks every avatar page, all three controls sharing a row, bottom alignment, zero margins and consistent minimum button height. It also checks for page-script errors. Use a browser for final visual checks at desktop and mobile widths.
 
-The sound regression check covers first arrival, translated start labels, synchronous audio start, automatic narration across navigation, shared audio reuse, persistent mute, silent browsing and blocked-playback fallback.
+The sound regression check covers first arrival, translated start labels, synchronous audio start, automatic narration across navigation, shared audio reuse, persistent mute, the disappearing start action and blocked-playback fallback.

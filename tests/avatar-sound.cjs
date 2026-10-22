@@ -79,20 +79,7 @@ w.HTMLMediaElement.prototype.play = function () { attempts++; return nativePlay.
   w.document.getElementById('voiceMuteToggle').click();
   await wait(50);
   assert(attempts > beforeMuted, 'Unmute restarts the current introduction');
-  w.JP_SOUND_STARTED = false;
-  w.localStorage.setItem('jp-voice-muted', 'false');
-  w.projectGo('learning-reflection.html');
-  await wait(450);
-  assert(w.document.getElementById('continueWithoutSound'));
-  const beforeSilent = attempts;
-  w.document.getElementById('continueWithoutSound').click();
-  assert(!w.document.getElementById('soundWelcome'));
-  assert.equal(w.localStorage.getItem('jp-voice-muted'), 'true');
-  w.projectGo('interactive-learning.html');
-  await wait(450);
-  assert.equal(attempts, beforeSilent, 'Silent browsing must not start sound');
-  w.document.getElementById('voiceMuteToggle').click();
-  await wait(30);
+  assert(!w.document.getElementById('continueWithoutSound'));
   w.document.getElementById('guideReliableStop').click();
   w.HTMLMediaElement.prototype.play = () => Promise.reject(Object.assign(new Error('Browser blocked sound'), { name: 'NotAllowedError' }));
   w.document.getElementById('guideReliablePlay').click();
@@ -100,5 +87,5 @@ w.HTMLMediaElement.prototype.play = function () { attempts++; return nativePlay.
   assert(w.document.getElementById('guideReliableStatus').textContent.length > 0, 'Explain a browser playback block');
   assert(w.document.getElementById('guideReliablePlay'), 'Retain an accessible replay fallback');
   assert.deepEqual(errors, []);
-  process.stdout.write('PASS: one start action, translated choice, synchronous audio start, automatic page introductions, shared audio, persistent mute and silent browsing.\n');
+  process.stdout.write('PASS: one start action, translated choice, synchronous audio start, automatic page introductions, shared audio, persistent mute and disappearing start action.\n');
 })().catch(error => { process.stderr.write(error.stack + '\n'); process.exitCode = 1; }).finally(() => w.close());
