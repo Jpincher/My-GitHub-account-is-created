@@ -27,8 +27,8 @@ jobs:
       - name: Install pinned browser test tools
         run: |
           npm install --prefix _checks --ignore-scripts --no-audit --no-fund playwright@1.56.1
-          node _checks/node_modules/playwright/cli.js install --with-deps chromium
-      - name: Measure playing, paused and stopped controls on every guide page
-        run: node tests/avatar-layout-browser.cjs
+          google-chrome --version
       - name: Decode every installed recording
         run: python3 tests/verify-recordings.py
+      - name: Measure playing, paused and stopped controls on every guide page
+        run: node tests/avatar-layout-browser.cjs
