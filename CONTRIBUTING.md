@@ -18,3 +18,5 @@ The sound regression check covers first arrival, translated start labels, synchr
 
 ## Guided usability testing
 Keep the tester launch button directly below the “Learning by design.” heading and above “Mute voice” in every project sidebar. Use the same green palette and compact controls. Keep tester instructions next to the buttons for the pages they describe, retain English/Spanish/Chinese content, and show honest dataset scope beside every report. The current tester is a browser-only first draft; see USABILITY_TESTING.md before enabling shared collection or collecting real personal information.
+
+The usability tester uses a 1–5 native-radio scale (1 unusable, 3 usable, 5 excellent and engaging). Put each criterion and its scale anchors above its choices. Keep the return-to-introduction action visible on question pages and preserve answers when returning. Task instructions end by explaining that the buttons below open the pages being assessed. Keep old 0–10 draft records separate from the 1–5 schema.

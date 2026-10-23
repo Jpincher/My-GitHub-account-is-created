@@ -10,7 +10,7 @@ vc.on('jsdomError', e => { if (!/Not implemented|Could not parse CSS/.test(e.mes
 const dom = new JSDOM(html, { url: 'https://jpincher.github.io/My-GitHub-account-is-created/usability-tester.html', runScripts: 'dangerously', pretendToBeVisual: true, virtualConsole: vc, beforeParse(w) { w.scrollTo = () => {}; w.open = () => null; Object.defineProperty(w, 'crypto', { value: webcrypto }); w.TextEncoder = TextEncoder; } });
 const w = dom.window, d = w.document;
 const click = selector => { const el = d.querySelector(selector); assert(el, 'Missing '+selector); el.click(); };
-const fill = (name, value) => { const el = d.querySelector('[name="'+name+'"]'); assert(el, name); if (el.type === 'checkbox') el.checked = !!value; else el.value = String(value); el.dispatchEvent(new w.Event('input', { bubbles: true })); };
+const fill = (name, value) => { const el = d.querySelector('[name="'+name+'"]'); assert(el, name); if (el.type === 'radio') { const radio = d.querySelector('[name="'+name+'"][value="'+value+'"]'); assert(radio); radio.click(); return; } if (el.type === 'checkbox') el.checked = !!value; else el.value = String(value); el.dispatchEvent(new w.Event('input', { bubbles: true })); };
 const main = () => d.getElementById('main').innerHTML;
 (async () => {
  assert.equal(d.querySelectorAll('select[name^="profile."]').length, 5);
@@ -20,9 +20,23 @@ const main = () => d.getElementById('main').innerHTML;
  fill('profile.age', 3);
  fill('consent', true);
  click('[data-action="start"]');
+ assert(!d.getElementById('testerIntroButton').hidden);
+ assert.equal(d.querySelectorAll('fieldset.rating-row').length, 7);
+ for (const group of d.querySelectorAll('fieldset.rating-row')) {
+   assert(group.querySelector('legend'));
+   assert(group.querySelector('.score-scale').textContent.includes('3 = usable'));
+   assert.deepEqual([...group.querySelectorAll('.score-options input')].map(r => r.value), ['1','2','3','4','5']);
+ }
+ assert(main().includes('The buttons below will take you to the pages you are being asked to assess.'));
+ fill('rating.interface', 1);
+ click('[data-action="intro"]');
+ assert(d.getElementById('testerIntroButton').hidden);
+ assert(main().includes('This information is not made public.'));
+ click('[data-action="start"]');
+ assert(d.querySelector('[name="rating.interface"][value="1"]').checked);
  for (let i = 0; i < 5; i++) {
    click('[data-action="outcome"][data-value="0"]');
-   for (const [key, score] of Object.entries({ interface: 0, next: 5, readability: 10, engagement: 6, function: 7 })) fill('rating.'+key, score);
+   for (const [key, score] of Object.entries({ interface: 1, next: 2, readability: 5, engagement: 3, function: 3 })) fill('rating.'+key, score);
    fill('stageComment', '<img src=x onerror=alert(1)>');
    click('[data-action="next"]');
  }
@@ -35,17 +49,17 @@ const main = () => d.getElementById('main').innerHTML;
  assert(!main().includes('PRIVATE_TEST_NICKNAME'));
  assert(!main().includes('private@example.invalid'));
  assert(!main().includes('onerror'));
- assert(main().includes('5.6'));
+ assert(main().includes('2.8'));
  click('[data-action="another"]');
  fill('consent', true);
  click('[data-action="start"]');
  for (let i = 0; i < 5; i++) click('[data-action="skip"]');
  click('[data-action="finished"]');
  click('[data-action="done"]');
- assert(main().includes('5.6'), 'Skipped answers must not become zero');
- const snapshot = JSON.parse(w.sessionStorage.getItem('jp-usability-draft-session-v1'));
+ assert(main().includes('2.8'), 'Skipped answers must not become zero');
+ const snapshot = JSON.parse(w.sessionStorage.getItem('jp-usability-draft-session-v2'));
  assert.equal(snapshot.records.length, 2);
- assert.equal(snapshot.records[0].sections.overview.ratings.interface, 0);
+ assert.equal(snapshot.records[0].sections.overview.ratings.interface, 1);
  click('[data-action="unlock"]');
  d.getElementById('developerCode').value = 'an incorrect preview code';
  click('[data-action="login"]');
@@ -57,11 +71,11 @@ const main = () => d.getElementById('main').innerHTML;
    await new Promise(resolve => setTimeout(resolve, 30));
    assert(main().includes('PRIVATE_TEST_NICKNAME'));
    assert(main().includes('50%'));
-   fill('filter.min', 9); click('[data-action="apply"]');
+   fill('filter.min', 4); click('[data-action="apply"]');
    assert(main().includes('No responses match'));
    click('[data-action="logout"]');
    assert(!main().includes('PRIVATE_TEST_NICKNAME'));
  }
  assert.deepEqual(errors, []);
- process.stdout.write('PASS: five demographic fields, five tasks, zero and missing scores, review privacy, public-report privacy, escaped comments and preview login rejection.\n');
+ process.stdout.write('PASS: five demographic fields, five tasks, 1–5 radio scores, return-to-introduction navigation and missing scores, review privacy, public-report privacy, escaped comments and preview login rejection.\n');
 })().catch(e => { process.stderr.write(e.stack+'\n'); process.exitCode = 1; }).finally(() => w.close());
