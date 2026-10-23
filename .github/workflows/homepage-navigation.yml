@@ -10,6 +10,8 @@ on:
       - 'interactive-learning.html'
       - 'learning-usability-testing.html'
       - 'tests/avatar-sound.cjs'
+      - 'how-to-read-this-site.html'
+      - 'tests/site-reading-guide.cjs'
       - 'tests/homepage-navigation.cjs'
       - '.github/workflows/homepage-navigation.yml'
   workflow_dispatch:

@@ -15,6 +15,7 @@ on:
       - 'interactive-learning.html'
       - 'learning-usability-testing.html'
       - 'usability-tester.html'
+      - 'how-to-read-this-site.html'
       - 'supabase/**'
       - 'tools/usability-live-*'
       - 'tools/enable-live-usability.cjs'
