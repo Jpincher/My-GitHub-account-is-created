@@ -1,0 +1,67 @@
+const { JSDOM, VirtualConsole } = require('jsdom');
+const { webcrypto } = require('node:crypto');
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const html = fs.readFileSync(path.join(__dirname, '..', 'usability-tester.html'), 'utf8');
+const errors = [];
+const vc = new VirtualConsole();
+vc.on('jsdomError', e => { if (!/Not implemented|Could not parse CSS/.test(e.message)) errors.push(e.message); });
+const dom = new JSDOM(html, { url: 'https://jpincher.github.io/My-GitHub-account-is-created/usability-tester.html', runScripts: 'dangerously', pretendToBeVisual: true, virtualConsole: vc, beforeParse(w) { w.scrollTo = () => {}; w.open = () => null; Object.defineProperty(w, 'crypto', { value: webcrypto }); w.TextEncoder = TextEncoder; } });
+const w = dom.window, d = w.document;
+const click = selector => { const el = d.querySelector(selector); assert(el, 'Missing '+selector); el.click(); };
+const fill = (name, value) => { const el = d.querySelector('[name="'+name+'"]'); assert(el, name); if (el.type === 'checkbox') el.checked = !!value; else el.value = String(value); el.dispatchEvent(new w.Event('input', { bubbles: true })); };
+const main = () => d.getElementById('main').innerHTML;
+(async () => {
+ assert.equal(d.querySelectorAll('select[name^="profile."]').length, 5);
+ for (const select of d.querySelectorAll('select[name^="profile."]')) assert.equal(select.options.length, 5);
+ fill('profile.nickname', 'PRIVATE_TEST_NICKNAME');
+ fill('profile.email', 'private@example.invalid');
+ fill('profile.age', 3);
+ fill('consent', true);
+ click('[data-action="start"]');
+ for (let i = 0; i < 5; i++) {
+   click('[data-action="outcome"][data-value="0"]');
+   for (const [key, score] of Object.entries({ interface: 0, next: 5, readability: 10, engagement: 6, function: 7 })) fill('rating.'+key, score);
+   fill('stageComment', '<img src=x onerror=alert(1)>');
+   click('[data-action="next"]');
+ }
+ fill('comments.improve', 'Make the next action clearer.');
+ click('[data-action="finished"]');
+ assert(!main().includes('PRIVATE_TEST_NICKNAME'));
+ assert(!main().includes('private@example.invalid'));
+ assert(main().includes('&lt;img'));
+ click('[data-action="done"]');
+ assert(!main().includes('PRIVATE_TEST_NICKNAME'));
+ assert(!main().includes('private@example.invalid'));
+ assert(!main().includes('onerror'));
+ assert(main().includes('5.6'));
+ click('[data-action="another"]');
+ fill('consent', true);
+ click('[data-action="start"]');
+ for (let i = 0; i < 5; i++) click('[data-action="skip"]');
+ click('[data-action="finished"]');
+ click('[data-action="done"]');
+ assert(main().includes('5.6'), 'Skipped answers must not become zero');
+ const snapshot = JSON.parse(w.sessionStorage.getItem('jp-usability-draft-session-v1'));
+ assert.equal(snapshot.records.length, 2);
+ assert.equal(snapshot.records[0].sections.overview.ratings.interface, 0);
+ click('[data-action="unlock"]');
+ d.getElementById('developerCode').value = 'an incorrect preview code';
+ click('[data-action="login"]');
+ await new Promise(resolve => setTimeout(resolve, 30));
+ assert(!main().includes('PRIVATE_TEST_NICKNAME'));
+ if (process.env.JP_USABILITY_TEST_CODE) {
+   d.getElementById('developerCode').value = process.env.JP_USABILITY_TEST_CODE;
+   click('[data-action="login"]');
+   await new Promise(resolve => setTimeout(resolve, 30));
+   assert(main().includes('PRIVATE_TEST_NICKNAME'));
+   assert(main().includes('50%'));
+   fill('filter.min', 9); click('[data-action="apply"]');
+   assert(main().includes('No responses match'));
+   click('[data-action="logout"]');
+   assert(!main().includes('PRIVATE_TEST_NICKNAME'));
+ }
+ assert.deepEqual(errors, []);
+ process.stdout.write('PASS: five demographic fields, five tasks, zero and missing scores, review privacy, public-report privacy, escaped comments and preview login rejection.\n');
+})().catch(e => { process.stderr.write(e.stack+'\n'); process.exitCode = 1; }).finally(() => w.close());

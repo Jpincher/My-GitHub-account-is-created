@@ -14,3 +14,7 @@ npm --prefix tests test
 This checks every avatar page, all three controls sharing a row, bottom alignment, zero margins and consistent minimum button height. It also checks for page-script errors. Use a browser for final visual checks at desktop and mobile widths.
 
 The sound regression check covers first arrival, translated start labels, synchronous audio start, automatic narration across navigation, shared audio reuse, persistent mute, the disappearing start action and blocked-playback fallback.
+
+
+## Guided usability testing
+Keep the tester launch button at the top of every project sidebar. Use the same green palette and compact controls. Keep tester instructions next to the buttons for the pages they describe, retain English/Spanish/Chinese content, and show honest dataset scope beside every report. The current tester is a browser-only first draft; see USABILITY_TESTING.md before enabling shared collection or collecting real personal information.
