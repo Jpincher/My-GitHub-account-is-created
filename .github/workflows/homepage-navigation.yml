@@ -6,6 +6,10 @@ on:
       - 'index.html'
       - 'FinalHomepage.html.html'
       - 'portfolio-languages.js'
+      - 'learning-project-*.js'
+      - 'interactive-learning.html'
+      - 'learning-usability-testing.html'
+      - 'tests/avatar-sound.cjs'
       - 'tests/homepage-navigation.cjs'
       - '.github/workflows/homepage-navigation.yml'
   workflow_dispatch:

@@ -49,15 +49,18 @@ w.HTMLMediaElement.prototype.play = function () { attempts++; return nativePlay.
   await wait(450);
   assert(w.document.getElementById('startExperienceSound'), 'Start action must be visible on first arrival');
   assert.equal(attempts, 0, 'No sound before the visitor starts the experience');
+  assert.match(w.document.getElementById('voiceMuteToggle').textContent,/Hear guide voice/);
   w.document.querySelector('[data-language="es"]').click();
   await wait(100);
   assert.equal(attempts, 0, 'Choosing a language must not bypass the start choice');
   assert.match(w.document.getElementById('startExperienceSound').textContent, /Comenzar/);
   const beforeStart = attempts;
-  w.document.getElementById('startExperienceSound').click();
+  w.document.getElementById('voiceMuteToggle').click();
   assert(attempts > beforeStart, 'Start must call play synchronously within the user action');
   await wait(50);
   assert(w.JP_SOUND_STARTED);
+  assert.match(w.document.getElementById('voiceMuteToggle').textContent,/Silenciar/);
+  assert.equal(w.JP_ACTIVE_TRACK.route,'interactive-learning.html');
   assert(!w.document.getElementById('soundWelcome'));
   const shared = w.JP_SHARED_AUDIO;
   for (const route of ['learning-compare.html', 'learning-comparison-document.html', 'learning-university-pack.html']) {
@@ -68,9 +71,19 @@ w.HTMLMediaElement.prototype.play = function () { attempts++; return nativePlay.
     assert.equal(w.JP_SHARED_AUDIO, shared, 'Use the same audio element across navigation');
     assert(attempts > before, 'Automatically introduce ' + route);
     assert(!w.document.getElementById('soundWelcome'), 'Do not repeat the welcome choice');
+    assert.match(w.document.getElementById('voiceMuteToggle').textContent,/Silenciar/);
+    w.document.getElementById('guideReliablePlay').click();
+    await wait(10);
+    assert.match(w.document.getElementById('voiceMuteToggle').textContent,/Escuchar la voz/,'Paused introduction offers Hear guide voice');
+    w.document.getElementById('voiceMuteToggle').click();
+    assert.equal(w.JP_ACTIVE_TRACK.route,route,'Hear uses the current route');
+    assert.equal(w.JP_SHARED_AUDIO.currentTime,0,'Hear restarts this introduction');
+    await wait(20);
+    assert.match(w.document.getElementById('voiceMuteToggle').textContent,/Silenciar/);
   }
   w.document.querySelector('.avatar-mute').click();
   assert.equal(w.localStorage.getItem('jp-voice-muted'), 'true');
+  assert.match(w.document.getElementById('voiceMuteToggle').textContent,/Escuchar la voz/);
   const beforeMuted = attempts;
   w.projectGo('learning-materials.html');
   await wait(450);
@@ -81,11 +94,13 @@ w.HTMLMediaElement.prototype.play = function () { attempts++; return nativePlay.
   assert(attempts > beforeMuted, 'Unmute restarts the current introduction');
   assert(!w.document.getElementById('continueWithoutSound'));
   w.document.getElementById('guideReliableStop').click();
+  assert.match(w.document.getElementById('voiceMuteToggle').textContent,/Escuchar la voz/,'Stopped introduction offers Hear guide voice');
   w.HTMLMediaElement.prototype.play = () => Promise.reject(Object.assign(new Error('Browser blocked sound'), { name: 'NotAllowedError' }));
   w.document.getElementById('guideReliablePlay').click();
   await wait(30);
   assert(w.document.getElementById('guideReliableStatus').textContent.length > 0, 'Explain a browser playback block');
   assert(w.document.getElementById('guideReliablePlay'), 'Retain an accessible replay fallback');
   assert.deepEqual(errors, []);
-  process.stdout.write('PASS: one start action, translated choice, synchronous audio start, automatic page introductions, shared audio, persistent mute and disappearing start action.\n');
+  for (const route of routes) {w.projectGo(route);await wait(10);if(w.document.getElementById('avatarWrap'))assert(w.document.getElementById('voiceMuteToggle'));else assert.equal(w.document.getElementById('voiceMuteToggle').hidden,true,'No dead guide control on bibliography');}
+  process.stdout.write('PASS: Hear guide voice starts the current recording synchronously; Mute voice appears only while audible; pause/stop/mute/failure offer Hear again; languages, shared player and all 18 guide pages remain supported.\n');
 })().catch(error => { process.stderr.write(error.stack + '\n'); process.exitCode = 1; }).finally(() => w.close());

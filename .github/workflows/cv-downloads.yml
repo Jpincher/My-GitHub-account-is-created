@@ -11,6 +11,13 @@ on:
       - 'index.html'
       - 'FinalHomepage.html.html'
       - 'portfolio-languages.js'
+      - 'learning-project-*.js'
+      - 'interactive-learning.html'
+      - 'learning-usability-testing.html'
+      - 'usability-tester.html'
+      - 'supabase/**'
+      - 'tools/usability-live-*'
+      - 'tools/enable-live-usability.cjs'
   workflow_dispatch:
 permissions:
   contents: read
