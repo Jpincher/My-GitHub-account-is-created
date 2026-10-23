@@ -15,6 +15,9 @@ on:
       - 'tests/homepage-navigation.cjs'
       - '.github/workflows/homepage-navigation.yml'
   workflow_dispatch:
+concurrency:
+  group: portfolio-checks-${{ github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:
