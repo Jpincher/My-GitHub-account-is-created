@@ -13,7 +13,7 @@ const server=http.createServer((req,res)=>{const p=path.join(root,decodeURICompo
   await page.waitForSelector('#guideReliablePlay');await page.click('#guideReliablePlay');
   const routes=await page.evaluate(()=>window.JP_PROJECT_PAGES);
   for(const route of routes){
-   await page.evaluate(route=>window.projectGo(route),route);await page.waitForTimeout(80);
+   console.log('Checking',width,route);await page.evaluate(route=>window.projectGo(route),route);await page.waitForTimeout(80);
    if(!await page.locator('#avatarWrap').count())continue;
    await page.evaluate(()=>document.getElementById('voiceMuteToggle').click());await page.waitForTimeout(30);
    // Hear may mute an already-playing introduction: explicitly start through the page player.
