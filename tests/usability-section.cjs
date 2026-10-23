@@ -28,27 +28,11 @@ for(const [name,content]of Object.entries(pages)){
  assert.ok(content.includes("usabilityTesting:['Usability testing','Pruebas de usabilidad','可用性测试']"));
 }
 for(const term of ['school networks','university Wi-Fi','home broadband','mobile internet','ongoing'])assert.ok(runtime.toLowerCase().includes(term.toLowerCase()),term+' in narration');
-assert.ok(html.includes('Browser voice preview'),'Voice preview is clearly identified');
+assert.ok(!html.includes('const speechAdapter='),'Final introduction uses the standard recorded player');
 assert.ok(html.includes('not automatically sent to Jonathan'),'Collection scope is honest');
 assert.ok(html.includes('data-open-usability="true"'),'New section launches actual tester');
 for(const url of ['gov.uk/service-manual/user-research','w3.org/WAI/test-evaluate','developer.chrome.com/docs/devtools/network'])assert.ok(html.includes(url));
-const playback=script(html,'reliable-avatar-playback'),adapter=playback.slice(playback.indexOf('const speechAdapter='),playback.indexOf('window.JP_SHARED_AUDIO?.pause()'));
-class Bus{constructor(){this.listeners={}}addEventListener(t,f){(this.listeners[t]??=[]).push(f)}removeEventListener(t,f){this.listeners[t]=(this.listeners[t]||[]).filter(x=>x!==f)}dispatchEvent(e){for(const f of this.listeners[e.type]||[])f(e)}}
-class TestEvent{constructor(type){this.type=type}}
-class Utterance{constructor(text){this.text=text}}
-const utterances=[];let cancelCount=0,resumeCount=0;
-const synth={getVoices:()=>[{name:'Samantha',lang:'en-GB',voiceURI:'en'},{name:'Monica',lang:'es-ES',voiceURI:'es'},{name:'Tingting',lang:'zh-CN',voiceURI:'zh'}],speak:u=>{utterances.push(u);u.onstart()},pause(){},resume(){resumeCount++},cancel(){cancelCount++}};
-const scripts={en:'Ongoing usability',es:'Usabilidad continua',zh:'持续测试'};
-const win={speechSynthesis:synth,SpeechSynthesisUtterance:Utterance,JP_SCRIPTS:{[route]:scripts}};
-const audio=new Function('window','EventTarget','Event','SpeechSynthesisUtterance','DOMException','location','performance','route','URL',adapter+'return speechAdapter;')(win,Bus,TestEvent,Utterance,Error,{href:'https://example.test/project.html'},{now:()=>1000},route,URL);
-(async()=>{
- for(const lang of ['en','es','zh']){
-  audio.src='jp-speech:'+lang;audio.load();await audio.play();
-  assert.equal(audio.paused,false);assert.equal(utterances.at(-1).text,scripts[lang]);assert.equal(utterances.at(-1).voice.voiceURI,lang);
-  audio.pause();assert.equal(audio.paused,true);await audio.play();assert.ok(resumeCount>0);
-  audio.pause();audio.currentTime=0;const count=utterances.length;await audio.play();assert.equal(utterances.length,count+1,'Stop then Play starts a fresh introduction');
- }
- audio.muted=true;assert.equal(audio.paused,true,'Mute cancels browser speech');
- audio.dispose();assert.ok(cancelCount>0);
- console.log('PASS: 19 menus, real destinations, heading/arrow navigation, numbering, languages, scripts, and speech start/pause/resume/stop/mute/cleanup');
-})().catch(error=>{console.error(error);process.exitCode=1});
+const installed=JSON.parse(fs.readFileSync(path.join(__dirname,'..','tools','final-voices-installed.json'),'utf8'));
+assert.equal(installed.recordings.length,6);
+for(const r of installed.recordings){assert.ok(fs.readFileSync(path.join(__dirname,'..',r.file)).length>1000);assert.ok(r.envelope.length>250);assert.equal(r.envelopeRate,25);assert.ok(r.envelope.some(v=>v>.5));}
+console.log('PASS: 19 menus, real destinations, numbering, languages and six synchronized final recordings');
