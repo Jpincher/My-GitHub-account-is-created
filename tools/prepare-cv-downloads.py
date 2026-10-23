@@ -25,7 +25,7 @@ def links():
         (ROOT/"CV_LINKS.md").write_text("\n".join(rows))
     errors=[]
     for key,(target,candidates) in specs.items():
-        if result.get(key,{}).get("short") and result[key].get("target")==target and result[key]["short"].rsplit("/",1)[-1] in candidates:
+        if result.get(key,{}).get("short") and result[key].get("target")==target and result[key]["short"].rsplit("/",1)[-1] in candidates[:2]:
             try:
                 _,destination=http(result[key]["short"])
                 if destination.rstrip("/")==target.rstrip("/"):continue
