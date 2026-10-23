@@ -1,0 +1,1 @@
+globalThis.JP_CV_LINKS={"home":{"target":"https://jpincher.github.io/My-GitHub-account-is-created/"},"learning":{"target":"https://jpincher.github.io/My-GitHub-account-is-created/interactive-learning.html"}};

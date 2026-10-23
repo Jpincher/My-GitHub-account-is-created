@@ -1,0 +1,51 @@
+name: Prepare CV links and complete backup
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/cv-downloads.yml'
+      - 'tools/prepare-cv-downloads.py'
+      - 'tools/access-guide-docx.js'
+      - 'download-access-guide.html'
+      - 'tests/access-guide.cjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: cv-downloads
+  cancel-in-progress: false
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.12'
+      - name: Check the private document builder
+        run: node tests/access-guide.cjs
+      - name: Create and verify named CV links
+        continue-on-error: true
+        run: python tools/prepare-cv-downloads.py links
+      - name: Save verified public link mappings
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add cv-links.js
+          if test -f cv-links.json; then git add cv-links.json CV_LINKS.md; fi
+          if ! git diff --cached --quiet; then
+            git commit -m "Save verified named CV links"
+            git push origin HEAD:main
+          fi
+      - name: Build and verify the complete ZIP backup
+        run: python tools/prepare-cv-downloads.py backup
+      - name: Publish the downloadable backup release
+        run: python tools/prepare-cv-downloads.py release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
