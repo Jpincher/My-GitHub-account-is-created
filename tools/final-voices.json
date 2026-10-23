@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "provider": "edge-tts",
+  "providerVersion": "7.3.1",
+  "guide": "elena",
+  "voices": {
+    "en": "en-US-JennyNeural",
+    "es": "es-MX-DaliaNeural",
+    "zh": "zh-CN-XiaoxiaoNeural"
+  },
+  "routes": {
+    "learning-school-dashboard.html": {
+      "en": "Now take the tutor's view. The fictional submissions show different levels of understanding, including some deliberate misconceptions. Scan the class overview, select a student, and inspect the reasoning behind the score. Objective items are scored automatically; written explanations need tutor review. Use the pattern to decide what to ask or teach next, not simply who has the highest mark.",
+      "es": "Ahora adopte la perspectiva del tutor. Las entregas ficticias muestran distintos niveles de comprensión y algunos errores deliberados. Revise el resumen, seleccione un estudiante y examine el razonamiento que hay detrás de la puntuación. Los elementos objetivos se puntúan automáticamente; las explicaciones escritas requieren revisión docente. Use los patrones para decidir qué preguntar o enseñar después, no solo quién obtiene la nota más alta.",
+      "zh": "现在请切换到教师视角。虚构提交展示不同程度的理解，以及一些有意设置的误解。先看班级概览，再选择一名学生，检查分数背后的推理。客观题自动评分，书面解释需要教师审核。请利用结果模式决定下一步提问或教学，而不只是比较谁的分数最高。"
+    },
+    "learning-usability-testing.html": {
+      "en": "Welcome. A learning experience is never finished simply because its pages have been published. Usability needs ongoing attention: can people find their way, understand the task, use the controls and recover when something goes wrong? We need to test different ways of using the product. That means more than phones, tablets and computers. It includes school networks, university Wi-Fi, home broadband, mobile internet, slow connections and interrupted access. We also need to listen to people using different languages and assistive technologies, and to learners and tutors with different levels of confidence. Scores can show us where to investigate. Watching what people do, and listening to their explanations, helps us understand what needs to change. Explore the approach here, or become a usability tester yourself. Your experience can help shape the next version.",
+      "es": "Bienvenido. Una experiencia de aprendizaje no está terminada simplemente porque sus páginas se hayan publicado. La usabilidad requiere atención continua: ¿pueden las personas orientarse, entender la tarea, utilizar los controles y recuperarse cuando algo falla? Debemos probar distintas formas de utilizar el producto. Eso significa más que móviles, tabletas y ordenadores. Incluye redes escolares, wifi universitario, banda ancha doméstica, internet móvil, conexiones lentas e interrupciones. También debemos escuchar a quienes utilizan otros idiomas y tecnologías de apoyo, y a estudiantes y docentes con distintos niveles de confianza. Las puntuaciones indican dónde investigar. Observar lo que hacen las personas y escuchar sus explicaciones nos ayuda a comprender qué debe cambiar. Explore el enfoque o participe como evaluador de usabilidad. Su experiencia puede orientar la próxima versión.",
+      "zh": "欢迎。学习体验不会仅仅因为网页发布就宣告完成。可用性需要持续关注：人们能否找到方向、理解任务、使用控件，并在出错后恢复？我们需要测试使用产品的不同方式，不仅包括手机、平板和电脑，还包括学校网络、大学无线网络、家庭宽带、移动互联网、缓慢和中断的连接。我们也需要倾听使用不同语言和辅助技术的人，以及具有不同信心水平的学习者和教师。评分能够提示调查方向。观察人们的操作并倾听他们的解释，有助于了解需要改进的地方。请在此探索我们的方法，或亲自参与可用性测试。您的体验可以帮助塑造下一个版本。"
+    }
+  }
+}

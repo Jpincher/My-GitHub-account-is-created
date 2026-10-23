@@ -1,0 +1,57 @@
+name: Finish and verify project recordings
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/finish-project.yml'
+      - 'tools/final-voices.json'
+      - 'tools/generate-final-voices.py'
+      - 'tools/install-final-voices.cjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: finish-project-recordings
+  cancel-in-progress: false
+jobs:
+  recordings-and-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.12'
+      - name: Install test dependencies
+        run: npm --prefix tests install --ignore-scripts --no-audit --no-fund
+      - name: Verify the existing project
+        run: npm --prefix tests test
+      - name: Install recording tools
+        run: |
+          python -m pip install edge-tts==7.3.1
+          if ! command -v ffmpeg >/dev/null; then
+            sudo apt-get update
+            sudo apt-get install -y ffmpeg
+          fi
+      - name: Generate the final voices and timing envelopes
+        run: python tools/generate-final-voices.py
+      - name: Install recordings and restore the shared audio player
+        run: node tools/install-final-voices.cjs
+      - name: Verify the completed recordings and every page
+        run: npm --prefix tests test
+      - name: Commit only verified project outputs
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add learning-media/*.mp3 tools/final-voices-installed.json learning-project-ddca4d6b5d3f.js interactive-learning.html learning-usability-testing.html tests/usability-section.cjs
+          if ! git diff --cached --quiet; then
+            git commit -m "Install verified final Elena recordings and synchronized mouth timing"
+            git push origin HEAD:main
+          fi
