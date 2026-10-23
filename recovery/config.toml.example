@@ -1,0 +1,4 @@
+# Merge into a reviewed supabase/config.toml after supabase init.
+[functions.usability-api]
+verify_jwt = false
+entrypoint = "./functions/usability-api/index.ts"

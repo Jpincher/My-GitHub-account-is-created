@@ -1,0 +1,902 @@
+{
+  "files": [
+    {
+      "path": ".github/workflows/avatar-layout.yml",
+      "group": "Automation",
+      "instruction": "Runs pinned Chromium layout checks and decodes all installed MP3 recordings. Requires the matching browser test source; not needed to serve the static site."
+    },
+    {
+      "path": ".github/workflows/cv-downloads.yml",
+      "group": "Automation",
+      "instruction": "GitHub Actions workflow: creates CV links and full/separate downloadable backups. Preserve in the combined repository. Review dependencies before reusing in a standalone repository."
+    },
+    {
+      "path": ".github/workflows/finish-project.yml",
+      "group": "Automation",
+      "instruction": "GitHub Actions workflow: finishes/verifies recorded voices. Preserve in the combined repository. Review dependencies before reusing in a standalone repository."
+    },
+    {
+      "path": ".github/workflows/homepage-navigation.yml",
+      "group": "Automation",
+      "instruction": "GitHub Actions workflow: checks homepage and learning regressions. Preserve in the combined repository. Review dependencies before reusing in a standalone repository."
+    },
+    {
+      "path": ".github/workflows/live-usability-checks.yml",
+      "group": "Automation",
+      "instruction": "GitHub Actions workflow: checks form/privacy/API and database transactions. Preserve in the combined repository. Review dependencies before reusing in a standalone repository."
+    },
+    {
+      "path": "accredited-course-design.html",
+      "group": "Homepage redirect",
+      "instruction": "Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site."
+    },
+    {
+      "path": "addie.html",
+      "group": "Homepage redirect",
+      "instruction": "Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site."
+    },
+    {
+      "path": "approach.html",
+      "group": "Homepage redirect",
+      "instruction": "Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site."
+    },
+    {
+      "path": "audit-accountability.html",
+      "group": "Homepage redirect",
+      "instruction": "Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site."
+    },
+    {
+      "path": "career.html",
+      "group": "Homepage redirect",
+      "instruction": "Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site."
+    },
+    {
+      "path": "COMPLETION_STATUS.md",
+      "group": "Documentation",
+      "instruction": "Published completion/validation status and limits. Read before rebuilding; update after meaningful changes."
+    },
+    {
+      "path": "completion-chime.html",
+      "group": "Independent utility",
+      "instruction": "Separate completion notification page, outside portfolio navigation. Open it online, enable sound once and keep it open. Polls completion-status.json; no microphone or private records."
+    },
+    {
+      "path": "completion-status.json",
+      "group": "Independent utility",
+      "instruction": "Public work-session status read by the chime page. Set state=complete only after actual checks/publication finish; keep workId unique for later work sessions."
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "group": "Documentation",
+      "instruction": "Portfolio design and ongoing implementation requirements. Read before editing visual controls, navigation, content or translations."
+    },
+    {
+      "path": "CV_LINKS.md",
+      "group": "Recovery",
+      "instruction": "Human-readable CV URLs. Regenerate with link tooling when destinations/aliases change."
+    },
+    {
+      "path": "cv-links.js",
+      "group": "Recovery",
+      "instruction": "Verified public CV short-link mapping used by the document generator. Regenerated from cv-links.json."
+    },
+    {
+      "path": "cv-links.json",
+      "group": "Recovery",
+      "instruction": "Authoritative public short/full URL mapping. Existing aliases continue to point to current destinations."
+    },
+    {
+      "path": "cv.html",
+      "group": "Homepage redirect",
+      "instruction": "Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site."
+    },
+    {
+      "path": "design.html",
+      "group": "Homepage redirect",
+      "instruction": "Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site."
+    },
+    {
+      "path": "download-access-guide.html",
+      "group": "Recovery",
+      "instruction": "Generates a private Word recovery guide in the browser from the supplied code. Keep its data/builder scripts together. Downloaded completed guide stays private."
+    },
+    {
+      "path": "education.html",
+      "group": "Homepage",
+      "instruction": "Education/learning portfolio landing page. Preserve existing links or update its destinations for a new host."
+    },
+    {
+      "path": "experience.html",
+      "group": "Homepage redirect",
+      "instruction": "Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site."
+    },
+    {
+      "path": "featured-work.html",
+      "group": "Homepage redirect",
+      "instruction": "Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site."
+    },
+    {
+      "path": "Final Lesson Plans Jonathan_Pincher_Portfolio_Invitation.html",
+      "group": "Historical",
+      "instruction": "Earlier lesson-plan/portfolio invitation source. Optional archive reference; current learning experience is loaded through the shared runtime."
+    },
+    {
+      "path": "FinalHomepage.html.html",
+      "group": "Homepage",
+      "instruction": "Published alias of the current homepage. Keep synchronized with index.html for existing bookmarks."
+    },
+    {
+      "path": "FinalHomepage.html.webarchive",
+      "group": "Historical",
+      "instruction": "Safari-saved reference archive. Not served as the live homepage. Keep for provenance; do not overwrite current index.html with it."
+    },
+    {
+      "path": "guide-audio-coordinator.js",
+      "group": "Learning",
+      "instruction": "Essential playback coordination loaded before the runtime. Prevents overlapping legacy players and multiple project tabs speaking at once. Preserve with both learning entry pages."
+    },
+    {
+      "path": "HOMEPAGE_NAVIGATION_REPAIR.md",
+      "group": "Documentation",
+      "instruction": "Navigation recovery history and implemented redirects. Explains which historical standalone pages were unavailable."
+    },
+    {
+      "path": "how-to-read-this-site.html",
+      "group": "Learning",
+      "instruction": "Recruiter-facing summary and interest routes. Uses popup messaging with a direct-link fallback. Keep beside the learning entry."
+    },
+    {
+      "path": "index.html",
+      "group": "Homepage",
+      "instruction": "Current homepage entry. Edit this live file for homepage content/layout; keep portfolio-languages.js beside it."
+    },
+    {
+      "path": "interactive-learning.html",
+      "group": "Learning",
+      "instruction": "Main entry loading the shared runtime. Keep beside the matching JS file and learning-media/."
+    },
+    {
+      "path": "learning-media/01920c07cdff6ffd0e00.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/08be69166a60defd0071.png",
+      "group": "Learning media",
+      "instruction": "Three-point bending apparatus illustration. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/08f98ef95ea3c3eb7ce1.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/09ed81957e9c86bd5493.png",
+      "group": "Learning media",
+      "instruction": "Learning illustration/media referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/1be61d35175364a7c169.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/1da6112e0dd831b3cfbf.mp3",
+      "group": "Learning media",
+      "instruction": "elena guide recording, zh, learning-school-dashboard.html, voice zh-CN-XiaoxiaoNeural. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/1dd2c7e3ed8e98a1cff7.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/2570f0310396945c8dc9.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/29cfac17886b25d4e51e.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/2bbe8f61c8a1c0981c9a.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/2d75553b137846184dae.mp3",
+      "group": "Learning media",
+      "instruction": "elena guide recording, es, learning-usability-testing.html, voice es-MX-DaliaNeural. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/2f5f997511c21b6dfa0d.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/3108bd9f799ce947757f.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/3163a6bec016506cb231.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/3399598cf1cd02ffda48.webp",
+      "group": "Learning media",
+      "instruction": "Daniel avatar sprite. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/33dd2adf47b366626646.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/3c64594bbcd05d3cab52.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/3ca33c8f5c13efbbdb0a.png",
+      "group": "Learning media",
+      "instruction": "Learning illustration/media referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/41b85cf0c3fcef8c88b0.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/450aedd6937f443d67a6.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/4663a0aa1ecb3db2a02d.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/4851b0a606dd51bdba60.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/4a66045692e376300897.png",
+      "group": "Learning media",
+      "instruction": "Learning illustration/media referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/4b4df3e80966450795ee.docx",
+      "group": "Learning media",
+      "instruction": "Downloadable design comparison Word document (Jonathan_Pincher_Design_Comparison.docx). Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/5cc74de67edcbd1822d5.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/621bdafc394d98f506b2.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/6238d89ad23cbbb60978.webp",
+      "group": "Learning media",
+      "instruction": "Learning illustration/media referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/6db978882716e519e388.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/6e1374ac1a88e2312637.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/6f2fcdf05f4974e19f41.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/6f4943b3ce996046e93f.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/7187c59f0594b9b868a1.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/74b791ec2db6db465a21.webp",
+      "group": "Learning media",
+      "instruction": "Learning illustration/media referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/75ce7f807e762d01e5db.webp",
+      "group": "Learning media",
+      "instruction": "Learning illustration/media referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/763609a0c8eff0f28851.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/7d37bcb8762b5febea28.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/854f644a966a0c18b41c.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/880026f3bb001df5f319.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/8834fc953356c6d99510.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/8913c721746113189235.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/897cf44551e684874d2a.mp3",
+      "group": "Learning media",
+      "instruction": "elena guide recording, en, learning-usability-testing.html, voice en-US-JennyNeural. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/89cc8c4af123d8bd2a03.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/8d18fd616fa9d625dc1a.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/8ebac5904d6edbffa8ca.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/9089d90ff5bf92f3a881.mp3",
+      "group": "Learning media",
+      "instruction": "elena guide recording, en, learning-school-dashboard.html, voice en-US-JennyNeural. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/919e3a68a5286afc4dd1.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/91e8eddbcda856836b6d.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/946a6b4f427832f4b74f.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/a1eabd1493ae56c0462e.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/a4a0cd6a9f112f6b8d31.docx",
+      "group": "Learning media",
+      "instruction": "Undergraduate teaching pack Word document (Undergraduate_Teaching_Pack.docx). Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/a68e88cb1906198a2438.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/a690be1e5e0e657c31fd.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/a96e384e7eaff3387b29.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/afb688b8cafa8faea61b.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/b3ab45986c02658f053d.webp",
+      "group": "Learning media",
+      "instruction": "Sofia avatar sprite. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/b9055388a21b6fce2085.webp",
+      "group": "Learning media",
+      "instruction": "Elena avatar sprite. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/bc2c19f9f5dd0d6bee56.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/bce32beb01d05027187c.webp",
+      "group": "Learning media",
+      "instruction": "Amara avatar sprite. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/c05a3e807064a126e013.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/c06225ba136da45761e6.mp3",
+      "group": "Learning media",
+      "instruction": "elena guide recording, es, learning-school-dashboard.html, voice es-MX-DaliaNeural. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/c0a9ea271eb9176ab2a0.mp3",
+      "group": "Learning media",
+      "instruction": "elena guide recording, zh, learning-usability-testing.html, voice zh-CN-XiaoxiaoNeural. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/c1183bfe6b1c105e0c28.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/c12da853f38d24dd7fdd.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/c16d48e1adb6278cbfba.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/c6540880b3427d79c7d6.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/c722ef3e13376643cf7a.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/c73a5b716ffb6dfc2f02.webp",
+      "group": "Learning media",
+      "instruction": "Ravi avatar sprite. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/c9557181944057c5a47b.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/cbc06ac60755a532ac51.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/d067b8ae19739fd16021.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/d7ed8a7981821a79447c.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/d9d084a178389ddbba81.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/dd3bee0a75f77ae373e0.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/e91e4fa11dc5fa29709c.png",
+      "group": "Learning media",
+      "instruction": "Learning illustration/media referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/eb2b4d1247ee55e5bd88.webp",
+      "group": "Learning media",
+      "instruction": "Yusuf avatar sprite. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/ed2decfcf3e4bf1be56e.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/ede90fd3162f8539ec88.webp",
+      "group": "Learning media",
+      "instruction": "Mei avatar sprite. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/f19fa2b525a14291d00b.webp",
+      "group": "Learning media",
+      "instruction": "Chloe avatar sprite. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/f3571960bfcd29033ee4.docx",
+      "group": "Learning media",
+      "instruction": "Age 15 teaching pack Word document (Age_15_Teaching_Pack.docx). Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/f58f9c8e107bd88bebfb.pdf",
+      "group": "Learning media",
+      "instruction": "Downloadable design comparison PDF (Jonathan_Pincher_Design_Comparison.pdf). Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-media/fdc99d76293bba4dc846.mp3",
+      "group": "Learning media",
+      "instruction": "Installed guide recording referenced by the shared runtime. Preserve its exact filename and folder; do not rename independently."
+    },
+    {
+      "path": "learning-project-05c34d493c64-1of3.txt",
+      "group": "Historical",
+      "instruction": "Historical source-upload chunk, part 1 of 3. Preserve all three for archival recovery; the current runtime does not load these files."
+    },
+    {
+      "path": "learning-project-05c34d493c64-2of3.txt",
+      "group": "Historical",
+      "instruction": "Historical source-upload chunk, part 2 of 3. Preserve all three for archival recovery; the current runtime does not load these files."
+    },
+    {
+      "path": "learning-project-05c34d493c64-3of3.txt",
+      "group": "Historical",
+      "instruction": "Historical source-upload chunk, part 3 of 3. Preserve all three for archival recovery; the current runtime does not load these files."
+    },
+    {
+      "path": "learning-project-ddca4d6b5d3f.js",
+      "group": "Learning",
+      "instruction": "Essential shared runtime with 19 embedded page documents, translations, routing, avatars, audio mapping and mouth timing. This is the current learning source; maintain one matching version with media."
+    },
+    {
+      "path": "learning-usability-testing.html",
+      "group": "Learning",
+      "instruction": "Direct launch of section 11 through the shared learning runtime. Keep its runtime URL/version aligned with interactive-learning.html."
+    },
+    {
+      "path": "portfolio-languages.js",
+      "group": "Homepage",
+      "instruction": "Current homepage translations and language controls (English, Spanish, Mandarin). Edit with the homepage and test all languages."
+    },
+    {
+      "path": "Put my thinking to work | Jonathan Pincher.html",
+      "group": "Historical",
+      "instruction": "User-supplied saved homepage reference. Not the current repaired live entry. Keep for historical comparison."
+    },
+    {
+      "path": "question.html",
+      "group": "Homepage redirect",
+      "instruction": "Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site."
+    },
+    {
+      "path": "README.md",
+      "group": "Documentation",
+      "instruction": "Original short repository description; the recovery manual provides full operating instructions."
+    },
+    {
+      "path": "recovery/config.toml.example",
+      "group": "Recovery",
+      "instruction": "Example Supabase function configuration with custom entrypoint and gateway JWT check disabled; merge into a reviewed project config."
+    },
+    {
+      "path": "recovery/FILE_GUIDE.json",
+      "group": "Recovery",
+      "instruction": "Machine-readable purpose/action inventory of every tracked file and embedded learning route. The generated HTML guide presents it for reading."
+    },
+    {
+      "path": "recovery/RECOVERY_GUIDE.md",
+      "group": "Recovery",
+      "instruction": "Public password-free master recovery manual. Private Word document adds the supplied developer code locally."
+    },
+    {
+      "path": "recovery/recovery-guide-data.js",
+      "group": "Recovery",
+      "instruction": "Public sections and individual file instructions consumed by the private Word builder. Contains no owner code."
+    },
+    {
+      "path": "recovery/restore-feedback.mjs",
+      "group": "Recovery",
+      "instruction": "Trusted owner CLI for restoring private Developer JSON exports into a new backend; dry-run default, conflict protection, no notification resend."
+    },
+    {
+      "path": "recovery/service-console.html",
+      "group": "Recovery",
+      "instruction": "Owner-authenticated health/setup-email/activation console for a backend rebuild. No personal response display or stored login token."
+    },
+    {
+      "path": "supabase/functions/usability-api/core.mjs",
+      "group": "Backend",
+      "instruction": "Strict record validation, equal-weight aggregates and score-only email summaries. Shared with restore tool and tests."
+    },
+    {
+      "path": "supabase/functions/usability-api/deno.json",
+      "group": "Backend",
+      "instruction": "Function-local Deno compiler configuration. Keep with index.ts/core.mjs when deploying."
+    },
+    {
+      "path": "supabase/functions/usability-api/index.ts",
+      "group": "Backend",
+      "instruction": "Edge Function API, owner authentication, CORS, configured email recipient and notification retry. Deploy only to Supabase; never serve as executable static-page code."
+    },
+    {
+      "path": "supabase/schema/usability-live.sql",
+      "group": "Backend",
+      "instruction": "Fresh-install schema, private tables, grants/RLS and RPCs. Apply once to a new empty project; not over live tables."
+    },
+    {
+      "path": "supabase/schema/usability-notification-cron.sql",
+      "group": "Backend",
+      "instruction": "pg_net/pg_cron five-minute notification retry job. Inspect extensions/jobs before installing to avoid duplicates."
+    },
+    {
+      "path": "supabase/USABILITY_LIVE_DEPLOYMENT.md",
+      "group": "Backend",
+      "instruction": "Original service setup order and verified deployment state. Use with the expanded recovery manual for a fresh backend."
+    },
+    {
+      "path": "test.html",
+      "group": "Homepage redirect",
+      "instruction": "Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site."
+    },
+    {
+      "path": "tests/access-guide.cjs",
+      "group": "Tests",
+      "instruction": "Automated development check for access guide. Run from the matching source tree; not needed to serve the public website."
+    },
+    {
+      "path": "tests/avatar-controls.cjs",
+      "group": "Tests",
+      "instruction": "Automated development check for avatar controls. Run from the matching source tree; not needed to serve the public website."
+    },
+    {
+      "path": "tests/avatar-layout-browser.cjs",
+      "group": "Tests",
+      "instruction": "Measures control-row positions in real Chromium at desktop and mobile sizes for playing, paused and stopped states. Uses pinned Playwright installed by avatar-layout.yml."
+    },
+    {
+      "path": "tests/avatar-sound.cjs",
+      "group": "Tests",
+      "instruction": "Automated development check for avatar sound. Run from the matching source tree; not needed to serve the public website."
+    },
+    {
+      "path": "tests/guide-audio-exclusivity.cjs",
+      "group": "Tests",
+      "instruction": "Regression check of every guide/language, recording/script mapping, play/pause/stop and cross-tab exclusivity. Run with the matching runtime and coordinator."
+    },
+    {
+      "path": "tests/homepage-navigation.cjs",
+      "group": "Tests",
+      "instruction": "Automated development check for homepage navigation. Run from the matching source tree; not needed to serve the public website."
+    },
+    {
+      "path": "tests/live-usability-smoke.cjs",
+      "group": "Tests",
+      "instruction": "Automated development check for live usability smoke. Run from the matching source tree; not needed to serve the public website."
+    },
+    {
+      "path": "tests/live-usability.cjs",
+      "group": "Tests",
+      "instruction": "Automated development check for live usability. Run from the matching source tree; not needed to serve the public website."
+    },
+    {
+      "path": "tests/live-usability.sql",
+      "group": "Tests",
+      "instruction": "Automated development check for live usability. Run from the matching source tree; not needed to serve the public website."
+    },
+    {
+      "path": "tests/package.json",
+      "group": "Tests",
+      "instruction": "Pinned jsdom test dependency and npm test command. Install with --ignore-scripts before running development checks."
+    },
+    {
+      "path": "tests/recovery-packages.cjs",
+      "group": "Tests",
+      "instruction": "Verifies separated package structure, local links, embedded routes/media, Word guide inventory and feedback restore safeguards."
+    },
+    {
+      "path": "tests/site-reading-guide.cjs",
+      "group": "Tests",
+      "instruction": "Automated development check for site reading guide. Run from the matching source tree; not needed to serve the public website."
+    },
+    {
+      "path": "tests/usability-section.cjs",
+      "group": "Tests",
+      "instruction": "Automated development check for usability section. Run from the matching source tree; not needed to serve the public website."
+    },
+    {
+      "path": "tests/usability-tester.cjs",
+      "group": "Tests",
+      "instruction": "Automated development check for usability tester. Run from the matching source tree; not needed to serve the public website."
+    },
+    {
+      "path": "tests/verify-recordings.py",
+      "group": "Tests",
+      "instruction": "Uses ffprobe and ffmpeg to verify positive duration and decode every installed MP3. Read-only recording integrity check; does not regenerate voices."
+    },
+    {
+      "path": "tools/access-guide-docx.js",
+      "group": "Recovery",
+      "instruction": "Client-side DOCX/ZIP generator. Takes code as private input; contains no plaintext owner code. Keep with recovery-guide-data.js and its CRC tests."
+    },
+    {
+      "path": "tools/enable-live-usability.cjs",
+      "group": "Backend support",
+      "instruction": "One-time guarded prototype-to-live transformation. Current form is already live; do not rerun against it as a routine restore."
+    },
+    {
+      "path": "tools/final-voices-installed.json",
+      "group": "Learning support",
+      "instruction": "Installed recording metadata, hashes, transcripts/identities and measured mouth envelopes. Preserve with exact MP3 files."
+    },
+    {
+      "path": "tools/final-voices.json",
+      "group": "Learning support",
+      "instruction": "Final voice assignments and introduction scripts. Read before changing recordings; not required as a separate browser request."
+    },
+    {
+      "path": "tools/generate-final-voices.py",
+      "group": "Learning support",
+      "instruction": "Generates final MP3 recordings using edge-tts. Development only; installed audio already plays without this tool."
+    },
+    {
+      "path": "tools/install-final-voices.cjs",
+      "group": "Learning support",
+      "instruction": "Installs verified recordings and mouth envelopes into runtime. Use matching manifest and run avatar/audio regression checks."
+    },
+    {
+      "path": "tools/prepare-cv-downloads.py",
+      "group": "Delivery",
+      "instruction": "Creates/verifies CV aliases, builds the full tracked-file backup and uploads release assets. Run in a Git checkout; release needs authorized temporary GH_TOKEN."
+    },
+    {
+      "path": "tools/prepare-recovery-packages.py",
+      "group": "Delivery",
+      "instruction": "Builds/validates independent Homepage and Learning packages, per-file inventories and public recovery manual. Does not include private response data or passwords."
+    },
+    {
+      "path": "tools/recovered-portfolio-languages.js",
+      "group": "Historical",
+      "instruction": "Recovered original translation source. Current browser loads portfolio-languages.js, not this reference."
+    },
+    {
+      "path": "tools/usability-live-client.js",
+      "group": "Backend support",
+      "instruction": "Source template for live submissions, challenge, report, server login/logout. Current browser embeds this logic inside usability-tester.html."
+    },
+    {
+      "path": "tools/usability-live-text.json",
+      "group": "Backend support",
+      "instruction": "English/Spanish/Chinese live-form consent, privacy and error copy used by the conversion tool. Update matching embedded form text if editing."
+    },
+    {
+      "path": "university-institute.html",
+      "group": "Homepage redirect",
+      "instruction": "Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site."
+    },
+    {
+      "path": "USABILITY_TESTING.md",
+      "group": "Documentation",
+      "instruction": "Usability decisions and verification methods. Use alongside the live deployment and recovery manuals."
+    },
+    {
+      "path": "usability-live-config.json",
+      "group": "Backend",
+      "instruction": "Public API endpoint for tooling/tests. Contains no server secret. Also update the embedded endpoint in the already-live tester HTML when reconnecting."
+    },
+    {
+      "path": "usability-tester.html",
+      "group": "Learning",
+      "instruction": "Live five-task 1–5 questionnaire, three language buttons, shared report and protected owner view. For another host edit both its embedded endpoint and project ROOT; API CORS must match."
+    }
+  ],
+  "routes": [
+    {
+      "path": "learning-compare.html",
+      "instruction": "Embedded learning page: Compare approaches | Jonathan Pincher. Open through interactive-learning.html#view=learning-compare.html&section=section-top . Its content lives in the shared runtime, not a separate required HTML file."
+    },
+    {
+      "path": "learning-school-pack.html",
+      "instruction": "Embedded learning page: Age-15 teaching pack | Jonathan Pincher. Open through interactive-learning.html#view=learning-school-pack.html&section=section-top . Its content lives in the shared runtime, not a separate required HTML file."
+    },
+    {
+      "path": "learning-demos.html",
+      "instruction": "Embedded learning page: Interactive demos | Jonathan Pincher. Open through interactive-learning.html#view=learning-demos.html&section=section-top . Its content lives in the shared runtime, not a separate required HTML file."
+    },
+    {
+      "path": "learning-school-activity.html",
+      "instruction": "Embedded learning page: Stick Lab for ages 15 and up. Open through interactive-learning.html#view=learning-school-activity.html&section=section-top . Its content lives in the shared runtime, not a separate required HTML file."
+    },
+    {
+      "path": "learning-reflection.html",
+      "instruction": "Embedded learning page: Reflection | Jonathan Pincher. Open through interactive-learning.html#view=learning-reflection.html&section=section-top . Its content lives in the shared runtime, not a separate required HTML file."
+    },
+    {
+      "path": "learning-university-dashboard.html",
+      "instruction": "Embedded learning page: Sticks Teacher Assessment Dashboard. Open through interactive-learning.html#view=learning-university-dashboard.html&section=section-top . Its content lives in the shared runtime, not a separate required HTML file."
+    },
+    {
+      "path": "learning-university-activity.html",
+      "instruction": "Embedded learning page: Sticks Interactive Materials Lab. Open through interactive-learning.html#view=learning-university-activity.html&section=section-top . Its content lives in the shared runtime, not a separate required HTML file."
+    },
+    {
+      "path": "learning-university-pack.html",
+      "instruction": "Embedded learning page: Undergraduate teaching pack | Jonathan Pincher. Open through interactive-learning.html#view=learning-university-pack.html&section=section-top . Its content lives in the shared runtime, not a separate required HTML file."
+    },
+    {
+      "path": "learning-materials.html",
+      "instruction": "Embedded learning page: Teaching materials | Jonathan Pincher. Open through interactive-learning.html#view=learning-materials.html&section=section-top . Its content lives in the shared runtime, not a separate required HTML file."
+    },
+    {
+      "path": "interactive-learning.html",
+      "instruction": "Embedded learning page: One topic. Two learning designs. | Jonathan Pincher. Open through interactive-learning.html#view=interactive-learning.html&section=section-top . Its content lives in the shared runtime, not a separate required HTML file."
+    },
+    {
+      "path": "learning-school-dashboard.html",
+      "instruction": "Embedded learning page: Stick Lab age 15 teacher dashboard. Open through interactive-learning.html#view=learning-school-dashboard.html&section=section-top . Its content lives in the shared runtime, not a separate required HTML file."
+    },
+    {
+      "path": "learning-comparison-document.html",
+      "instruction": "Embedded learning page: Comparison document | Jonathan Pincher. Open through interactive-learning.html#view=learning-comparison-document.html&section=section-top . Its content lives in the shared runtime, not a separate required HTML file."
+    },
+    {
+      "path": "learning-design-considerations.html",
+      "instruction": "Embedded learning page: Instructional design and user interface considerations | Jonathan Pincher. Open through interactive-learning.html#view=learning-design-considerations.html&section=section-top . Its content lives in the shared runtime, not a separate required HTML file."
+    },
+    {
+      "path": "learning-ai-development.html",
+      "instruction": "Embedded learning page: Using AI in web development | Jonathan Pincher. Open through interactive-learning.html#view=learning-ai-development.html&section=section-top . Its content lives in the shared runtime, not a separate required HTML file."
+    },
+    {
+      "path": "learning-school-twist.html",
+      "instruction": "Embedded learning page: Give your stick a clever advantage | Jonathan Pincher. Open through interactive-learning.html#view=learning-school-twist.html&section=section-top . Its content lives in the shared runtime, not a separate required HTML file."
+    },
+    {
+      "path": "learning-curriculum-design.html",
+      "instruction": "Embedded learning page: Curriculum design | Jonathan Pincher. Open through interactive-learning.html#view=learning-curriculum-design.html&section=section-top . Its content lives in the shared runtime, not a separate required HTML file."
+    },
+    {
+      "path": "learning-bibliography.html",
+      "instruction": "Embedded learning page: Bibliography | Jonathan Pincher. Open through interactive-learning.html#view=learning-bibliography.html&section=section-top . Its content lives in the shared runtime, not a separate required HTML file."
+    },
+    {
+      "path": "learning-pathways.html",
+      "instruction": "Embedded learning page: Teaching pathways | Jonathan Pincher. Open through interactive-learning.html#view=learning-pathways.html&section=section-top . Its content lives in the shared runtime, not a separate required HTML file."
+    },
+    {
+      "path": "learning-usability-testing.html",
+      "instruction": "Embedded learning page: Usability testing | Jonathan Pincher. Open through interactive-learning.html#view=learning-usability-testing.html&section=section-top . Its content lives in the shared runtime, not a separate required HTML file."
+    }
+  ]
+}

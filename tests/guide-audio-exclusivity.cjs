@@ -33,7 +33,7 @@ const wait=ms=>new Promise(r=>setTimeout(r,ms));
    assert(fs.existsSync(path.join(root,source)),'Recording exists: '+source);
    assert(w.JP_SCRIPTS?.[route]?.[lang]?.trim().length>30,'Spoken script exists: '+route+' '+lang);
    assert.equal(w.JP_ACTIVE_TRACK.lang,lang);assert.equal(w.JP_ACTIVE_TRACK.audio,w.JP_SHARED_AUDIO);
-   assert.equal(playing.size,1,route+' '+lang+' has one audible player');assert(!w.document.body.textContent.includes('Hear the introduction to this page.'));
+   assert.equal(playing.size,1,route+' '+lang+' has one audible player');assert.equal(w.document.getElementById('guideReliableStatus').textContent,'');
    w.document.getElementById('guideReliablePlay').click();await wait(5);assert.equal(playing.size,0,'Pause stops sound');assert.equal(w.document.querySelector('.avatar-mute').hidden,false);
    w.document.getElementById('voiceMuteToggle').click();await wait(5);assert.equal(playing.size,1,'Hear restarts one current recording');
    w.document.getElementById('guideReliableStop').click();await wait(5);assert.equal(playing.size,0,'Stop stops sound');assert.equal(w.document.querySelector('.avatar-mute').hidden,false);

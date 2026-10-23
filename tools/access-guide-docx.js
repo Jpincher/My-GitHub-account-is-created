@@ -20,79 +20,21 @@ function zip(files){
  const result=new Uint8Array(offset+directorySize+end.length);let at=0;for(const b of [...chunks,...central,end]){result.set(b,at);at+=b.length}return result;
 }
 function paragraphs(code,links){
- const base='https://jpincher.github.io/My-GitHub-account-is-created/';
- const home=links?.home||{target:base},learning=links?.learning||{target:base+'interactive-learning.html'};
- const section=(title,lines)=>[{style:'Heading1',text:title},...lines.map(text=>({text}))];
+ const data=root.JP_RECOVERY_GUIDE;if(!data)throw Error('Recovery guide data is missing. Keep recovery/recovery-guide-data.js with this page.');
+ const home=links?.home||{},learning=links?.learning||{};
  return [
  {style:'Title',text:'Jonathan Pincher — Private access and recovery guide'},
- {text:'Prepared 23 October 2026. Owner copy: keep this document on your computer and out of the public repository.'},
- ...section('1. Share these CV links',[
- 'Portfolio: '+(home.short||home.target),
- 'Learning design: '+(learning.short||learning.target),
- 'Both published projects are public. Visitors need no account or password.',
- 'Full homepage address: '+home.target,
- 'Full learning-project address: '+learning.target,
- 'Usability explanation: '+base+'learning-usability-testing.html',
- 'Tester questionnaire: '+base+'usability-tester.html'
- ]),
- ...section('2. Protected developer access',[
- 'Code supplied in this private download: '+(code||'[Not supplied. Obtain it from your private conversation with ChatGPT.]'),
- 'Where to use it: open the tester questionnaire, complete or view its report, then choose Developer only.',
- 'Enter the code exactly, including capital letters and the final symbol.',
- 'The live tester uses server-verified developer authentication. The code opens individual responses, demographic percentages, high/low score filters and exports. Access expires after 45 minutes; lock the view when you finish.',
- 'Public reports show shared score averages only. Individual names, email addresses, demographics and comments are stored in the protected Supabase database. Export detailed responses from Developer only for a separate private data backup.'
- ]),
- ...section('3. GitHub editing and recovery',[
- 'Account username: Jpincher',
- 'Repository: https://github.com/Jpincher/My-GitHub-account-is-created',
- 'Main branch: main. Current publishing location: GitHub Pages, repository root.',
- 'Your GitHub account password, passkeys, two-factor authentication and recovery codes are your own account credentials. They are not available to this project or included here.',
- 'If you cannot sign in, use GitHub’s account-recovery process. Do not substitute the developer code for your GitHub password.',
- 'No repository token, API key or GitHub password is embedded in the website.',
- 'The GitHub Actions workflow uses GitHub’s temporary runner token; there is no permanent token for you to copy from this project.'
- ]),
- ...section('4. Complete backup and restoration',[
- 'Complete backup ZIP: https://github.com/Jpincher/My-GitHub-account-is-created/releases/download/portfolio-backup-2026-10-23/Jonathan_Pincher_Portfolio_Backup.zip',
- 'Download the ZIP and this private Word document separately. Extract the ZIP and retain its folder structure.',
- 'Open START_HERE.html for the viewing links. Website/index.html is the homepage; Website/interactive-learning.html is the learning-project entry.',
- 'The ZIP contains all tracked source files, images, recorded voices, mouth-timing data, teaching resources, tests and build tools at its recorded commit. It does not contain Git history or live feedback stored in Supabase. Export that feedback separately through the protected developer report.',
- 'External references, email links and online services still need internet access. Browser rules may require a real click before sound plays.',
- 'To restore online: sign in to GitHub, open the same repository, upload the contents of Website into the repository root, then commit. Do not upload only the ZIP or create an extra Website folder above index.html.',
- 'Keep publishing set to main / root if using branch-based Pages. Check Actions until deployment succeeds.',
- 'Keep the repository name and entry filenames unchanged so your CV links continue to work.',
- 'The backup includes a file inventory and SHA-256 checksums for verification.'
- ]),
- ...section('5. Important project files',[
- 'index.html — portfolio homepage.',
- 'education.html — education and learning design landing page.',
- 'interactive-learning.html — learning-project entry.',
- 'learning-project-ddca4d6b5d3f.js — shared learning-project source and embedded page content.',
- 'learning-media/ — images, audio, downloadable teaching documents and other assets. Keep this folder beside the HTML files.',
- 'learning-usability-testing.html — direct entry to section 11.',
- 'usability-tester.html — live questionnaire, shared anonymous report and protected developer report.',
- 'tools/final-voices.json — fixed Elena voice choices and introduction scripts.',
- 'tools/final-voices-installed.json — installed audio identifiers, transcripts, checksums and mouth envelopes.',
- 'CONTRIBUTING.md, USABILITY_TESTING.md and COMPLETION_STATUS.md — design rules, testing details and remaining limitations.',
- 'tests/ — automated regression checks. Install test dependencies and run npm --prefix tests test when developing.'
- ]),
- ...section('6. Voices and animation',[
- 'Elena: English en-US-JennyNeural; Spanish es-MX-DaliaNeural; Mandarin zh-CN-XiaoxiaoNeural.',
- 'Her school-dashboard and usability introductions use recorded MP3 files. Mouth envelopes are measured from each recording at 25 samples per second.',
- 'Other guides retain their installed recordings. No speech-provider account or API key is needed to play those files.',
- 'For regeneration, use the Finish and verify project recordings workflow in GitHub Actions. It installs its own tools, tests before and after generation, and commits verified outputs only.',
- 'The voice generator uses edge-tts 7.3.1. Future service changes may require maintenance; do not delete the installed MP3 files when updating tools.'
- ]),
- ...section('7. Other access and unfinished services',[
- 'An older private mobile copy exists at https://jonathan-learning-design.yummykrill4.chatgpt.site . It uses your ChatGPT account access, not a separate project password. The current master copy is the GitHub version above.',
- 'Automatic shared feedback collection is live in Supabase project Jonathan Pincher Usability (uyjwotszvggcoutalobr), Jpincher’s Org, London. Dashboard: https://supabase.com/dashboard/project/uyjwotszvggcoutalobr . API: https://uyjwotszvggcoutalobr.supabase.co/functions/v1/usability-api . Sign into Supabase with your own account. No database secret or service key is included in this document or the public website.',
- 'Completed live responses are saved centrally. No browser-preview feedback was imported. FormSubmit sends a per-response score summary and running averages to joff.2.22.22@gmail.com; personal details and comments stay in the protected report. Failed notifications are queued for automatic retry every five minutes.',
- 'The public short-link service uses no owner password for these links. Its links cannot be retargeted; maintain the full GitHub destinations.',
- 'This guide cannot include account passwords or recovery keys that were never supplied. Store those separately in your own password manager.'
- ]),
- ...section('8. Keep private',[
- 'Do not add this completed access guide to GitHub, a public website, your CV or the backup release.',
- 'The download page assembles this file locally in your browser. It does not send the developer code to a server or save it in browser storage.'
- ])
+ {text:'Prepared 23 October 2026. Private owner copy. Keep off public websites and GitHub.'},
+ {style:'Heading1',text:'Your developer access code'},
+ {text:'Developer code: '+(code||'[Not supplied. Use your private project conversation.]')},
+ {text:'Enter this code in Developer only at the live tester. Server-verified developer authentication protects individual feedback. This is not your GitHub, Gmail or Supabase account password.'},
+ {text:'Homepage: '+(home.short||home.target||'https://is.gd/JP_Homepage')},
+ {text:'Learning project: '+(learning.short||learning.target||'https://is.gd/JP_Learning')},
+ ...data.sections.flatMap(([title,lines],i)=>[{style:'Heading1',text:(i+1)+'. '+title},...lines.map(text=>({text}))]),
+ {style:'Heading1',text:'File-by-file instructions'},
+ ...data.files.flatMap(file=>[{style:'Heading2',text:file.path+' — '+file.group},{text:file.instruction}]),
+ {style:'Heading1',text:'Embedded learning pages'},
+ ...data.routes.flatMap(file=>[{style:'Heading2',text:file.path},{text:file.instruction}])
  ];
 }
 function build(code,links){
@@ -101,7 +43,7 @@ function build(code,links){
  '[Content_Types].xml':'<?xml version="1.0" encoding="UTF-8"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/></Types>',
  '_rels/.rels':'<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>',
  'word/_rels/document.xml.rels':'<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rIdStyles" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>',
- 'word/styles.xml':'<?xml version="1.0" encoding="UTF-8"?><w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="Calibri" w:hAnsi="Calibri"/><w:sz w:val="22"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="140" w:line="276" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style><w:style w:type="paragraph" w:styleId="Title"><w:name w:val="Title"/><w:basedOn w:val="Normal"/><w:rPr><w:b/><w:color w:val="284B37"/><w:sz w:val="40"/></w:rPr></w:style><w:style w:type="paragraph" w:styleId="Heading1"><w:name w:val="heading 1"/><w:basedOn w:val="Normal"/><w:pPr><w:keepNext/><w:spacing w:before="260" w:after="140"/></w:pPr><w:rPr><w:b/><w:color w:val="284B37"/><w:sz w:val="28"/></w:rPr></w:style></w:styles>',
+ 'word/styles.xml':'<?xml version="1.0" encoding="UTF-8"?><w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="Calibri" w:hAnsi="Calibri"/><w:sz w:val="22"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="140" w:line="276" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style><w:style w:type="paragraph" w:styleId="Title"><w:name w:val="Title"/><w:basedOn w:val="Normal"/><w:rPr><w:b/><w:color w:val="284B37"/><w:sz w:val="40"/></w:rPr></w:style><w:style w:type="paragraph" w:styleId="Heading1"><w:name w:val="heading 1"/><w:basedOn w:val="Normal"/><w:pPr><w:keepNext/><w:spacing w:before="260" w:after="140"/></w:pPr><w:rPr><w:b/><w:color w:val="284B37"/><w:sz w:val="28"/></w:rPr></w:style><w:style w:type="paragraph" w:styleId="Heading2"><w:name w:val="heading 2"/><w:basedOn w:val="Normal"/><w:pPr><w:keepNext/></w:pPr><w:rPr><w:b/><w:sz w:val="24"/></w:rPr></w:style></w:styles>',
  'word/document.xml':'<?xml version="1.0" encoding="UTF-8"?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>'+ps+'<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1080" w:right="1080" w:bottom="1080" w:left="1080"/></w:sectPr></w:body></w:document>'
  });
 }

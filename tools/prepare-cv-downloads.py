@@ -75,7 +75,7 @@ Source commit: """+sha+"""
 6. To restore GitHub Pages, upload the CONTENTS of Website/ into the root of the existing repository and commit. Do not upload only this ZIP or put an extra Website folder above index.html.
 7. Check GitHub Actions until deployment succeeds.
 8. Save your PRIVATE ACCESS GUIDE separately. It is not included here, and must not be published.
-9. No GitHub account password, server key or other account credential is present. Browser-session feedback is not included; export it separately from the tester if needed.
+9. No GitHub account password, server key or other account credential is present. Live Supabase feedback is not included; export it privately through Developer only. A separate private recovery guide is required for access codes.
 10. This is a complete tracked-file snapshot, not the full Git history. FILE_CHECKSUMS.sha256 records the source files.
 """
     start="""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jonathan Pincher — Portfolio backup</title><style>body{font:17px/1.65 Arial,sans-serif;max-width:760px;margin:7vh auto;padding:24px;background:#faf8ee;color:#284b37}h1{font:36px Georgia,serif}a{display:inline-block;margin:8px 12px 8px 0;padding:9px 14px;background:#e9efdf;border:1px solid #8ca37e;border-radius:7px;color:inherit}p{max-width:650px}</style></head><body><h1>Your complete portfolio backup</h1><p>Keep this folder together. Open either project below. Some browser features and outside references may require internet.</p><a href="Website/index.html">Open portfolio homepage</a><a href="Website/interactive-learning.html">Open learning project</a><a href="Website/learning-usability-testing.html">Open usability testing section</a><p>Read README.txt for restoration instructions. Keep your private access guide separately.</p></body></html>"""
@@ -109,7 +109,7 @@ def release():
         if not path.is_file():continue
         if path.name in existing:http(api+"/releases/assets/"+str(existing[path.name]["id"]),method="DELETE",headers=headers)
         upload=record["upload_url"].split("{")[0]+"?"+urllib.parse.urlencode({"name":path.name})
-        raw,_=http(upload,path.read_bytes(),"POST",{**headers,"Content-Type":"application/zip" if path.suffix==".zip" else "text/plain"})
+        raw,_=http(upload,path.read_bytes(),"POST",{**headers,"Content-Type":"application/zip" if path.suffix==".zip" else "text/html; charset=utf-8" if path.suffix==".html" else "text/plain"})
         created=json.loads(raw);print("Published download:",created["browser_download_url"],flush=True)
 
 if __name__=="__main__":

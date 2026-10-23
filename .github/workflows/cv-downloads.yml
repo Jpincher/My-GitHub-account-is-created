@@ -5,6 +5,10 @@ on:
     paths:
       - '.github/workflows/cv-downloads.yml'
       - 'tools/prepare-cv-downloads.py'
+      - 'tools/prepare-recovery-packages.py'
+      - 'recovery/**'
+      - 'tests/recovery-packages.cjs'
+      - 'guide-audio-coordinator.js'
       - 'tools/access-guide-docx.js'
       - 'download-access-guide.html'
       - 'tests/access-guide.cjs'
@@ -56,6 +60,10 @@ jobs:
           fi
       - name: Build and verify the complete ZIP backup
         run: python tools/prepare-cv-downloads.py backup
+      - name: Build the separate projects and recovery manual
+        run: python tools/prepare-recovery-packages.py
+      - name: Verify portable packages and private-data recovery safeguards
+        run: node tests/recovery-packages.cjs
       - name: Publish the downloadable backup release
         run: python tools/prepare-cv-downloads.py release
         env:

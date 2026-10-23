@@ -4,6 +4,7 @@
 if(window.JP_GUIDE_AUDIO_COORDINATOR)return;
 const proto=window.HTMLMediaElement?.prototype;if(!proto)return;
 const nativePlay=proto.play,nativePause=proto.pause,active=new Set();
+const synthesis=window.speechSynthesis;if(synthesis&&typeof synthesis.speak==='function'){const nativeSpeak=synthesis.speak.bind(synthesis);synthesis.speak=function(utterance){if(window.JP_AUDIO?.[window.JP_CURRENT])return;return nativeSpeak(utterance)}}
 const owner=Date.now().toString(36)+'-'+Math.random().toString(36).slice(2),key='jp-guide-audio-owner-v1';
 let channel=null;
 function stopAll(){for(const audio of [...active]){try{nativePause.call(audio)}catch{}active.delete(audio)}try{window.speechSynthesis?.cancel()}catch{}}
