@@ -17,4 +17,4 @@ The sound regression check covers first arrival, translated start labels, synchr
 
 
 ## Guided usability testing
-Keep the tester launch button at the top of every project sidebar. Use the same green palette and compact controls. Keep tester instructions next to the buttons for the pages they describe, retain English/Spanish/Chinese content, and show honest dataset scope beside every report. The current tester is a browser-only first draft; see USABILITY_TESTING.md before enabling shared collection or collecting real personal information.
+Keep the tester launch button directly below the “Learning by design.” heading and above “Mute voice” in every project sidebar. Use the same green palette and compact controls. Keep tester instructions next to the buttons for the pages they describe, retain English/Spanish/Chinese content, and show honest dataset scope beside every report. The current tester is a browser-only first draft; see USABILITY_TESTING.md before enabling shared collection or collecting real personal information.
