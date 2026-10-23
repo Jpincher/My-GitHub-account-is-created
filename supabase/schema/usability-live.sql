@@ -87,3 +87,9 @@ revoke all on function public.jp_usability_live_limit(text,integer,timestamptz) 
 revoke all on function public.jp_usability_live_submit(jsonb) from public,anon,authenticated;
 revoke all on function public.jp_usability_live_claim(integer) from public,anon,authenticated;
 grant execute on function public.jp_usability_live_summary(),public.jp_usability_live_limit(text,integer,timestamptz),public.jp_usability_live_submit(jsonb),public.jp_usability_live_claim(integer) to service_role;
+
+create policy block_direct_client_access on public.jp_usability_live_responses for all to anon,authenticated using(false) with check(false);
+create policy block_direct_client_access on public.jp_usability_live_sessions for all to anon,authenticated using(false) with check(false);
+create policy block_direct_client_access on public.jp_usability_live_limits for all to anon,authenticated using(false) with check(false);
+create policy block_direct_client_access on public.jp_usability_live_outbox for all to anon,authenticated using(false) with check(false);
+create policy block_direct_client_access on public.jp_usability_live_config for all to anon,authenticated using(false) with check(false);

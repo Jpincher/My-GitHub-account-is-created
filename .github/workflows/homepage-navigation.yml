@@ -1,7 +1,7 @@
 name: Check portfolio homepage navigation
 on:
   push:
-    branches: [main, repair-homepage-navigation]
+    branches: [main, repair-homepage-navigation, live-usability-integration]
     paths:
       - 'index.html'
       - 'FinalHomepage.html.html'

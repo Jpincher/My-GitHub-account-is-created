@@ -31,15 +31,15 @@ async function session(req){
  const rows=await db('jp_usability_live_sessions?token_hash=eq.'+await hash(token)+'&expires_at=gt.'+encodeURIComponent(new Date().toISOString())+'&select=token_hash');
  return rows.length===1;
 }
-async function email(record,summary){
- const r=await fetch('https://formsubmit.co/ajax/'+OWNER,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json','Referer':ORIGIN+'/My-GitHub-account-is-created/usability-tester.html'},body:JSON.stringify(notification(record,summary)),signal:AbortSignal.timeout(12000)});
- if(!r.ok)throw Error('delivery_provider_unavailable');
- const result=await r.json();if(!(result.success===true||result.success==='true'))throw Error('delivery_not_accepted');
+async function email(record,summary,isTest=false){
+ const r=await fetch('https://formsubmit.co/ajax/'+OWNER,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json','Referer':ORIGIN+'/My-GitHub-account-is-created/usability-tester.html'},body:JSON.stringify({...notification(record,summary),...(isTest?{_subject:'SETUP TEST — learning-project usability email delivery'}:{})}),signal:AbortSignal.timeout(45000)});
+ if(!r.ok)throw Error('delivery_http_'+r.status);
+ const result=await r.json();if(!(result.success===true||result.success==='true')){if(isTest)return {accepted:false,message:typeof result.message==='string'?result.message.slice(0,500):JSON.stringify(result).slice(0,500)};throw Error('delivery_not_accepted');}
  return {accepted:true,message:typeof result.message==='string'?result.message.slice(0,300):''};
 }
 async function flush(){
  const rows=await rpc('claim',{p_max:5});let accepted=0;
- for(const row of rows){
+ await Promise.all(rows.map(async row=>{
   try{
    const data=await db('jp_usability_live_responses?id=eq.'+encodeURIComponent(row.response_id)+'&select=payload');
    if(!data[0])throw Error('response_missing');
@@ -49,7 +49,7 @@ async function flush(){
    const delay=Math.min(3600,30*2**Math.min(row.attempts,7));
    await db('jp_usability_live_outbox?response_id=eq.'+encodeURIComponent(row.response_id),{method:'PATCH',body:JSON.stringify({state:'pending',claimed_until:null,next_attempt_at:new Date(Date.now()+delay*1000).toISOString(),last_error:'Delivery failed; automatic retry scheduled.'})});
   }
- }
+ }));
  return {processed:rows.length,accepted};
 }
 Deno.serve(async req=>{
@@ -122,7 +122,7 @@ Deno.serve(async req=>{
   }
   if(body.action==='delivery-test'){
    let record;try{record=cleanRecord(body.record)}catch{return reply({error:'invalid_feedback'},400)}
-   return reply(await email(record,await rpc('summary')));
+   return reply(await email(record,await rpc('summary'),true));
   }
   if(body.action==='enable'){
    const config=await configuration();if(!config?.delivery_verified)return reply({error:'email_not_verified'},409);
@@ -130,5 +130,5 @@ Deno.serve(async req=>{
    return reply({ready:true});
   }
   return reply({error:'unknown_action'},400);
- }catch{return reply({error:'service_unavailable'},503)}
+ }catch(error){const message=error instanceof Error?error.message:'';const safe=/^(delivery_(?:http_\d+|not_accepted|provider_unavailable)|database_unavailable)$/.test(message)?message:'service_unavailable';return reply({error:safe},503)}
 });

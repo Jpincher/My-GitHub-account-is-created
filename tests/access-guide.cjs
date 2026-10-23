@@ -11,7 +11,7 @@ while(view.getUint32(at,true)===0x04034b50){
  assert.equal(JP_ACCESS_DOCX.crc32(data),view.getUint32(at+14,true),name+' checksum');
  if(name==='word/document.xml'){
   const xml=new TextDecoder().decode(data);
-  assert(xml.includes(fake));assert(xml.includes('https://is.gd/example'));assert(xml.includes('not secure server authentication'));
+  assert(xml.includes(fake));assert(xml.includes('https://is.gd/example'));assert(xml.includes('server-verified developer authentication'));
   assert(xml.includes('GitHub account password'));assert(xml.includes('Automatic shared feedback collection'));
  }
  count++;at=start+size;

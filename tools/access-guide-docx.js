@@ -35,19 +35,19 @@ function paragraphs(code,links){
  'Usability explanation: '+base+'learning-usability-testing.html',
  'Tester questionnaire: '+base+'usability-tester.html'
  ]),
- ...section('2. Developer preview code',[
+ ...section('2. Protected developer access',[
  'Code supplied in this private download: '+(code||'[Not supplied. Obtain it from your private conversation with ChatGPT.]'),
  'Where to use it: open the tester questionnaire, complete or view its report, then choose Developer only.',
  'Enter the code exactly, including capital letters and the final symbol.',
- 'This currently opens a browser-only developer preview. It is not secure server authentication and does not collect or reveal responses from other people’s browsers.',
- 'Public reports omit identity and demographic details. Responses remain in the current tester browser session; export any feedback files you want to keep.'
+ 'The live tester uses server-verified developer authentication. The code opens individual responses, demographic percentages, high/low score filters and exports. Access expires after 45 minutes; lock the view when you finish.',
+ 'Public reports show shared score averages only. Individual names, email addresses, demographics and comments are stored in the protected Supabase database. Export detailed responses from Developer only for a separate private data backup.'
  ]),
  ...section('3. GitHub editing and recovery',[
  'Account username: Jpincher',
  'Repository: https://github.com/Jpincher/My-GitHub-account-is-created',
  'Main branch: main. Current publishing location: GitHub Pages, repository root.',
  'Your GitHub account password, passkeys, two-factor authentication and recovery codes are your own account credentials. They are not available to this project or included here.',
- 'If you cannot sign in, use GitHub’s account-recovery process. Do not substitute the developer-preview code for your GitHub password.',
+ 'If you cannot sign in, use GitHub’s account-recovery process. Do not substitute the developer code for your GitHub password.',
  'No repository token, API key or GitHub password is embedded in the website.',
  'The GitHub Actions workflow uses GitHub’s temporary runner token; there is no permanent token for you to copy from this project.'
  ]),
@@ -55,7 +55,7 @@ function paragraphs(code,links){
  'Complete backup ZIP: https://github.com/Jpincher/My-GitHub-account-is-created/releases/download/portfolio-backup-2026-10-23/Jonathan_Pincher_Portfolio_Backup.zip',
  'Download the ZIP and this private Word document separately. Extract the ZIP and retain its folder structure.',
  'Open START_HERE.html for the viewing links. Website/index.html is the homepage; Website/interactive-learning.html is the learning-project entry.',
- 'The ZIP contains all tracked source files, images, recorded voices, mouth-timing data, teaching resources, tests and build tools at its recorded commit. It does not contain Git history or feedback stored in other browsers.',
+ 'The ZIP contains all tracked source files, images, recorded voices, mouth-timing data, teaching resources, tests and build tools at its recorded commit. It does not contain Git history or live feedback stored in Supabase. Export that feedback separately through the protected developer report.',
  'External references, email links and online services still need internet access. Browser rules may require a real click before sound plays.',
  'To restore online: sign in to GitHub, open the same repository, upload the contents of Website into the repository root, then commit. Do not upload only the ZIP or create an extra Website folder above index.html.',
  'Keep publishing set to main / root if using branch-based Pages. Check Actions until deployment succeeds.',
@@ -69,7 +69,7 @@ function paragraphs(code,links){
  'learning-project-ddca4d6b5d3f.js — shared learning-project source and embedded page content.',
  'learning-media/ — images, audio, downloadable teaching documents and other assets. Keep this folder beside the HTML files.',
  'learning-usability-testing.html — direct entry to section 11.',
- 'usability-tester.html — questionnaire and local report prototype.',
+ 'usability-tester.html — live questionnaire, shared anonymous report and protected developer report.',
  'tools/final-voices.json — fixed Elena voice choices and introduction scripts.',
  'tools/final-voices-installed.json — installed audio identifiers, transcripts, checksums and mouth envelopes.',
  'CONTRIBUTING.md, USABILITY_TESTING.md and COMPLETION_STATUS.md — design rules, testing details and remaining limitations.',
@@ -84,8 +84,8 @@ function paragraphs(code,links){
  ]),
  ...section('7. Other access and unfinished services',[
  'An older private mobile copy exists at https://jonathan-learning-design.yummykrill4.chatgpt.site . It uses your ChatGPT account access, not a separate project password. The current master copy is the GitHub version above.',
- 'Automatic shared feedback collection, durable research storage and genuine developer authentication are not deployed. There are no live server or database credentials to record for those features yet.',
- 'The current tester is an illustrative draft. Use fictional personal details until secure collection is connected.',
+ 'Automatic shared feedback collection is live in Supabase project Jonathan Pincher Usability (uyjwotszvggcoutalobr), Jpincher’s Org, London. Dashboard: https://supabase.com/dashboard/project/uyjwotszvggcoutalobr . API: https://uyjwotszvggcoutalobr.supabase.co/functions/v1/usability-api . Sign into Supabase with your own account. No database secret or service key is included in this document or the public website.',
+ 'Completed live responses are saved centrally. No browser-preview feedback was imported. FormSubmit sends a per-response score summary and running averages to joff.2.22.22@gmail.com; personal details and comments stay in the protected report. Failed notifications are queued for automatic retry every five minutes.',
  'The public short-link service uses no owner password for these links. Its links cannot be retargeted; maintain the full GitHub destinations.',
  'This guide cannot include account passwords or recovery keys that were never supplied. Store those separately in your own password manager.'
  ]),

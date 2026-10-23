@@ -37,7 +37,7 @@ async function liveDone(){
   if(result.saved!==true)throw Error('save_not_confirmed');
   acceptSummary(result.summary);lastRecord=record;state.draft=newDraft();state.records=[];state.admin=false;adminSession='';
   state.screen='report';state.notice=tr('submitted');history.replaceState(null,'','#report');signalEnd();render();
- }catch{state.error=tr('submitError');render(false)}
+ }catch(error){if(error.message==='refresh_required')liveChallenge=null;state.error=tr('submitError');render(false)}
  finally{liveBusy=false}
 }
 async function liveLogin(){

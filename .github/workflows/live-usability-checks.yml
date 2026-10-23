@@ -42,6 +42,8 @@ jobs:
         run: npm install --prefix tests --ignore-scripts --no-audit --no-fund
       - name: Check live form, authentication boundaries and notification summaries
         run: node tests/live-usability.cjs
+      - name: Verify deployed API without creating responses
+        run: node tests/live-usability-smoke.cjs
       - name: Prepare isolated test database roles
         run: psql -v ON_ERROR_STOP=1 -c 'create role anon; create role authenticated; create role service_role bypassrls;'
       - name: Verify database schema and transactions

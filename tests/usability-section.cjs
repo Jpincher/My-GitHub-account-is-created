@@ -29,7 +29,7 @@ for(const [name,content]of Object.entries(pages)){
 }
 for(const term of ['school networks','university Wi-Fi','home broadband','mobile internet','ongoing'])assert.ok(runtime.toLowerCase().includes(term.toLowerCase()),term+' in narration');
 assert.ok(!html.includes('const speechAdapter='),'Final introduction uses the standard recorded player');
-assert.ok(html.includes('not automatically sent to Jonathan'),'Collection scope is honest');
+assert.ok(html.includes('server-verified developer login'),'Live collection scope is honest');
 assert.ok(html.includes('data-open-usability="true"'),'New section launches actual tester');
 for(const url of ['gov.uk/service-manual/user-research','w3.org/WAI/test-evaluate','developer.chrome.com/docs/devtools/network'])assert.ok(html.includes(url));
 const installed=JSON.parse(fs.readFileSync(path.join(__dirname,'..','tools','final-voices-installed.json'),'utf8'));

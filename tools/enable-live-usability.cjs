@@ -18,6 +18,7 @@ function enableLive(source,config){
  replace('(function usabilityApp(DATA,TEXT,CODE_HASH)','(function usabilityApp(DATA,TEXT)');
  replace("KEY='jp-usability-draft-session-v2'","KEY='jp-usability-live-session-v1'");
  html=html.replaceAll("'jp-usability-draft-v2'","'jp-usability-live-v1'");
+ html=html.replaceAll("'jp-usability-feedback-v2'","'jp-usability-live-export-v1'");
  replace("projectVersion:'f4fdbe2'","projectVersion:'live-usability-v1'");
  replace('<aside class="draft-strip"><strong id="draftLabel">First draft · browser-only preview</strong><span id="draftText">Shared collection is not connected yet.</span></aside>','');
  replace("$('draftLabel').textContent=tr('draft');$('draftText').textContent=tr('draftNote');",'');

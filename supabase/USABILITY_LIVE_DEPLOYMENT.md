@@ -1,6 +1,6 @@
 # Live usability integration — deployment preparation
 
-The existing public tester remains a browser-only preview until a real Supabase project and confirmed email delivery are available. Do not remove its notice or enable collection by editing labels alone.
+Live deployment completed on 23 October 2026. Supabase project uyjwotszvggcoutalobr in Jpincher’s Org (London) hosts the protected dataset and API. The original preview notice was removed after hosted database, authentication and actual inbox-delivery verification.
 
 Prepared components:
 - supabase/schema/usability-live.sql: a new empty live dataset; server-only response, session, rate-limit, configuration and transactional outbox tables. No legacy imports or destructive reset.
@@ -23,9 +23,12 @@ Deployment order:
 9. Run full checks. Adjust the old prototype-only test entry to run the new live suite once the public form is converted. Update section 11's prototype collection wording in all three languages, completion status and private owner guide. Publish, verify GitHub Pages, and refresh the complete backup.
 10. Verify a genuine end-to-end user submission with the owner when testing begins: independent browser aggregate, protected owner details, individual/running email and retry status. Future owner responses are live data; never delete them as “test cleanup”.
 
-Current blockers:
-- Organization choice is required before Supabase project creation (available: Jpincher's Org).
-- No project has been created; no real submissions have been collected.
-- No email relay activation or successful inbox delivery has been verified yet.
+Verified deployment:
+- Organization selection confirmed by the owner.
+- Hosted transactional database checks passed with rollback and zero live records.
+- FormSubmit activated for the actual tester URL. A SETUP TEST email with individual scores and running totals was received and read in the owner mailbox.
+- Live readiness and delivery verification enabled. Security and performance advisors return no findings.
+- No prototype responses were imported; no sample rows remain.
+- Public source never contains a service/secret key or the plaintext developer code.
 
 Private code: use the value requested in the conversation. Only its digest exists in server source. Do not add its plaintext to public GitHub or releases. The original client-side digest gate is removed by the live conversion.

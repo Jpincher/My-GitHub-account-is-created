@@ -1,23 +1,34 @@
 # Completion status — 23 October 2026
 
-## Installed and verified
-- Section 11, Usability testing, linked from all 19 project menus; Curriculum, Reflection and Bibliography numbered 12–14.
-- English, Spanish and Chinese content, grouped control inventory, primary references and network/internet testing plan.
-- Tester introduction typography, top-left and bottom project-return actions, five-stage 1–5 radio questionnaire, review and anonymous aggregate preview.
-- Compact bottom-aligned playback controls on all 18 avatar pages, one initial sound-start action and persistent mute.
-- Six final Elena recordings installed for the school tutor dashboard and usability section in English, Spanish and Mandarin. Mouth envelopes are derived from the exact MP3 files at 25 samples per second; the usability page now uses the same recorded-audio player as other sections. Browser-speech preview removed.
-- Exact provider/voice IDs, transcripts, MP3 SHA-256 values, durations and envelope data are in tools/final-voices-installed.json.
-- All other guide recordings retained.
-- Complete repository regression suite passed on GitHub's Ubuntu runner with Node 24, before and after recording installation. Run: https://github.com/Jpincher/My-GitHub-account-is-created/actions/runs/39950621178
-- Media/link inventory had no missing referenced assets or unresolved local destinations before recording generation; generated files are hash-verified by the installer.
+## Published portfolio and learning project
+- Latest owner-supplied homepage, original recovered English/Spanish/Chinese language controls, repaired navigation and matching existing-content destinations.
+- How to read this site: recruiter-friendly overview, six interest routes, three languages and a separate-window launcher ABOVE Be a usability tester on every project page.
+- Hear guide voice starts the CURRENT page introduction; Mute voice appears while the guide is audible. Pause, stop, mute and finished playback return the start action.
+- Usability tester header alone uses the outlined j and Jonathan Pincher.
+- All 19 project routes, section-11 navigation, primary references, six final Elena recordings, waveform mouth timing and the remaining original guide recordings are retained.
 
-## Remaining work — not a completed live research service
-The questionnaire still keeps responses in the tester's browser session. It does not automatically send feedback to Jonathan or combine visitors' responses.
-A real collection service still needs hosted durable storage, server-side validation, protected individual-response endpoints, genuine developer authentication, consent/retention handling and frontend integration. GitHub Pages serves static files and cannot execute that server.
-The local file/execution workspace remains disconnected, preventing the supported server-hosting preparation/deployment workflow. The existing private Sites copy must retain its owner-only audience.
+## Live usability collection
+- Supabase project Jonathan Pincher Usability, reference uyjwotszvggcoutalobr, London, Jpincher’s Org.
+- Five guided tasks, 1–5 radio ratings, optional contact/demographic fields and written comments.
+- New empty live dataset; NO browser-preview data imported. Database tests roll back.
+- Successful Done saves to the shared database; uncertain/failed saves preserve answers and allow idempotent retry.
+- Public report returns only combined section scores and counts.
+- Developer code verified on the server; opaque sessions expire after 45 minutes. Individual details, demographic percentages, high/low filtering and exports require this session.
+- Personal records are not persisted in browser report storage.
+- Per-response task/score and running-average emails go to the verified owner address. The provider receives score summaries and response identifier, NOT names, contact details, demographics or free comments.
+- Transactional outbox and five-minute retry cron protect delivery after a transient failure.
+- FormSubmit activated; actual setup-test email received and read in the connected owner inbox, with individual ratings and running totals. Setup mails are labelled SETUP TEST and created NO live tester records.
+- First-draft banner and prototype collection notices removed only after backend readiness and email verification.
+- Security/performance advisors returned no findings after explicit client-deny policies.
 
-## Verification limits
-Automated layout, playback, navigation, scoring and report-privacy tests passed. Real Safari/mobile/assistive-technology and real-network review remains necessary. No classroom or participant research is claimed. The voice recordings were generated and waveform-checked; a human listening review is still useful.
+## Verification
+Real hosted PostgreSQL transactional tests passed: save, duplicate handling, equal-weight averages, private-data-free aggregate, outbox lease and rate limits, with zero records after rollback.
+Actual API health, unauthorized access rejection, developer login and email delivery verified.
+Automated DOM tests cover all three languages, guided navigation, review privacy, failed-save retry, protected developer data, session isolation and logout.
+Real Safari/mobile/assistive-technology review and participant research remain useful next steps; no classroom learning gains are claimed.
 
-## Regenerating the final voices
-The finish-project workflow installs pinned recording/test dependencies, runs the regression suite, generates only the fictional introduction text, derives real waveform timing, reruns tests and commits verified outputs only. A failure leaves the live configuration unchanged. Other guides and existing user data are not sent to the speech provider.
+## Operations and backup
+Public entry: index.html. Learning entry: interactive-learning.html. Tester: usability-tester.html. Guide: how-to-read-this-site.html.
+Current deployment source, SQL and function code are tracked. Supabase secrets stay server-side.
+The full downloadable ZIP is regenerated by the delivery workflow. It contains SOURCE/MEDIA, not live feedback records; export those privately from Developer only.
+The private access-guide download explains account recovery, developer access, backend location and restoration.
