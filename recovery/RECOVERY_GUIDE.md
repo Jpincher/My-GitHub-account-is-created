@@ -130,7 +130,7 @@ Only after actual inbox verification, set delivery_verified=true for id=true thr
 
 Set the frontend endpoint in usability-live-config.json AND the embedded window.JP_USABILITY_LIVE object in usability-tester.html. The live form uses the embedded object, not a runtime fetch of the JSON file. Updating the JSON alone will not reconnect an already-converted form. Keep tools/usability-live-client.js and enable-live-usability.cjs consistent if regenerating it.
 
-For a changed hostname, update index.ts ORIGIN to the exact scheme + host + optional port; update its FormSubmit Referer to the actual tester URL, then redeploy. The current function permits one origin. Same-host different repository paths share an origin; a localhost port or LAN IP is a different origin. Do not change the production backend just to authorize an untrusted preview.
+For a changed hostname, update index.ts ORIGIN to the exact scheme + host + optional port; update its FormSubmit Referer to the actual tester URL, and update core.mjs’s Private response report URL, then redeploy. The current function permits one origin. Same-host different repository paths share an origin; a localhost port or LAN IP is a different origin. Do not change the production backend just to authorize an untrusted preview.
 
 Verify health returns ready=true and deliveryVerified=true, anonymous records requests are rejected, public averages contain no personal fields, owner login works, grants/RLS remain private and the retry job is active. The supplied no-write smoke test checks the existing deployment; change its config and expected origin before testing a new host.
 
@@ -180,7 +180,7 @@ Supabase backups/migration: https://supabase.com/docs/guides/platform/migrating-
 
 ## File-by-file instructions
 
-- `.github/workflows/avatar-layout.yml` (Automation): Runs pinned Chromium layout checks and decodes all installed MP3 recordings. Requires the matching browser test source; not needed to serve the static site.
+- `.github/workflows/avatar-layout.yml` (Automation): Runs real Chrome desktop/mobile layout checks with pinned Playwright and decodes all installed recordings with a pinned decoder. Development checks only; not needed to serve the static site.
 - `.github/workflows/cv-downloads.yml` (Automation): GitHub Actions workflow: creates CV links and full/separate downloadable backups. Preserve in the combined repository. Review dependencies before reusing in a standalone repository.
 - `.github/workflows/finish-project.yml` (Automation): GitHub Actions workflow: finishes/verifies recorded voices. Preserve in the combined repository. Review dependencies before reusing in a standalone repository.
 - `.github/workflows/homepage-navigation.yml` (Automation): GitHub Actions workflow: checks homepage and learning regressions. Preserve in the combined repository. Review dependencies before reusing in a standalone repository.
@@ -328,7 +328,7 @@ Supabase backups/migration: https://supabase.com/docs/guides/platform/migrating-
 - `tests/site-reading-guide.cjs` (Tests): Automated development check for site reading guide. Run from the matching source tree; not needed to serve the public website.
 - `tests/usability-section.cjs` (Tests): Automated development check for usability section. Run from the matching source tree; not needed to serve the public website.
 - `tests/usability-tester.cjs` (Tests): Automated development check for usability tester. Run from the matching source tree; not needed to serve the public website.
-- `tests/verify-recordings.py` (Tests): Uses ffprobe and ffmpeg to verify positive duration and decode every installed MP3. Read-only recording integrity check; does not regenerate voices.
+- `tests/verify-recordings.py` (Tests): Decodes every installed MP3 using FFmpeg CLI tools or pinned PyAV 15.1.0 when those tools are unavailable. Read-only integrity check; the workflow installs the decoder automatically.
 - `tools/access-guide-docx.js` (Recovery): Client-side DOCX/ZIP generator. Takes code as private input; contains no plaintext owner code. Keep with recovery-guide-data.js and its CRC tests.
 - `tools/enable-live-usability.cjs` (Backend support): One-time guarded prototype-to-live transformation. Current form is already live; do not rerun against it as a routine restore.
 - `tools/final-voices-installed.json` (Learning support): Installed recording metadata, hashes, transcripts/identities and measured mouth envelopes. Preserve with exact MP3 files.

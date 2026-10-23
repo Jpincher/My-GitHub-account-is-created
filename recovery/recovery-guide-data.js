@@ -99,7 +99,7 @@ globalThis.JP_RECOVERY_GUIDE={
         "First owner login initializes jp_usability_live_config with that project’s API URL and a newly generated notification token. Use the recovery service console to sign in and send a clearly labelled, non-recording setup email. Activate FormSubmit from the owner inbox if asked, then verify receipt, individual scores and running totals.",
         "Only after actual inbox verification, set delivery_verified=true for id=true through trusted Supabase SQL tooling. Use the recovery service console to Enable collection. Install the notification-cron SQL after checking pg_net and pg_cron extensions and avoiding duplicate cron jobs.",
         "Set the frontend endpoint in usability-live-config.json AND the embedded window.JP_USABILITY_LIVE object in usability-tester.html. The live form uses the embedded object, not a runtime fetch of the JSON file. Updating the JSON alone will not reconnect an already-converted form. Keep tools/usability-live-client.js and enable-live-usability.cjs consistent if regenerating it.",
-        "For a changed hostname, update index.ts ORIGIN to the exact scheme + host + optional port; update its FormSubmit Referer to the actual tester URL, then redeploy. The current function permits one origin. Same-host different repository paths share an origin; a localhost port or LAN IP is a different origin. Do not change the production backend just to authorize an untrusted preview.",
+        "For a changed hostname, update index.ts ORIGIN to the exact scheme + host + optional port; update its FormSubmit Referer to the actual tester URL, and update core.mjs’s Private response report URL, then redeploy. The current function permits one origin. Same-host different repository paths share an origin; a localhost port or LAN IP is a different origin. Do not change the production backend just to authorize an untrusted preview.",
         "Verify health returns ready=true and deliveryVerified=true, anonymous records requests are rejected, public averages contain no personal fields, owner login works, grants/RLS remain private and the retry job is active. The supplied no-write smoke test checks the existing deployment; change its config and expected origin before testing a new host.",
         "Use Developer only to check detailed responses and exports; owner sessions expire after 45 minutes and Lock clears them. If you change the developer code, replace CODE_HASH server-side with SHA-256 of the new code, redeploy and revoke old sessions. The plaintext code is never a public frontend constant."
       ]
@@ -142,7 +142,7 @@ globalThis.JP_RECOVERY_GUIDE={
     {
       "path": ".github/workflows/avatar-layout.yml",
       "group": "Automation",
-      "instruction": "Runs pinned Chromium layout checks and decodes all installed MP3 recordings. Requires the matching browser test source; not needed to serve the static site."
+      "instruction": "Runs real Chrome desktop/mobile layout checks with pinned Playwright and decodes all installed recordings with a pinned decoder. Development checks only; not needed to serve the static site."
     },
     {
       "path": ".github/workflows/cv-downloads.yml",
@@ -882,7 +882,7 @@ globalThis.JP_RECOVERY_GUIDE={
     {
       "path": "tests/verify-recordings.py",
       "group": "Tests",
-      "instruction": "Uses ffprobe and ffmpeg to verify positive duration and decode every installed MP3. Read-only recording integrity check; does not regenerate voices."
+      "instruction": "Decodes every installed MP3 using FFmpeg CLI tools or pinned PyAV 15.1.0 when those tools are unavailable. Read-only integrity check; the workflow installs the decoder automatically."
     },
     {
       "path": "tools/access-guide-docx.js",
