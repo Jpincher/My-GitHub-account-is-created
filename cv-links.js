@@ -1,1 +1,1 @@
-globalThis.JP_CV_LINKS={"home":{"target":"https://jpincher.github.io/My-GitHub-account-is-created/"},"learning":{"target":"https://jpincher.github.io/My-GitHub-account-is-created/interactive-learning.html"}};
+globalThis.JP_CV_LINKS={"home":{"target":"https://jpincher.github.io/My-GitHub-account-is-created/","short":"https://is.gd/jpfolio"},"learning":{"target":"https://jpincher.github.io/My-GitHub-account-is-created/interactive-learning.html","short":"https://is.gd/jplearn"}};
