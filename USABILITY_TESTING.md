@@ -23,7 +23,7 @@ This is a custom diagnostic 1–5 scale, not the System Usability Scale. The anc
 
 ## Checks
 Run `npm --prefix tests install` then `npm --prefix tests test`. Optional developer-preview checks can use JP_USABILITY_TEST_CODE in the local process environment; never put its value in source or shell history.
-The authoring environment was offline for this draft: script compilation, pure scoring checks and simulated form-flow checks passed, but a rendered browser review and the repository's jsdom test remain to be run.
+The local authoring environment remains offline. The complete repository jsdom suite has now passed on GitHub's runner, including form flow, 1–5 scoring, return navigation, privacy and login rejection. A rendered real-browser and participant review remains to be carried out.
 
 ## Research and browser references
 - https://www.gov.uk/service-manual/user-research/using-moderated-usability-testing
