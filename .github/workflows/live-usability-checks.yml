@@ -1,0 +1,50 @@
+name: Check live usability integration
+on:
+  push:
+    branches: [main, live-usability-integration]
+    paths:
+      - 'supabase/**'
+      - 'tools/*live-usability*'
+      - 'tools/usability-live-*'
+      - 'tests/live-usability*'
+      - '.github/workflows/live-usability-checks.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: test-only-local
+          POSTGRES_DB: usability_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      PGHOST: localhost
+      PGUSER: postgres
+      PGDATABASE: usability_test
+      PGPASSWORD: test-only-local
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24'
+      - name: Install existing DOM test dependencies
+        run: npm install --prefix tests --ignore-scripts --no-audit --no-fund
+      - name: Check live form, authentication boundaries and notification summaries
+        run: node tests/live-usability.cjs
+      - name: Prepare isolated test database roles
+        run: psql -v ON_ERROR_STOP=1 -c 'create role anon; create role authenticated; create role service_role bypassrls;'
+      - name: Verify database schema and transactions
+        run: |
+          psql -v ON_ERROR_STOP=1 -f supabase/schema/usability-live.sql
+          psql -v ON_ERROR_STOP=1 -f tests/live-usability.sql

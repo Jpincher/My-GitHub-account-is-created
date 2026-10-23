@@ -1,0 +1,60 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path');
+function enableLive(source,config){
+ if(!config||!/^https:\/\/[a-z0-9-]+\.supabase\.co\/functions\/v1\/usability-api$/.test(config.endpoint||''))throw Error('A verified Supabase endpoint is required');
+ if(!source.includes('(function usabilityApp(DATA,TEXT,CODE_HASH)'))throw Error('Unexpected tester source: refusing an unsafe rewrite');
+ const root=path.resolve(__dirname,'..');
+ const updates=JSON.parse(fs.readFileSync(path.join(__dirname,'usability-live-text.json'),'utf8'));
+ const client=fs.readFileSync(path.join(__dirname,'usability-live-client.js'),'utf8');
+ let html=source;
+ const replace=(from,to)=>{if(!html.includes(from))throw Error('Missing expected source: '+from.slice(0,80));html=html.replace(from,to)};
+ const start=html.indexOf('})({"stages":')+3,end=html.lastIndexOf(');</script>');
+ const args=Function('return ['+html.slice(start,end)+'];')(),data=args[0],text=args[1];
+ for(const lang of ['en','es','zh']){
+  Object.assign(text[lang],updates[lang]);
+  for(const key of ['draft','draftNote','import','importNote','importError','imported','files'])delete text[lang][key];
+ }
+ html=html.slice(0,start)+JSON.stringify(data)+','+JSON.stringify(text)+html.slice(end);
+ replace('(function usabilityApp(DATA,TEXT,CODE_HASH)','(function usabilityApp(DATA,TEXT)');
+ replace("KEY='jp-usability-draft-session-v2'","KEY='jp-usability-live-session-v1'");
+ html=html.replaceAll("'jp-usability-draft-v2'","'jp-usability-live-v1'");
+ replace("projectVersion:'f4fdbe2'","projectVersion:'live-usability-v1'");
+ replace('<aside class="draft-strip"><strong id="draftLabel">First draft · browser-only preview</strong><span id="draftText">Shared collection is not connected yet.</span></aside>','');
+ replace("$('draftLabel').textContent=tr('draft');$('draftText').textContent=tr('draftNote');",'');
+ replace("records:(saved.records||[]).map(cleanRecord)","records:[]");
+ replace("function save(){try{const {admin,error,notice,...safe}=state;sessionStorage.setItem(KEY,JSON.stringify(safe))}catch{storageFailed=true}}","function save(){try{const {admin,error,notice,records,summary,...safe}=state;sessionStorage.setItem(KEY,JSON.stringify(safe))}catch{storageFailed=true}}");
+ replace("const tr=k=>","if(location.hash==='#developer')state.screen='unlock';\nstate.records=[];state.summary=null;\ntry{sessionStorage.removeItem('jp-usability-draft-session-v2')}catch{}\nconst tr=k=>");
+ const reviewStart=html.indexOf('function reviewPage()'),reviewEnd=html.indexOf('function unlockPage()',reviewStart);
+ const review=html.slice(reviewStart,reviewEnd).replace("const rows=aggregate(state.records);","const rows=state.summary?.sections||STAGES.map(s=>({id:s.id,n:0,average:null}));\n const responseCount=state.summary?.total||0;").replaceAll('state.records.length','responseCount').replace("'<div class=\"actions\">'+btn('edit'","errorBlock()+'<div class=\"actions\">'+btn('edit'").replace("return '<header class=\"hero\"><p class=\"kicker\">'","return errorBlock()+'<header class=\"hero\"><p class=\"kicker\">'");
+ html=html.slice(0,reviewStart)+review+html.slice(reviewEnd);
+ const importStart=html.indexOf('async function importFiles('),importEnd=html.indexOf('async function handle(',importStart);
+ if(importStart<0||importEnd<0)throw Error('Import function not found');
+ html=html.slice(0,importStart)+client+'\n'+html.slice(importEnd);
+ const done=html.indexOf(" if(action==='done')"),doneEnd=html.indexOf("\n if(action==='download')",done);
+ html=html.slice(0,done)+" if(action==='done'){await liveDone();return}"+html.slice(doneEnd);
+ const report=html.indexOf(" if(action==='report')"),reportEnd=html.indexOf("\n if(action==='another')",report);
+ html=html.slice(0,report)+" if(action==='report'){if(adminSession)await liveLogout();else await liveReport();return}"+html.slice(reportEnd);
+ const login=html.indexOf(" if(action==='login')"),loginEnd=html.indexOf("\n if(action==='apply')",login);
+ html=html.slice(0,login)+" if(action==='login'){await liveLogin();return}\n if(action==='logout'){await liveLogout();return}"+html.slice(loginEnd);
+ replace("async function handle(action,el){\n state.error='';","async function handle(action,el){\n if(liveBusy)return;\n state.error='';");
+ replace("if(action==='another'){state.draft=newDraft();","if(action==='another'){state.records=[];state.summary=null;adminSession='';state.draft=newDraft();");
+ replace("else if(e.target.id==='feedbackFiles')importFiles([...e.target.files]);","");
+ const footerStart=html.indexOf("+'<label class=\"button\" for=\"feedbackFiles\">"),footerEnd=html.indexOf(";\n}",footerStart);
+ if(footerStart<0||footerEnd<0)throw Error('Developer import footer not found');
+ html=html.slice(0,footerStart)+"+'</div></section>'"+html.slice(footerEnd);
+ const inject='<script>window.JP_USABILITY_LIVE='+JSON.stringify({schema:'jp-usability-live-v1',endpoint:config.endpoint})+';</script>';
+ replace('<script>(function usabilityApp',inject+'<script>(function usabilityApp');
+ replace('render(false);\n})(', "render(false);\nprepareChallenge();\nif(state.screen==='report')loadReport().then(()=>render(false)).catch(()=>{state.error=tr('connectionError');render(false)});\n})(");
+ if(html.includes('First draft')||html.includes('browser-only preview')||html.includes('CODE_HASH'))throw Error('Draft presentation or client authentication was not removed');
+ for(const match of html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g))new Function(match[1]);
+ return html;
+}
+module.exports={enableLive};
+if(require.main===module)(async()=>{
+ const root=path.resolve(__dirname,'..'),config=JSON.parse(fs.readFileSync(path.join(root,'usability-live-config.json'),'utf8'));
+ const response=await fetch(config.endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'health'}),signal:AbortSignal.timeout(15000)});
+ const health=await response.json();
+ if(!response.ok||health.ready!==true||health.deliveryVerified!==true)throw Error('Live collection and email delivery are not verified; keeping the current tester');
+ const file=path.join(root,'usability-tester.html'),result=enableLive(fs.readFileSync(file,'utf8'),config);
+ fs.writeFileSync(file,result);console.log('Live tester enabled against verified backend.');
+})().catch(error=>{console.error(error.message);process.exitCode=1});
