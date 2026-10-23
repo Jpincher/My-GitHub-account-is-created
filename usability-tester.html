@@ -27,7 +27,12 @@
 @media(max-width:650px){.topbar.has-intro .brand span:last-child{display:none}.topbar.has-intro{gap:8px}.topbar.has-intro select{max-width:105px}.rating-row{padding:16px 0}.rating-title{font-size:14px}.score-options{gap:7px}}
 
 .tester-example-note{max-width:760px;font-size:15px;line-height:1.65;margin:0 0 1.6em}
-</style></head><body><a class="sr-only" href="#main">Skip to the tester</a><header class="topbar" id="testerTopbar"><div class="brand"><span class="mark" aria-hidden="true">j</span><span id="brandLabel">Learning by design · Jonathan Pincher</span></div><button type="button" id="testerIntroButton" data-action="intro" class="quiet small" hidden></button><label><span class="sr-only">Language / Idioma / 语言</span><select id="language" aria-label="Language / Idioma / 语言"><option value="en">English</option><option value="es">Español</option><option value="zh">中文</option></select></label></header><div class="shell" id="shell"><aside class="draft-strip"><strong id="draftLabel">First draft · browser-only preview</strong><span id="draftText">Shared collection is not connected yet.</span></aside><main id="main" tabindex="-1"></main><footer class="footer"><span id="footerLabel">Learning by design · Jonathan Pincher</span><button id="projectLink" type="button" class="quiet small">Return to the learning project</button></footer></div><noscript><p style="padding:24px">This tester needs JavaScript. Please enable it and reload.</p></noscript><script>(function usabilityApp(DATA,TEXT,CODE_HASH){
+
+/* Keep the project return action first, left aligned and visible on every tester screen. */
+.topbar{flex-wrap:wrap}
+.tester-return-row{flex:0 0 100%;display:flex;justify-content:flex-start;min-width:0}
+.tester-return-row button{font-size:11px;min-height:30px;padding:5px 9px;text-align:left}
+</style></head><body><a class="sr-only" href="#main">Skip to the tester</a><header class="topbar" id="testerTopbar"><div class="tester-return-row"><button id="topProjectLink" type="button" class="quiet small">Return to the learning project</button></div><div class="brand"><span class="mark" aria-hidden="true">j</span><span id="brandLabel">Learning by design · Jonathan Pincher</span></div><button type="button" id="testerIntroButton" data-action="intro" class="quiet small" hidden></button><label><span class="sr-only">Language / Idioma / 语言</span><select id="language" aria-label="Language / Idioma / 语言"><option value="en">English</option><option value="es">Español</option><option value="zh">中文</option></select></label></header><div class="shell" id="shell"><aside class="draft-strip"><strong id="draftLabel">First draft · browser-only preview</strong><span id="draftText">Shared collection is not connected yet.</span></aside><main id="main" tabindex="-1"></main><footer class="footer"><span id="footerLabel">Learning by design · Jonathan Pincher</span><button id="projectLink" type="button" class="quiet small">Return to the learning project</button></footer></div><noscript><p style="padding:24px">This tester needs JavaScript. Please enable it and reload.</p></noscript><script>(function usabilityApp(DATA,TEXT,CODE_HASH){
 'use strict';
 const STAGES=DATA.stages,METRICS=DATA.metrics,DEMOGRAPHICS=DATA.demographics,ROOT='https://jpincher.github.io/My-GitHub-account-is-created/',KEY='jp-usability-draft-session-v2';
 
@@ -125,7 +130,8 @@ function render(focus=true){
  const introButton=$('testerIntroButton');introButton.hidden=!(form&&state.index>0);introButton.textContent=tr('introButton');introButton.setAttribute('aria-label',tr('backIntro'));$('testerTopbar').className='topbar'+(!introButton.hidden?' has-intro':'');
  let html=form?progress()+(state.index===0?profile():state.index===6?commentsPage():stagePage(state.index-1)):state.screen==='review'?reviewPage():state.screen==='unlock'?unlockPage():state.screen==='developer'?developerPage():reportPage();
  $('main').innerHTML=html+(storageFailed?'<p class="error">'+esc(tr('localError'))+'</p>':'');
- $('footerLabel').textContent=tr('latest');$('projectLink').textContent=tr('returnProject');
+ $('footerLabel').textContent=tr('latest');
+ for(const id of ['topProjectLink','projectLink'])$(id).textContent=tr('returnProject');
  save();
  if(focus){if(!state.error)window.scrollTo({top:0,behavior:'instant'});const h=$('main').querySelector(state.error?'[role="alert"]':'h1');if(h){h.tabIndex=-1;h.focus({preventScroll:!state.error})}}
 }
@@ -189,7 +195,7 @@ document.addEventListener('change',e=>{if(e.target.id==='language'){state.lang=e
 document.addEventListener('click',e=>{const b=e.target.closest('[data-action]');if(b){e.preventDefault();handle(b.dataset.action,b)}});
 document.addEventListener('submit',e=>e.preventDefault());
 document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='developerCode'){e.preventDefault();handle('login',e.target)}});
-$('projectLink').addEventListener('click',e=>{e.preventDefault();viewProject('interactive-learning.html')});
+for(const id of ['topProjectLink','projectLink'])$(id).addEventListener('click',e=>{e.preventDefault();viewProject('interactive-learning.html')});
 window.addEventListener('message',e=>{if(e.origin!==new URL(ROOT).origin||e.data?.type!=='JP_USABILITY_ACK')return;if($('projectStatus')){$('projectStatus').textContent=tr('ack')+': '+(DATA.routeNames[e.data.route]?.[state.lang]||'');$('projectStatus').dataset.ack='true';if($('projectFallback'))$('projectFallback').hidden=true}});
 window.addEventListener('beforeunload',signalEnd);
 render(false);
