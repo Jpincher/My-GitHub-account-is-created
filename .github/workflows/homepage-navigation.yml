@@ -1,0 +1,28 @@
+name: Check portfolio homepage navigation
+on:
+  push:
+    branches: [main, repair-homepage-navigation]
+    paths:
+      - 'index.html'
+      - 'FinalHomepage.html.html'
+      - 'portfolio-languages.js'
+      - 'tests/homepage-navigation.cjs'
+      - '.github/workflows/homepage-navigation.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24'
+      - name: Install existing DOM test dependencies
+        run: npm install --prefix tests --ignore-scripts --no-audit --no-fund
+      - name: Check every homepage destination and all language controls
+        run: node tests/homepage-navigation.cjs
+      - name: Check learning-project navigation and avatar regressions
+        run: npm test --prefix tests

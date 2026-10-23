@@ -8,6 +8,9 @@ on:
       - 'tools/access-guide-docx.js'
       - 'download-access-guide.html'
       - 'tests/access-guide.cjs'
+      - 'index.html'
+      - 'FinalHomepage.html.html'
+      - 'portfolio-languages.js'
   workflow_dispatch:
 permissions:
   contents: read

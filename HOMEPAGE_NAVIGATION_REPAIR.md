@@ -1,0 +1,28 @@
+# Homepage navigation repair — 23 October 2026
+
+The latest owner-supplied homepage was uploaded as FinalHomepage.html.html. It depended on twelve standalone HTML destinations and portfolio-languages.js that were never committed to this repository. Prior index.html was an older design.
+
+Both index.html and FinalHomepage.html.html now serve the supplied latest design with repaired navigation. The original uploaded HTML remains recoverable from commit dbb822727d517b7c349d9d2921f4f1348077a141.
+
+Missing standalone pages were NOT recovered. Links now open the matching existing content in the learning-project runtime, including the owner's previously published CV extracts. Legacy URLs redirect to those sections. No CV details were invented.
+
+| Previously missing destination | Existing published content |
+| --- | --- |
+| approach.html | interactive-learning.html#view=learning-design-considerations.html&section=section-top |
+| question.html | interactive-learning.html#view=learning-design-considerations.html&section=criterion-2 |
+| design.html | interactive-learning.html#view=learning-design-considerations.html&section=nav-section-7 |
+| test.html | interactive-learning.html#view=learning-usability-testing.html&section=section-top |
+| career.html | interactive-learning.html#view=learning-design-considerations.html&section=experience-and-standards |
+| experience.html | interactive-learning.html#view=learning-design-considerations.html&section=experience-skillkit |
+| accredited-course-design.html | interactive-learning.html#view=learning-design-considerations.html&section=experience-miid |
+| audit-accountability.html | interactive-learning.html#view=learning-design-considerations.html&section=experience-skillkit |
+| university-institute.html | interactive-learning.html#view=learning-design-considerations.html&section=experience-miid |
+| cv.html | interactive-learning.html#view=learning-design-considerations.html&section=experience-and-standards |
+| addie.html | interactive-learning.html#view=learning-design-considerations.html&section=nav-section-1 |
+| featured-work.html | interactive-learning.html#view=interactive-learning.html&section=section-top |
+
+portfolio-languages.js provides body, menu, accessible label and metadata translations in English, Spanish and Chinese. It uses jp-guide-language to share the preference with the learning project. Choosing a language works without localStorage. A lang query parameter can override the saved choice.
+
+tests/homepage-navigation.cjs checks every homepage href/src and every redirect against repository files, checks project routes and fragment IDs against the actual runtime pages, and exercises language switching in a DOM (including body text, URL, accessible state, round-trip, saved preference and denied-storage behavior). DOM checks do not substitute for real Safari visual/usability testing.
+
+The DRAFT watermark was removed from the final homepage. The usability form's collection status and the learning project's evidence limitations remain unchanged by this repair.
