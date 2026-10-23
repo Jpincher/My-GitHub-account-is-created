@@ -4,13 +4,13 @@ These links open the public work; viewers need no password.
 
 ## Portfolio
 
-https://is.gd/jpfolio
+https://is.gd/JP_Homepage
 
 Full address: https://jpincher.github.io/My-GitHub-account-is-created/
 
 ## Learning design
 
-https://is.gd/jplearn
+https://is.gd/JP_Learning
 
 Full address: https://jpincher.github.io/My-GitHub-account-is-created/interactive-learning.html
 
