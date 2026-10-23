@@ -62,8 +62,8 @@ Deno.serve(async req=>{
  if(req.method!=='POST')return reply({error:'method_not_allowed'},405);
  if(!BASE||!SECRET)return reply({error:'not_configured'},503);
  try{
-  if(Number(req.headers.get('content-length')||0)>60000)return reply({error:'request_too_large'},413);
-  const raw=await req.text();if(enc.encode(raw).length>60000)return reply({error:'request_too_large'},413);
+  if(Number(req.headers.get('content-length')||0)>100000)return reply({error:'request_too_large'},413);
+  const raw=await req.text();if(enc.encode(raw).length>100000)return reply({error:'request_too_large'},413);
   let body;try{body=JSON.parse(raw)}catch{return reply({error:'invalid_request'},400)}
   const ip=req.headers.get('x-forwarded-for')?.split(',')[0]?.trim()||req.headers.get('cf-connecting-ip')||'unknown';
   if(body.action==='health'){

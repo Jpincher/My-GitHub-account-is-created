@@ -14,5 +14,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
  const challenge=await call('challenge');assert.match(challenge.data.challenge.signature,/^[0-9a-f]{64}$/);
  await new Promise(r=>setTimeout(r,1200));
  const invalid=await call('submit',{challenge:challenge.data.challenge,record:{schema:'jp-usability-draft-v2'}});assert.equal(invalid.response.status,400);assert.equal(invalid.data.error,'invalid_feedback');
+ const unicode=await call('submit',{challenge:challenge.data.challenge,record:{schema:'jp-usability-draft-v2'},padding:'界'.repeat(22000)});assert.equal(unicode.response.status,400,'Maximum multilingual comment-sized requests reach validation');
+ const oversized=await call('submit',{challenge:challenge.data.challenge,padding:'界'.repeat(40000)});assert.equal(oversized.response.status,413);
  console.log('PASS: deployed health/readiness, live public aggregate shape, CORS, unauthorized records rejection, signed challenge and server validation. No live response or email created.');
 })().catch(error=>{console.error(error);process.exitCode=1});
