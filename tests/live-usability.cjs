@@ -34,8 +34,14 @@ const {JSDOM}=require('jsdom'),{enableLive}=require('../tools/enable-live-usabil
  await tick();assert.equal(w.sessionStorage.getItem('jp-usability-draft-session-v2'),null);
  assert.equal(w.document.getElementById('brandLabel').textContent,'Jonathan Pincher');
  assert.equal(w.document.querySelector('.draft-strip'),null);
+ assert.equal(w.document.querySelector('select#language'),null);
+ const chooseLanguage=async(lang,htmlLang)=>{const button=w.document.querySelector('[data-language="'+lang+'"]');assert.ok(button,lang+' language button exists');button.click();await tick();assert.equal(w.document.documentElement.lang,htmlLang);assert.equal(button.getAttribute('aria-pressed'),'true');assert.equal(w.document.querySelectorAll('[data-language][aria-pressed="true"]').length,1)};
+ await chooseLanguage('es','es');const spanishBody=w.document.getElementById('main').textContent;
+ await chooseLanguage('zh','zh-CN');assert.notEqual(w.document.getElementById('main').textContent,spanishBody,'Body content changes with language');
+ await chooseLanguage('en','en');
  set('profile.nickname','PRIVATE_TEST_NAME');set('profile.email','private@example.test');set('consent',true,true);await action('start');
  for(let i=0;i<5;i++){
+  if(i===0){await chooseLanguage('es','es');await chooseLanguage('en','en');assert.equal(w.document.querySelector('[name="rating.interface"]').checked,false)}
   assert.ok(w.document.getElementById('testerIntroButton'));assert.equal(w.document.querySelectorAll('fieldset').length,7);
   await action('outcome');
   for(const metric of core.METRICS){const el=w.document.querySelector('[name="rating.'+metric+'"][value="'+(i+1)+'"]');el.checked=true;el.dispatchEvent(new w.Event('change',{bubbles:true}))}
