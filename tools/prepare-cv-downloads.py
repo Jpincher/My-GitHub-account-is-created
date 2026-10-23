@@ -13,7 +13,7 @@ def http(url,data=None,method=None,headers=None):
 def links():
     file=ROOT/"cv-links.json"
     result=json.loads(file.read_text()) if file.exists() else {}
-    specs={"home":(BASE,["jpweb","jpfolio","JPincherDesign"]),"learning":(BASE+"interactive-learning.html",["jpedu","jplearn","JPincherLearning"])}
+    specs={"home":(BASE,["JP_Homepage","JPincher_Homepage","jpfolio"]),"learning":(BASE+"interactive-learning.html",["JP_Learning","JPincher_Learning","jplearn"])}
     def save():
         file.write_text(json.dumps(result,indent=2)+"\n")
         (ROOT/"cv-links.js").write_text("globalThis.JP_CV_LINKS="+json.dumps(result,separators=(",",":"))+";\n")
@@ -25,7 +25,7 @@ def links():
         (ROOT/"CV_LINKS.md").write_text("\n".join(rows))
     errors=[]
     for key,(target,candidates) in specs.items():
-        if result.get(key,{}).get("short") and result[key].get("target")==target:
+        if result.get(key,{}).get("short") and result[key].get("target")==target and result[key]["short"].rsplit("/",1)[-1] in candidates:
             try:
                 _,destination=http(result[key]["short"])
                 if destination.rstrip("/")==target.rstrip("/"):continue
