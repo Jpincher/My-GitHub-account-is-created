@@ -1,0 +1,31 @@
+/* One recorded guide at a time, including other open learning-project tabs. */
+(()=>{
+'use strict';
+if(window.JP_GUIDE_AUDIO_COORDINATOR)return;
+const proto=window.HTMLMediaElement?.prototype;if(!proto)return;
+const nativePlay=proto.play,nativePause=proto.pause,active=new Set();
+const owner=Date.now().toString(36)+'-'+Math.random().toString(36).slice(2),key='jp-guide-audio-owner-v1';
+let channel=null;
+function stopAll(){for(const audio of [...active]){try{nativePause.call(audio)}catch{}active.delete(audio)}try{window.speechSynthesis?.cancel()}catch{}}
+function receive(message){if(message?.type==='guide-claim'&&typeof message.owner==='string'&&message.owner!==owner)stopAll()}
+try{channel=new BroadcastChannel('jp-learning-guide-audio-v1');channel.onmessage=event=>receive(event.data)}catch{}
+window.addEventListener('storage',event=>{if(event.key===key&&event.newValue){try{receive(JSON.parse(event.newValue))}catch{}}});
+function claim(){const message={type:'guide-claim',owner,at:Date.now(),nonce:Math.random()};try{channel?.postMessage(message)}catch{}try{localStorage.setItem(key,JSON.stringify(message))}catch{}}
+function blocked(){return Promise.reject(Object.assign(new Error('This guide player has been replaced or is in a background tab.'),{name:'AbortError'}))}
+proto.play=function(){
+ // Older embedded section scripts must never create a second audible guide.
+ if(this!==window.JP_SHARED_AUDIO||document.hidden)return blocked();
+ for(const previous of [...active])if(previous!==this){try{nativePause.call(previous)}catch{}active.delete(previous)}
+ try{window.speechSynthesis?.cancel()}catch{}
+ if(!active.has(this)){
+  const clear=()=>active.delete(this);
+  this.addEventListener('pause',clear);this.addEventListener('ended',clear);this.addEventListener('error',clear);
+ }
+ active.add(this);claim();
+ let result;try{result=nativePlay.call(this)}catch(error){active.delete(this);throw error}
+ return Promise.resolve(result).catch(error=>{active.delete(this);throw error});
+};
+window.addEventListener('pagehide',stopAll);
+document.addEventListener('visibilitychange',()=>{if(document.hidden)stopAll()});
+window.JP_GUIDE_AUDIO_COORDINATOR={stop:stopAll,activeCount:()=>active.size};
+})();

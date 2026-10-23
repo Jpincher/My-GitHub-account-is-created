@@ -10,6 +10,8 @@ on:
       - 'interactive-learning.html'
       - 'learning-usability-testing.html'
       - 'tests/avatar-sound.cjs'
+      - 'tests/guide-audio-exclusivity.cjs'
+      - 'guide-audio-coordinator.js'
       - 'how-to-read-this-site.html'
       - 'tests/site-reading-guide.cjs'
       - 'tests/homepage-navigation.cjs'
