@@ -26,3 +26,9 @@ portfolio-languages.js provides body, menu, accessible label and metadata transl
 tests/homepage-navigation.cjs checks every homepage href/src and every redirect against repository files, checks project routes and fragment IDs against the actual runtime pages, and exercises language switching in a DOM (including body text, URL, accessible state, round-trip, saved preference and denied-storage behavior). DOM checks do not substitute for real Safari visual/usability testing.
 
 The DRAFT watermark was removed from the final homepage. The usability form's collection status and the learning project's evidence limitations remain unchanged by this repair.
+
+## Original translation recovery
+
+A subsequent owner upload, FinalHomepage.html.webarchive (131,195 bytes), contains the original portfolio-languages.js (95,516 UTF-8 bytes), with 270 entries in each of Spanish and Chinese. Its main-resource URL identifies the final horizontal-language-buttons local preview. The separately uploaded HTML, Put my thinking to work | Jonathan Pincher.html, is byte-for-byte identical to the first HTML upload (blob a3a30dbd7ba48cb8ac3616eab927aa4a7c93829f).
+
+The live language script now uses those original translations and original switching behavior. Small compatibility changes share the language preference with the learning project, update description metadata and refresh the saved preference on return. Additional accessible-label translations cover the repaired skip link. The archived original script is retained unchanged in tools/recovered-portfolio-languages.js. The archive contains only the homepage and its language script, not the standalone destination pages; their existing-content navigation mappings above remain in effect.

@@ -40,7 +40,7 @@ for(const link of w.document.querySelectorAll('a[href]'))auditLink(link.getAttri
 for(const node of w.document.querySelectorAll('[src]'))auditLink(node.getAttribute('src'),'index.html');
 assert.ok(!html.includes('portfolio-draft-watermark'));
 const original=w.document.querySelector('main').textContent;
-const expect={es:['No se limite a','más de 30 años de experiencia','PLANTEE UNA MEJOR PREGUNTA'],zh:['阅读我的简历','30 多年的经验','提出更好的问题']};
+const expect={es:['No te limites a','más de 30 años de experiencia','PLANTEA UNA MEJOR PREGUNTA'],zh:['阅读我的简历','三十余年的经验','提出更好的问题']};
 for(const lang of ['es','zh','en','es','en']){
  w.document.querySelector('[data-language="'+lang+'"]').click();
  assert.equal(w.document.documentElement.lang,lang==='zh'?'zh-CN':lang);
@@ -51,7 +51,7 @@ for(const lang of ['es','zh','en','es','en']){
  else for(const text of expect[lang])assert.ok(w.document.querySelector('main').textContent.includes(text),lang+' body translated: '+text);
 }
 assert.equal(w.document.querySelector('.portfolio-menu-shell').open,true);
-assert.equal(w.document.querySelector('.portfolio-side-nav a').getAttribute('href'),'index.html');
+assert.equal(new URL(w.document.querySelector('.portfolio-side-nav a').href).pathname,'/portfolio/index.html');
 for(const name of ['approach','question','design','test','career','experience','accredited-course-design','audit-accountability','university-institute','cv','addie','featured-work']){
  const alias=fs.readFileSync(path.join(root,name+'.html'),'utf8');
  const redirect=alias.match(/http-equiv="refresh" content="0;url=([^"]+)"/);
