@@ -6,7 +6,7 @@ const runtime=fs.readFileSync(path.join(root,'learning-project-ddca4d6b5d3f.js')
 const marker=runtime.indexOf('const pages=')+12;let depth=0,quoted=false,escaped=false,end;
 for(let i=marker;i<runtime.length;i++){const c=runtime[i];if(quoted){if(escaped)escaped=false;else if(c==='\\')escaped=true;else if(c==='"')quoted=false}else if(c==='"')quoted=true;else if(c==='{')depth++;else if(c==='}'&&--depth===0){end=i+1;break}}
 const pages=JSON.parse(runtime.slice(marker,end)),errors=[],channels=new Set(),pauseState=new WeakMap(),playing=new Set();
-let peak=0;
+let peak=0;const windows=[];
 class Channel{constructor(){this.onmessage=null;channels.add(this)}postMessage(data){for(const other of channels)if(other!==this)other.onmessage?.({data})}close(){channels.delete(this)}}
 function makeWindow(){
  const vc=new VirtualConsole();vc.on('jsdomError',e=>{if(!/Not implemented|Could not parse CSS/.test(e.message))errors.push(e.message)});
@@ -17,7 +17,7 @@ function makeWindow(){
   w.HTMLMediaElement.prototype.pause=function(){pauseState.set(this,true);playing.delete(this);this.dispatchEvent(new w.Event('pause'))};
   w.HTMLMediaElement.prototype.load=function(){};
  }});
- dom.window.eval(coordinator);dom.window.eval(runtime);return dom;
+ windows.push(dom);dom.window.eval(coordinator);dom.window.eval(runtime);return dom;
 }
 const wait=ms=>new Promise(r=>setTimeout(r,ms));
 (async()=>{
@@ -34,9 +34,9 @@ const wait=ms=>new Promise(r=>setTimeout(r,ms));
    assert(w.JP_SCRIPTS?.[route]?.[lang]?.trim().length>30,'Spoken script exists: '+route+' '+lang);
    assert.equal(w.JP_ACTIVE_TRACK.lang,lang);assert.equal(w.JP_ACTIVE_TRACK.audio,w.JP_SHARED_AUDIO);
    assert.equal(playing.size,1,route+' '+lang+' has one audible player');assert(!w.document.body.textContent.includes('Hear the introduction to this page.'));
-   w.document.getElementById('guideReliablePlay').click();await wait(5);assert.equal(playing.size,0,'Pause stops sound');
+   w.document.getElementById('guideReliablePlay').click();await wait(5);assert.equal(playing.size,0,'Pause stops sound');assert.equal(w.document.querySelector('.avatar-mute').hidden,false);
    w.document.getElementById('voiceMuteToggle').click();await wait(5);assert.equal(playing.size,1,'Hear restarts one current recording');
-   w.document.getElementById('guideReliableStop').click();await wait(5);assert.equal(playing.size,0,'Stop stops sound');
+   w.document.getElementById('guideReliableStop').click();await wait(5);assert.equal(playing.size,0,'Stop stops sound');assert.equal(w.document.querySelector('.avatar-mute').hidden,false);
    w.document.getElementById('voiceMuteToggle').click();await wait(5);
   }
  }
@@ -48,4 +48,4 @@ const wait=ms=>new Promise(r=>setTimeout(r,ms));
  assert.equal(peak,1,'Never two simultaneously playing recordings');
  w.JP_GUIDE_AUDIO_COORDINATOR.stop();v.JP_GUIDE_AUDIO_COORDINATOR.stop();a.window.close();b.window.close();
  assert.deepEqual(errors,[]);console.log('PASS: all 18 guides in 3 languages have scripts/media and a single active player; pause, stop, replay, page changes, legacy audio and cross-tab/storage takeover remain exclusive.');
-})().catch(e=>{console.error(e);process.exitCode=1});
+})().catch(e=>{console.error(e);process.exitCode=1}).finally(()=>{for(const dom of windows){try{dom.window.JP_GUIDE_AUDIO_COORDINATOR?.stop();dom.window.close()}catch{}}});

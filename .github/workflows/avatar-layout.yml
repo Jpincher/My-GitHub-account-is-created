@@ -1,0 +1,34 @@
+name: Verify guide layout and installed recordings
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'learning-project-*.js'
+      - 'guide-audio-coordinator.js'
+      - 'learning-media/**'
+      - 'tests/avatar-layout-browser.cjs'
+      - 'tests/verify-recordings.py'
+      - '.github/workflows/avatar-layout.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: avatar-layout
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24'
+      - name: Install pinned browser test tools
+        run: |
+          npm install --prefix _checks --ignore-scripts --no-audit --no-fund playwright@1.56.1
+          node _checks/node_modules/playwright/cli.js install --with-deps chromium
+      - name: Measure playing, paused and stopped controls on every guide page
+        run: node tests/avatar-layout-browser.cjs
+      - name: Decode every installed recording
+        run: python3 tests/verify-recordings.py
