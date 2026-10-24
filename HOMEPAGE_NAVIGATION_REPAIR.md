@@ -32,3 +32,10 @@ The DRAFT watermark was removed from the final homepage. The usability form's co
 A subsequent owner upload, FinalHomepage.html.webarchive (131,195 bytes), contains the original portfolio-languages.js (95,516 UTF-8 bytes), with 270 entries in each of Spanish and Chinese. Its main-resource URL identifies the final horizontal-language-buttons local preview. The separately uploaded HTML, Put my thinking to work | Jonathan Pincher.html, is byte-for-byte identical to the first HTML upload (blob a3a30dbd7ba48cb8ac3616eab927aa4a7c93829f).
 
 The live language script now uses those original translations and original switching behavior. Small compatibility changes share the language preference with the learning project, update description metadata and refresh the saved preference on return. Additional accessible-label translations cover the repaired skip link. The archived original script is retained unchanged in tools/recovered-portfolio-languages.js. The archive contains only the homepage and its language script, not the standalone destination pages; their existing-content navigation mappings above remain in effect.
+
+
+## Standalone portfolio restoration — 24 October 2026
+
+Supersedes the redirect approach above. All twelve original homepage destinations now contain substantive standalone content recovered from the English keys and Spanish/Chinese translations in portfolio-languages.js. Original page markup was unavailable; the pages were rebuilt with the current shared homepage shell, typography, language controls and sidebar. Original destination mapping is restored across the sidebar, homepage graphic and recruiter navigation. The featured-work overview contains explicit launch buttons for the learning project. ADDIE has five independently expandable stages. The CV includes the original delivery evidence, career history, qualifications and working arrangements.
+
+Automated checks cover every local destination/fragment, all twelve current-page menus and three-language round trips. Homepage-only recovery packages include these independent pages and keep portfolio navigation local.

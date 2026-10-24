@@ -3,7 +3,7 @@ on:
   push:
     branches: [main, repair-homepage-navigation, live-usability-integration]
     paths:
-      - 'index.html'
+      - '*.html'
       - 'FinalHomepage.html.html'
       - 'portfolio-languages.js'
       - 'learning-project-*.js'

@@ -1,5 +1,6 @@
 {
-  "workId": "portfolio-final-20261023",
-  "state": "complete",
-  "message": "Finished. The updated portfolio and learning project are published. Audio, controls and recovery backups have passed their checks."
+  "workId": "portfolio-pages-20261024",
+  "state": "working",
+  "message": "Restoring separate homepage portfolio pages and checking navigation.",
+  "updatedAt": "2026-10-24"
 }

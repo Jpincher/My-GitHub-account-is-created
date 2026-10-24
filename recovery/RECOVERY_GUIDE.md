@@ -1,14 +1,14 @@
 # Jonathan Pincher — Recovery manual
 
-Prepared 23 October 2026. Public copy: no access codes or private response data.
+Prepared 24 October 2026. Public copy: no access codes or private response data.
 
 ## 1. Choose the right backup
 
-Prepared 23 October 2026. Keep this private Word guide with your offline copies. The public ZIP files contain no owner code, account passwords, database secret keys or personal tester responses.
+Prepared 24 October 2026. Keep this private Word guide with your offline copies. The public ZIP files contain no owner code, account passwords, database secret keys or personal tester responses.
 
 Complete project: Jonathan_Pincher_Portfolio_Backup.zip is the exact tracked-file snapshot of the combined published repository. Use it to restore the present site with both projects together.
 
-Homepage only: Jonathan_Pincher_Homepage_Standalone.zip contains a deployable Website folder, professional homepage, language script and redirect pages. Its evidence links lead to the published learning project. The learning project is deliberately not duplicated in this smaller package.
+Homepage only: Jonathan_Pincher_Homepage_Standalone.zip contains a deployable Website folder, professional homepage, language script and twelve standalone portfolio pages, including CV, approach and career evidence. Their menus stay local. The featured-work page has an explicit button to the published learning project, which is not duplicated in this smaller package.
 
 Learning only: Jonathan_Pincher_Learning_Standalone.zip contains a deployable Website folder with the complete learning experience, its media and questionnaires. An index.html launcher makes the learning project the entry page. Portfolio/Home buttons continue to the published portfolio.
 
@@ -68,7 +68,7 @@ For a repository owned by Jpincher, a project page is normally https://jpincher.
 
 The standalone packages are portable copies; the complete archive preserves original source exactly. PACKAGE_CHANGES.json in each standalone records transformations. The learning tester's project navigation is made relative to its restored folder. The homepage's cross-project links are made explicit external links.
 
-If moving BOTH packages to a new host, edit the learning-project destination in homepage HTML and redirect files; edit the public portfolio destination in the learning runtime/entry copies if desired. Keep folder paths intact. Inspect FILE_GUIDE.html before editing generated or historical files.
+If moving BOTH packages to a new host, edit the explicit learning-project destination in featured-work.html; edit the public portfolio destination in the learning runtime/entry copies if desired. Keep folder paths intact. Inspect FILE_GUIDE.html before editing generated or historical files.
 
 ## 6. View on your own computer
 
@@ -148,13 +148,13 @@ Run with the matching backend version so ratings/profile validation remains corr
 
 ## 11. Maintain files and verify a rebuild
 
-Treat index.html plus portfolio-languages.js as the homepage’s live pair. FinalHomepage.html.html is its public alias. Do not replace these with the older Safari-saved upload or webarchive just because its name says final.
+Keep index.html, portfolio-languages.js and the twelve standalone portfolio HTML pages together. FinalHomepage.html.html is its public alias. Do not replace these with the older Safari-saved upload or webarchive just because its name says final.
 
 Treat interactive-learning.html plus guide-audio-coordinator.js, learning-project-ddca4d6b5d3f.js and learning-media/ as one learning runtime. Internal page HTML, scripts, translations and avatar timing are embedded in the runtime. The three 05c34d493c64 text chunks are historical source uploads; the current entry does not load them.
 
 Do not rename hashed media files individually. The runtime and installed-voice manifest refer to their exact paths. The file guide names the teaching documents and the media use, where the installed manifest identifies them.
 
-Original standalone career/design/etc pages were not recovered as separate originals; the current small HTML files redirect to the matching published evidence inside the learning project. The backup preserves this implemented behavior rather than claiming to restore unavailable originals.
+The twelve standalone portfolio pages were rebuilt on 24 October 2026 using the original English text and Spanish/Chinese translations recovered from portfolio-languages.js. Original separate page markup was unavailable; the rebuilt pages use the current homepage header, menu and purple-and-cream styling. These pages are independent of the learning runtime.
 
 For development, install the pinned tests dependencies using npm install --prefix tests --ignore-scripts and run npm test --prefix tests. node tests/homepage-navigation.cjs audits homepage links; node tests/access-guide.cjs validates the private Word builder. Automated checks do not replace testing Safari, keyboard use, zoom, language buttons, slower networks and a second LAN device.
 
@@ -185,11 +185,11 @@ Supabase backups/migration: https://supabase.com/docs/guides/platform/migrating-
 - `.github/workflows/finish-project.yml` (Automation): GitHub Actions workflow: finishes/verifies recorded voices. Preserve in the combined repository. Review dependencies before reusing in a standalone repository.
 - `.github/workflows/homepage-navigation.yml` (Automation): GitHub Actions workflow: checks homepage and learning regressions. Preserve in the combined repository. Review dependencies before reusing in a standalone repository.
 - `.github/workflows/live-usability-checks.yml` (Automation): GitHub Actions workflow: checks form/privacy/API and database transactions. Preserve in the combined repository. Review dependencies before reusing in a standalone repository.
-- `accredited-course-design.html` (Homepage redirect): Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site.
-- `addie.html` (Homepage redirect): Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site.
-- `approach.html` (Homepage redirect): Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site.
-- `audit-accountability.html` (Homepage redirect): Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site.
-- `career.html` (Homepage redirect): Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site.
+- `accredited-course-design.html` (Homepage redirect): Standalone portfolio page with recovered original English/Spanish/Chinese content. Deploy beside index.html and portfolio-languages.js; its sidebar stays within the homepage project.
+- `addie.html` (Homepage redirect): Standalone portfolio page with recovered original English/Spanish/Chinese content. Deploy beside index.html and portfolio-languages.js; its sidebar stays within the homepage project.
+- `approach.html` (Homepage redirect): Standalone portfolio page with recovered original English/Spanish/Chinese content. Deploy beside index.html and portfolio-languages.js; its sidebar stays within the homepage project.
+- `audit-accountability.html` (Homepage redirect): Standalone portfolio page with recovered original English/Spanish/Chinese content. Deploy beside index.html and portfolio-languages.js; its sidebar stays within the homepage project.
+- `career.html` (Homepage redirect): Standalone portfolio page with recovered original English/Spanish/Chinese content. Deploy beside index.html and portfolio-languages.js; its sidebar stays within the homepage project.
 - `COMPLETION_STATUS.md` (Documentation): Published completion/validation status and limits. Read before rebuilding; update after meaningful changes.
 - `completion-chime.html` (Independent utility): Separate completion notification page, outside portfolio navigation. Open it online, enable sound once and keep it open. Polls completion-status.json; no microphone or private records.
 - `completion-status.json` (Independent utility): Public work-session status read by the chime page. Set state=complete only after actual checks/publication finish; keep workId unique for later work sessions.
@@ -197,12 +197,12 @@ Supabase backups/migration: https://supabase.com/docs/guides/platform/migrating-
 - `CV_LINKS.md` (Recovery): Human-readable CV URLs. Regenerate with link tooling when destinations/aliases change.
 - `cv-links.js` (Recovery): Verified public CV short-link mapping used by the document generator. Regenerated from cv-links.json.
 - `cv-links.json` (Recovery): Authoritative public short/full URL mapping. Existing aliases continue to point to current destinations.
-- `cv.html` (Homepage redirect): Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site.
-- `design.html` (Homepage redirect): Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site.
+- `cv.html` (Homepage redirect): Standalone portfolio page with recovered original English/Spanish/Chinese content. Deploy beside index.html and portfolio-languages.js; its sidebar stays within the homepage project.
+- `design.html` (Homepage redirect): Standalone portfolio page with recovered original English/Spanish/Chinese content. Deploy beside index.html and portfolio-languages.js; its sidebar stays within the homepage project.
 - `download-access-guide.html` (Recovery): Generates a private Word recovery guide in the browser from the supplied code. Keep its data/builder scripts together. Downloaded completed guide stays private.
 - `education.html` (Homepage): Education/learning portfolio landing page. Preserve existing links or update its destinations for a new host.
-- `experience.html` (Homepage redirect): Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site.
-- `featured-work.html` (Homepage redirect): Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site.
+- `experience.html` (Homepage redirect): Standalone portfolio page with recovered original English/Spanish/Chinese content. Deploy beside index.html and portfolio-languages.js; its sidebar stays within the homepage project.
+- `featured-work.html` (Homepage redirect): Standalone portfolio page with recovered original English/Spanish/Chinese content. Deploy beside index.html and portfolio-languages.js; its sidebar stays within the homepage project.
 - `Final Lesson Plans Jonathan_Pincher_Portfolio_Invitation.html` (Historical): Earlier lesson-plan/portfolio invitation source. Optional archive reference; current learning experience is loaded through the shared runtime.
 - `FinalHomepage.html.html` (Homepage): Published alias of the current homepage. Keep synchronized with index.html for existing bookmarks.
 - `FinalHomepage.html.webarchive` (Historical): Safari-saved reference archive. Not served as the live homepage. Keep for provenance; do not overwrite current index.html with it.
@@ -299,7 +299,7 @@ Supabase backups/migration: https://supabase.com/docs/guides/platform/migrating-
 - `learning-usability-testing.html` (Learning): Direct launch of section 11 through the shared learning runtime. Keep its runtime URL/version aligned with interactive-learning.html.
 - `portfolio-languages.js` (Homepage): Current homepage translations and language controls (English, Spanish, Mandarin). Edit with the homepage and test all languages.
 - `Put my thinking to work | Jonathan Pincher.html` (Historical): User-supplied saved homepage reference. Not the current repaired live entry. Keep for historical comparison.
-- `question.html` (Homepage redirect): Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site.
+- `question.html` (Homepage redirect): Standalone portfolio page with recovered original English/Spanish/Chinese content. Deploy beside index.html and portfolio-languages.js; its sidebar stays within the homepage project.
 - `README.md` (Documentation): Original short repository description; the recovery manual provides full operating instructions.
 - `recovery/config.toml.example` (Recovery): Example Supabase function configuration with custom entrypoint and gateway JWT check disabled; merge into a reviewed project config.
 - `recovery/FILE_GUIDE.json` (Recovery): Machine-readable purpose/action inventory of every tracked file and embedded learning route. The generated HTML guide presents it for reading.
@@ -313,7 +313,7 @@ Supabase backups/migration: https://supabase.com/docs/guides/platform/migrating-
 - `supabase/schema/usability-live.sql` (Backend): Fresh-install schema, private tables, grants/RLS and RPCs. Apply once to a new empty project; not over live tables.
 - `supabase/schema/usability-notification-cron.sql` (Backend): pg_net/pg_cron five-minute notification retry job. Inspect extensions/jobs before installing to avoid duplicates.
 - `supabase/USABILITY_LIVE_DEPLOYMENT.md` (Backend): Original service setup order and verified deployment state. Use with the expanded recovery manual for a fresh backend.
-- `test.html` (Homepage redirect): Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site.
+- `test.html` (Homepage redirect): Standalone portfolio page with recovered original English/Spanish/Chinese content. Deploy beside index.html and portfolio-languages.js; its sidebar stays within the homepage project.
 - `tests/access-guide.cjs` (Tests): Automated development check for access guide. Run from the matching source tree; not needed to serve the public website.
 - `tests/avatar-controls.cjs` (Tests): Automated development check for avatar controls. Run from the matching source tree; not needed to serve the public website.
 - `tests/avatar-layout-browser.cjs` (Tests): Measures control-row positions in real Chromium at desktop and mobile sizes for playing, paused and stopped states. Uses pinned Playwright installed by avatar-layout.yml.
@@ -340,7 +340,7 @@ Supabase backups/migration: https://supabase.com/docs/guides/platform/migrating-
 - `tools/recovered-portfolio-languages.js` (Historical): Recovered original translation source. Current browser loads portfolio-languages.js, not this reference.
 - `tools/usability-live-client.js` (Backend support): Source template for live submissions, challenge, report, server login/logout. Current browser embeds this logic inside usability-tester.html.
 - `tools/usability-live-text.json` (Backend support): English/Spanish/Chinese live-form consent, privacy and error copy used by the conversion tool. Update matching embedded form text if editing.
-- `university-institute.html` (Homepage redirect): Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site.
+- `university-institute.html` (Homepage redirect): Standalone portfolio page with recovered original English/Spanish/Chinese content. Deploy beside index.html and portfolio-languages.js; its sidebar stays within the homepage project.
 - `USABILITY_TESTING.md` (Documentation): Usability decisions and verification methods. Use alongside the live deployment and recovery manuals.
 - `usability-live-config.json` (Backend): Public API endpoint for tooling/tests. Contains no server secret. Also update the embedded endpoint in the already-live tester HTML when reconnecting.
 - `usability-tester.html` (Learning): Live five-task 1–5 questionnaire, three language buttons, shared report and protected owner view. For another host edit both its embedded endpoint and project ROOT; API CORS must match.

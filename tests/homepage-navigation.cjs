@@ -52,14 +52,43 @@ for(const lang of ['es','zh','en','es','en']){
 }
 assert.equal(w.document.querySelector('.portfolio-menu-shell').open,true);
 assert.equal(new URL(w.document.querySelector('.portfolio-side-nav a').href).pathname,'/portfolio/index.html');
-for(const name of ['approach','question','design','test','career','experience','accredited-course-design','audit-accountability','university-institute','cv','addie','featured-work']){
- const alias=fs.readFileSync(path.join(root,name+'.html'),'utf8');
- const redirect=alias.match(/http-equiv="refresh" content="0;url=([^"]+)"/);
- assert.ok(redirect,'Legacy URL has a real redirect '+name);
- auditLink(redirect[1].replaceAll('&amp;','&'),name+'.html');
+
+const restored=[{"path":"featured-work.html","label":"See the work","title":"One investigation. Two learning journeys.","lead":"A stick is a simple starting point. What learners do with it reveals the design."},{"path":"approach.html","label":"My approach","title":"A clear need. A purposeful experience.","lead":"Three steps connect the question to something people can use."},{"path":"career.html","label":"Experience overview","title":"Experience with substance.","lead":"Learning design, programme leadership and the responsibility to make delivery work."},{"path":"accredited-course-design.html","label":"Accredited course design","title":"Curriculum that meets the standard. Evidence that stands up to audit."},{"path":"audit-accountability.html","label":"Audit and accountability","title":"Deliver the learning. Account for the funding.","lead":"My CV describes responsibility for the records, reporting and evidence behind publicly funded learning—not just the courses themselves."},{"path":"university-institute.html","label":"University institute","title":"Learning at scale. Designed around people.","lead":"At Manchester Metropolitan University, I founded an institute recruiting and training approximately 6,000 learners annually."},{"path":"experience.html","label":"Learning delivery","title":"Learning design. Built on delivery.","lead":"From founding an education business in 1995 to developing interactive learning today, I connect course design with the realities of running programmes."},{"path":"question.html","label":"Question","title":"What if the same lesson needs two different designs?","lead":"A stick. Two learners. Two different starting points. The question is not what content to show—it is what each learner needs to understand and do."},{"path":"design.html","label":"Design","title":"Turn “what if?” into “try this”.","lead":"Give the learner something to predict, investigate and explain. Then make the design decisions visible so the experience can be questioned and improved."},{"path":"test.html","label":"Test and refine","title":"A polished screen is only the start.","lead":"The useful question is what happens when somebody tries to learn with it."},{"path":"addie.html","label":"Explore ADDIE","title":"ADDIE — how I examine the design process.","lead":"Analyse. Design. Develop. Implement. Evaluate."},{"path":"cv.html","label":"Summary of my CV","title":"The experience behind the work.","lead":"Jonathan Pincher · Learning experience design, digital learning and programme leadership"}];
+const menuTargets={"Home":"index.html","See the work":"featured-work.html","My approach":"approach.html","Question":"question.html","Design":"design.html","Test and refine":"test.html","Experience overview":"career.html","Learning delivery":"experience.html","Accredited course design":"accredited-course-design.html","Audit and accountability":"audit-accountability.html","University institute":"university-institute.html","Summary of my CV":"cv.html","Explore ADDIE":"addie.html","Explore my approach":"approach.html","See my experience":"career.html","EXPLORE THE DESIGN":"design.html","ASK A BETTER QUESTION":"question.html","TRY THE EXPERIENCE":"featured-work.html","EXPLORE ADDIE":"addie.html","DESIGN THE EXPERIENCE":"design.html","TEST AND REFINE":"test.html"};
+for(const item of restored){
+ const source=fs.readFileSync(path.join(root,item.path),'utf8');
+ assert.ok(!/http-equiv=["']refresh/i.test(source),'Standalone page, not redirect: '+item.path);
+ const page=new JSDOM(source,{url:'https://example.test/portfolio/'+item.path,runScripts:'outside-only'});
+ const pw=page.window;
+ assert.equal(pw.document.querySelector('h1').textContent,item.title);
+ assert.ok(pw.document.querySelector('main').textContent.length>650,'Substantive original content: '+item.path);
+ const active=pw.document.querySelector('.portfolio-side-nav [aria-current="page"]');
+ assert.equal(active?.getAttribute('href'),item.path,'Current section: '+item.path);
+ for(const a of pw.document.querySelectorAll('a[href]'))auditLink(a.getAttribute('href'),item.path);
+ for(const a of pw.document.querySelectorAll('.portfolio-side-nav a[href]')){
+  const target=a.getAttribute('href');assert.ok(!target.includes('interactive-learning'),'Portfolio menu stays in portfolio: '+item.path);
+  const expected=menuTargets[a.textContent.trim()];if(expected)assert.equal(target,expected);
+ }
+ pw.eval(language);
+ const english=pw.document.querySelector('main').textContent;
+ for(const lang of ['es','zh','en']){
+  pw.document.querySelector('[data-language="'+lang+'"]').click();
+  assert.equal(pw.document.documentElement.lang,lang==='zh'?'zh-CN':lang);
+  if(lang==='en')assert.equal(pw.document.querySelector('main').textContent,english,'English roundtrip '+item.path);
+  else {
+   assert.notEqual(pw.document.querySelector('h1').textContent,item.title,'Translated heading '+lang+' '+item.path);
+   assert.notEqual(pw.document.querySelector('main').textContent,english,'Translated body '+lang+' '+item.path);
+  }
+ }
+ if(item.path==='addie.html'){
+  const stages=pw.document.querySelectorAll('.addie-stage');assert.equal(stages.length,5);
+  for(const stage of stages){stage.open=true;assert.equal(stage.open,true);stage.open=false;assert.equal(stage.open,false);assert.ok(stage.querySelector('summary'));}
+ }
+ page.window.close();
 }
+for(const a of w.document.querySelectorAll('.portfolio-side-nav a'))assert.ok(!a.href.includes('interactive-learning'),'Homepage menu stays in portfolio');
 assert.deepEqual(errors,[]);
 dom.window.close();
 const es=new JSDOM(html,{url:'https://example.test/portfolio/index.html?lang=es',runScripts:'outside-only'});es.window.eval(language);assert.equal(es.window.document.documentElement.lang,'es');assert.ok(es.window.document.querySelector('main').textContent.includes('más de 30 años'));es.window.close();
 const denied=new JSDOM(html,{url:'https://example.test/portfolio/index.html',runScripts:'outside-only'});Object.defineProperty(denied.window,'localStorage',{get(){throw new Error('Storage denied')}});denied.window.eval(language);denied.window.document.querySelector('[data-language="zh"]').click();assert.equal(denied.window.document.documentElement.lang,'zh-CN');denied.window.close();
-console.log('PASS: '+checked+' local links/assets/legacy redirects; every project route and fragment exists; all three language buttons translate body and metadata, round-trip without corruption, persist to project and work when storage is blocked.');
+console.log('PASS: '+checked+' local links/assets and 12 restored portfolio pages; every project route and fragment exists; all three language buttons translate body and metadata, round-trip without corruption, persist to project and work when storage is blocked.');

@@ -1,12 +1,12 @@
 globalThis.JP_RECOVERY_GUIDE={
-  "prepared": "2026-10-23",
+  "prepared": "2026-10-24",
   "sections": [
     [
       "Choose the right backup",
       [
-        "Prepared 23 October 2026. Keep this private Word guide with your offline copies. The public ZIP files contain no owner code, account passwords, database secret keys or personal tester responses.",
+        "Prepared 24 October 2026. Keep this private Word guide with your offline copies. The public ZIP files contain no owner code, account passwords, database secret keys or personal tester responses.",
         "Complete project: Jonathan_Pincher_Portfolio_Backup.zip is the exact tracked-file snapshot of the combined published repository. Use it to restore the present site with both projects together.",
-        "Homepage only: Jonathan_Pincher_Homepage_Standalone.zip contains a deployable Website folder, professional homepage, language script and redirect pages. Its evidence links lead to the published learning project. The learning project is deliberately not duplicated in this smaller package.",
+        "Homepage only: Jonathan_Pincher_Homepage_Standalone.zip contains a deployable Website folder, professional homepage, language script and twelve standalone portfolio pages, including CV, approach and career evidence. Their menus stay local. The featured-work page has an explicit button to the published learning project, which is not duplicated in this smaller package.",
         "Learning only: Jonathan_Pincher_Learning_Standalone.zip contains a deployable Website folder with the complete learning experience, its media and questionnaires. An index.html launcher makes the learning project the entry page. Portfolio/Home buttons continue to the published portfolio.",
         "Recovery guide: Jonathan_Pincher_Recovery_Manual.html is the public, password-free recovery manual. This private Word document adds your supplied developer code. Each ZIP includes a readable file-by-file inventory, checksums, source version and package notes.",
         "Do not mix the two standalone Website folders into the same directory without reviewing index.html: one starts the portfolio and the other starts the learning project. For the original combined site use the complete ZIP."
@@ -52,7 +52,7 @@ globalThis.JP_RECOVERY_GUIDE={
         "Learning alone: create or clone a repository such as learning-design. Copy Learning_Standalone/Website contents to its root, including its index.html launcher, interactive-learning.html, shared runtime, learning-media/, tester and reading guide. Publish main / root. The runtime contains the internal pages; a missing physical learning-compare.html is not a lost section.",
         "For a repository owned by Jpincher, a project page is normally https://jpincher.github.io/REPOSITORY-NAME/ . Use Settings > Pages > Visit site to obtain its actual address. A repository named Jpincher.github.io uses the account root address instead.",
         "The standalone packages are portable copies; the complete archive preserves original source exactly. PACKAGE_CHANGES.json in each standalone records transformations. The learning tester's project navigation is made relative to its restored folder. The homepage's cross-project links are made explicit external links.",
-        "If moving BOTH packages to a new host, edit the learning-project destination in homepage HTML and redirect files; edit the public portfolio destination in the learning runtime/entry copies if desired. Keep folder paths intact. Inspect FILE_GUIDE.html before editing generated or historical files."
+        "If moving BOTH packages to a new host, edit the explicit learning-project destination in featured-work.html; edit the public portfolio destination in the learning runtime/entry copies if desired. Keep folder paths intact. Inspect FILE_GUIDE.html before editing generated or historical files."
       ]
     ],
     [
@@ -116,10 +116,10 @@ globalThis.JP_RECOVERY_GUIDE={
     [
       "Maintain files and verify a rebuild",
       [
-        "Treat index.html plus portfolio-languages.js as the homepage’s live pair. FinalHomepage.html.html is its public alias. Do not replace these with the older Safari-saved upload or webarchive just because its name says final.",
+        "Keep index.html, portfolio-languages.js and the twelve standalone portfolio HTML pages together. FinalHomepage.html.html is its public alias. Do not replace these with the older Safari-saved upload or webarchive just because its name says final.",
         "Treat interactive-learning.html plus guide-audio-coordinator.js, learning-project-ddca4d6b5d3f.js and learning-media/ as one learning runtime. Internal page HTML, scripts, translations and avatar timing are embedded in the runtime. The three 05c34d493c64 text chunks are historical source uploads; the current entry does not load them.",
         "Do not rename hashed media files individually. The runtime and installed-voice manifest refer to their exact paths. The file guide names the teaching documents and the media use, where the installed manifest identifies them.",
-        "Original standalone career/design/etc pages were not recovered as separate originals; the current small HTML files redirect to the matching published evidence inside the learning project. The backup preserves this implemented behavior rather than claiming to restore unavailable originals.",
+        "The twelve standalone portfolio pages were rebuilt on 24 October 2026 using the original English text and Spanish/Chinese translations recovered from portfolio-languages.js. Original separate page markup was unavailable; the rebuilt pages use the current homepage header, menu and purple-and-cream styling. These pages are independent of the learning runtime.",
         "For development, install the pinned tests dependencies using npm install --prefix tests --ignore-scripts and run npm test --prefix tests. node tests/homepage-navigation.cjs audits homepage links; node tests/access-guide.cjs validates the private Word builder. Automated checks do not replace testing Safari, keyboard use, zoom, language buttons, slower networks and a second LAN device.",
         "The complete backup includes GitHub Actions workflows for checks, finishing voices and refreshed downloads. Do not copy all workflows blindly into a standalone repository: some assume both projects and production URLs. Standalone Website folders omit automation; their Support folders retain relevant source for a developer.",
         "Voices are already installed as MP3 files; playing them needs no paid voice account/API key. tools/final-voices.json and final-voices-installed.json describe scripts, voice identities, audio hashes and mouth envelopes. Regeneration tools use edge-tts and may need maintenance if its service changes.",
@@ -166,28 +166,28 @@ globalThis.JP_RECOVERY_GUIDE={
     },
     {
       "path": "accredited-course-design.html",
-      "group": "Homepage redirect",
-      "instruction": "Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site."
+      "group": "Homepage portfolio page",
+      "instruction": "Standalone Accredited course design portfolio page, restored from the recovered English/Spanish/Chinese text. Deploy beside index.html and portfolio-languages.js. Its sidebar stays within the homepage project; no learning runtime is required for this page."
     },
     {
       "path": "addie.html",
-      "group": "Homepage redirect",
-      "instruction": "Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site."
+      "group": "Homepage portfolio page",
+      "instruction": "Standalone Explore ADDIE portfolio page, restored from the recovered English/Spanish/Chinese text. Deploy beside index.html and portfolio-languages.js. Its sidebar stays within the homepage project; no learning runtime is required for this page."
     },
     {
       "path": "approach.html",
-      "group": "Homepage redirect",
-      "instruction": "Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site."
+      "group": "Homepage portfolio page",
+      "instruction": "Standalone My approach portfolio page, restored from the recovered English/Spanish/Chinese text. Deploy beside index.html and portfolio-languages.js. Its sidebar stays within the homepage project; no learning runtime is required for this page."
     },
     {
       "path": "audit-accountability.html",
-      "group": "Homepage redirect",
-      "instruction": "Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site."
+      "group": "Homepage portfolio page",
+      "instruction": "Standalone Audit and accountability portfolio page, restored from the recovered English/Spanish/Chinese text. Deploy beside index.html and portfolio-languages.js. Its sidebar stays within the homepage project; no learning runtime is required for this page."
     },
     {
       "path": "career.html",
-      "group": "Homepage redirect",
-      "instruction": "Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site."
+      "group": "Homepage portfolio page",
+      "instruction": "Standalone Experience overview portfolio page, restored from the recovered English/Spanish/Chinese text. Deploy beside index.html and portfolio-languages.js. Its sidebar stays within the homepage project; no learning runtime is required for this page."
     },
     {
       "path": "COMPLETION_STATUS.md",
@@ -226,13 +226,13 @@ globalThis.JP_RECOVERY_GUIDE={
     },
     {
       "path": "cv.html",
-      "group": "Homepage redirect",
-      "instruction": "Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site."
+      "group": "Homepage portfolio page",
+      "instruction": "Standalone Summary of my CV portfolio page, restored from the recovered English/Spanish/Chinese text. Deploy beside index.html and portfolio-languages.js. Its sidebar stays within the homepage project; no learning runtime is required for this page."
     },
     {
       "path": "design.html",
-      "group": "Homepage redirect",
-      "instruction": "Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site."
+      "group": "Homepage portfolio page",
+      "instruction": "Standalone Design portfolio page, restored from the recovered English/Spanish/Chinese text. Deploy beside index.html and portfolio-languages.js. Its sidebar stays within the homepage project; no learning runtime is required for this page."
     },
     {
       "path": "download-access-guide.html",
@@ -246,13 +246,13 @@ globalThis.JP_RECOVERY_GUIDE={
     },
     {
       "path": "experience.html",
-      "group": "Homepage redirect",
-      "instruction": "Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site."
+      "group": "Homepage portfolio page",
+      "instruction": "Standalone Learning delivery portfolio page, restored from the recovered English/Spanish/Chinese text. Deploy beside index.html and portfolio-languages.js. Its sidebar stays within the homepage project; no learning runtime is required for this page."
     },
     {
       "path": "featured-work.html",
-      "group": "Homepage redirect",
-      "instruction": "Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site."
+      "group": "Homepage portfolio page",
+      "instruction": "Standalone See the work portfolio page, restored from the recovered English/Spanish/Chinese text. Deploy beside index.html and portfolio-languages.js. Its sidebar stays within the homepage project; no learning runtime is required for this page."
     },
     {
       "path": "Final Lesson Plans Jonathan_Pincher_Portfolio_Invitation.html",
@@ -736,8 +736,8 @@ globalThis.JP_RECOVERY_GUIDE={
     },
     {
       "path": "question.html",
-      "group": "Homepage redirect",
-      "instruction": "Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site."
+      "group": "Homepage portfolio page",
+      "instruction": "Standalone Question portfolio page, restored from the recovered English/Spanish/Chinese text. Deploy beside index.html and portfolio-languages.js. Its sidebar stays within the homepage project; no learning runtime is required for this page."
     },
     {
       "path": "README.md",
@@ -806,8 +806,8 @@ globalThis.JP_RECOVERY_GUIDE={
     },
     {
       "path": "test.html",
-      "group": "Homepage redirect",
-      "instruction": "Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site."
+      "group": "Homepage portfolio page",
+      "instruction": "Standalone Test and refine portfolio page, restored from the recovered English/Spanish/Chinese text. Deploy beside index.html and portfolio-languages.js. Its sidebar stays within the homepage project; no learning runtime is required for this page."
     },
     {
       "path": "tests/access-guide.cjs",
@@ -941,8 +941,8 @@ globalThis.JP_RECOVERY_GUIDE={
     },
     {
       "path": "university-institute.html",
-      "group": "Homepage redirect",
-      "instruction": "Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site."
+      "group": "Homepage portfolio page",
+      "instruction": "Standalone University institute portfolio page, restored from the recovered English/Spanish/Chinese text. Deploy beside index.html and portfolio-languages.js. Its sidebar stays within the homepage project; no learning runtime is required for this page."
     },
     {
       "path": "USABILITY_TESTING.md",

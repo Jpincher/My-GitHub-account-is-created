@@ -10,7 +10,16 @@ const root=path.resolve(__dirname,'..'),tmp=fs.mkdtempSync(path.join(os.tmpdir()
   const href=match[1];if(/^(?:https?:|mailto:|#|data:)/.test(href))continue;
   assert(fs.existsSync(path.join(home,href.split(/[?#]/)[0])),'Homepage local dependency '+href);
  }
- assert(homeHTML.includes('https://jpincher.github.io/My-GitHub-account-is-created/interactive-learning.html'));
+ const portfolioPages=["featured-work.html","approach.html","career.html","accredited-course-design.html","audit-accountability.html","university-institute.html","experience.html","question.html","design.html","test.html","addie.html","cv.html"];
+ for(const name of ['index.html',...portfolioPages]){
+  const source=fs.readFileSync(path.join(home,name),'utf8');
+  assert(!/http-equiv=["']refresh/i.test(source),'Standalone portfolio page '+name);
+  for(const match of source.matchAll(/(?:href|src)=["']([^"']+)["']/g)){
+   const href=match[1];if(/^(?:https?:|mailto:|#|data:)/.test(href))continue;
+   assert(fs.existsSync(path.join(home,href.split(/[?#]/)[0])),'Portable portfolio dependency '+name+' '+href);
+  }
+ }
+ assert(fs.readFileSync(path.join(home,'featured-work.html'),'utf8').includes('https://jpincher.github.io/My-GitHub-account-is-created/interactive-learning.html'));
  assert(!fs.existsSync(path.join(home,'learning-project-ddca4d6b5d3f.js')),'Homepage does not require a local learning runtime');
  assert(fs.existsSync(path.join(learning,'guide-audio-coordinator.js')));
  const entry=fs.readFileSync(path.join(learning,'index.html'),'utf8');assert(entry.includes('location.search+location.hash'));

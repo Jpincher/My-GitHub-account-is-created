@@ -12,7 +12,7 @@ on:
       - 'tools/access-guide-docx.js'
       - 'download-access-guide.html'
       - 'tests/access-guide.cjs'
-      - 'index.html'
+      - '*.html'
       - 'FinalHomepage.html.html'
       - 'portfolio-languages.js'
       - 'learning-project-*.js'

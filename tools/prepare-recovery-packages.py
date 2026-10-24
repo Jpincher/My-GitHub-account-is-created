@@ -55,8 +55,8 @@ def build():
  support_names=[p for p in files if p.startswith(("recovery/","supabase/")) or p in ["download-access-guide.html","tools/access-guide-docx.js","cv-links.js","cv-links.json","CONTRIBUTING.md","USABILITY_TESTING.md","COMPLETION_STATUS.md","CV_LINKS.md","HOMEPAGE_NAVIGATION_REPAIR.md"]]
  common={"Support/"+p:(ROOT/p).read_bytes() for p in support_names}
  common_sources={"Support/"+p:p for p in support_names}
- redirect_names=["accredited-course-design.html","addie.html","approach.html","audit-accountability.html","career.html","cv.html","design.html","experience.html","featured-work.html","question.html","test.html","university-institute.html"]
- home_names=["index.html","FinalHomepage.html.html","portfolio-languages.js","education.html",*redirect_names]
+ portfolio_pages=["accredited-course-design.html","addie.html","approach.html","audit-accountability.html","career.html","cv.html","design.html","experience.html","featured-work.html","question.html","test.html","university-institute.html"]
+ home_names=["index.html","FinalHomepage.html.html","portfolio-languages.js","education.html",*portfolio_pages]
  home=dict(common);home_sources=dict(common_sources)
  for p in home_names:
   raw=(ROOT/p).read_text()
@@ -77,7 +77,7 @@ def build():
    learning["Support/"+p]=(ROOT/p).read_bytes();learning_sources["Support/"+p]=p
  learning["Website/index.html"]=b'<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Learning by design</title><script>location.replace("interactive-learning.html"+location.search+location.hash)</script></head><body><p><a href="interactive-learning.html">Open the learning project</a></p></body></html>'
  learning["Website/.nojekyll"]=b""
- write_zip("Jonathan_Pincher_Homepage_Standalone.zip","Homepage_Standalone",home,home_sources,"homepage",["Homepage evidence and redirect links use the published learning-project address, so learning files are not required beside the homepage.","No original site source is overwritten; transformations affect this package only."])
+ write_zip("Jonathan_Pincher_Homepage_Standalone.zip","Homepage_Standalone",home,home_sources,"homepage",["Homepage menus and evidence pages remain local. Only explicit learning-project launch buttons in featured-work.html use the published learning address; learning files are not required beside the homepage.","No original site source is overwritten; transformations affect this package only."])
  write_zip("Jonathan_Pincher_Learning_Standalone.zip","Learning_Standalone",learning,learning_sources,"learning",["A new index.html launcher opens interactive-learning.html and preserves query/hash.","Tester project ROOT becomes relative to the restored folder for local navigation. Its online API endpoint is preserved and CORS still requires an explicitly allowed origin.","Portfolio/Home links remain intentional links to the published portfolio.","All installed media are copied unchanged, including original recorded voices and mouth envelopes in the runtime."])
  (OUT/"Jonathan_Pincher_Recovery_Manual.html").write_bytes(manual())
  (OUT/"Jonathan_Pincher_Recovery_Manual.html.sha256").write_text(hashlib.sha256(manual()).hexdigest()+"  Jonathan_Pincher_Recovery_Manual.html\n")

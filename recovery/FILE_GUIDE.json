@@ -27,28 +27,28 @@
     },
     {
       "path": "accredited-course-design.html",
-      "group": "Homepage redirect",
-      "instruction": "Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site."
+      "group": "Homepage portfolio page",
+      "instruction": "Standalone Accredited course design portfolio page, restored from the recovered English/Spanish/Chinese text. Deploy beside index.html and portfolio-languages.js. Its sidebar stays within the homepage project; no learning runtime is required for this page."
     },
     {
       "path": "addie.html",
-      "group": "Homepage redirect",
-      "instruction": "Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site."
+      "group": "Homepage portfolio page",
+      "instruction": "Standalone Explore ADDIE portfolio page, restored from the recovered English/Spanish/Chinese text. Deploy beside index.html and portfolio-languages.js. Its sidebar stays within the homepage project; no learning runtime is required for this page."
     },
     {
       "path": "approach.html",
-      "group": "Homepage redirect",
-      "instruction": "Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site."
+      "group": "Homepage portfolio page",
+      "instruction": "Standalone My approach portfolio page, restored from the recovered English/Spanish/Chinese text. Deploy beside index.html and portfolio-languages.js. Its sidebar stays within the homepage project; no learning runtime is required for this page."
     },
     {
       "path": "audit-accountability.html",
-      "group": "Homepage redirect",
-      "instruction": "Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site."
+      "group": "Homepage portfolio page",
+      "instruction": "Standalone Audit and accountability portfolio page, restored from the recovered English/Spanish/Chinese text. Deploy beside index.html and portfolio-languages.js. Its sidebar stays within the homepage project; no learning runtime is required for this page."
     },
     {
       "path": "career.html",
-      "group": "Homepage redirect",
-      "instruction": "Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site."
+      "group": "Homepage portfolio page",
+      "instruction": "Standalone Experience overview portfolio page, restored from the recovered English/Spanish/Chinese text. Deploy beside index.html and portfolio-languages.js. Its sidebar stays within the homepage project; no learning runtime is required for this page."
     },
     {
       "path": "COMPLETION_STATUS.md",
@@ -87,13 +87,13 @@
     },
     {
       "path": "cv.html",
-      "group": "Homepage redirect",
-      "instruction": "Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site."
+      "group": "Homepage portfolio page",
+      "instruction": "Standalone Summary of my CV portfolio page, restored from the recovered English/Spanish/Chinese text. Deploy beside index.html and portfolio-languages.js. Its sidebar stays within the homepage project; no learning runtime is required for this page."
     },
     {
       "path": "design.html",
-      "group": "Homepage redirect",
-      "instruction": "Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site."
+      "group": "Homepage portfolio page",
+      "instruction": "Standalone Design portfolio page, restored from the recovered English/Spanish/Chinese text. Deploy beside index.html and portfolio-languages.js. Its sidebar stays within the homepage project; no learning runtime is required for this page."
     },
     {
       "path": "download-access-guide.html",
@@ -107,13 +107,13 @@
     },
     {
       "path": "experience.html",
-      "group": "Homepage redirect",
-      "instruction": "Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site."
+      "group": "Homepage portfolio page",
+      "instruction": "Standalone Learning delivery portfolio page, restored from the recovered English/Spanish/Chinese text. Deploy beside index.html and portfolio-languages.js. Its sidebar stays within the homepage project; no learning runtime is required for this page."
     },
     {
       "path": "featured-work.html",
-      "group": "Homepage redirect",
-      "instruction": "Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site."
+      "group": "Homepage portfolio page",
+      "instruction": "Standalone See the work portfolio page, restored from the recovered English/Spanish/Chinese text. Deploy beside index.html and portfolio-languages.js. Its sidebar stays within the homepage project; no learning runtime is required for this page."
     },
     {
       "path": "Final Lesson Plans Jonathan_Pincher_Portfolio_Invitation.html",
@@ -597,8 +597,8 @@
     },
     {
       "path": "question.html",
-      "group": "Homepage redirect",
-      "instruction": "Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site."
+      "group": "Homepage portfolio page",
+      "instruction": "Standalone Question portfolio page, restored from the recovered English/Spanish/Chinese text. Deploy beside index.html and portfolio-languages.js. Its sidebar stays within the homepage project; no learning runtime is required for this page."
     },
     {
       "path": "README.md",
@@ -667,8 +667,8 @@
     },
     {
       "path": "test.html",
-      "group": "Homepage redirect",
-      "instruction": "Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site."
+      "group": "Homepage portfolio page",
+      "instruction": "Standalone Test and refine portfolio page, restored from the recovered English/Spanish/Chinese text. Deploy beside index.html and portfolio-languages.js. Its sidebar stays within the homepage project; no learning runtime is required for this page."
     },
     {
       "path": "tests/access-guide.cjs",
@@ -802,8 +802,8 @@
     },
     {
       "path": "university-institute.html",
-      "group": "Homepage redirect",
-      "instruction": "Small redirect to existing learning-project evidence. Keep for existing bookmarks; homepage-only package points this evidence at the published learning site."
+      "group": "Homepage portfolio page",
+      "instruction": "Standalone University institute portfolio page, restored from the recovered English/Spanish/Chinese text. Deploy beside index.html and portfolio-languages.js. Its sidebar stays within the homepage project; no learning runtime is required for this page."
     },
     {
       "path": "USABILITY_TESTING.md",
