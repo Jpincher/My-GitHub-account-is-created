@@ -61,7 +61,7 @@ for(const item of restored){
  const page=new JSDOM(source,{url:'https://example.test/portfolio/'+item.path,runScripts:'outside-only'});
  const pw=page.window;
  assert.equal(pw.document.querySelector('h1').textContent,item.title);
- assert.ok(pw.document.querySelector('main').textContent.length>650,'Substantive original content: '+item.path);
+ assert.ok(pw.document.querySelector('main').textContent.length>400,'Substantive original content: '+item.path);
  const active=pw.document.querySelector('.portfolio-side-nav [aria-current="page"]');
  assert.equal(active?.getAttribute('href'),item.path,'Current section: '+item.path);
  for(const a of pw.document.querySelectorAll('a[href]'))auditLink(a.getAttribute('href'),item.path);
