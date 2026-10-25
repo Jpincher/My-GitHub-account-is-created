@@ -38,4 +38,4 @@ window.addEventListener('message',event=>{
  if(!waiting||event.data.route!==waiting.route)return;waiting=null;$('routeStatus').textContent=DATA[lang].ready;$('directLink').hidden=true;
 });
 render();
-})();</script></body></html>
+})();</script><script data-home-links-removed="true">(()=>{'use strict';function clean(){for(const a of document.querySelectorAll('a[href]')){const raw=a.getAttribute('href')||'';const label=(a.textContent||'').trim().replace(/\s+/g,' ').toLowerCase();let portfolio=false;try{const u=new URL(raw,location.href);portfolio=/(?:^|\/)(?:index|education)\.html$/.test(u.pathname)||(u.hostname==='jpincher.github.io'&&/^\/My-GitHub-account-is-created\/?$/.test(u.pathname))}catch{}if(portfolio||/^(?:home|project home|inicio|inicio del proyecto|项目首页|首页)$/.test(label)){if(/^(?:home|project home|inicio|inicio del proyecto|项目首页|首页)$/.test(label))a.remove();else a.replaceWith(...a.childNodes)}}}clean();if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',clean,{once:true});new MutationObserver(clean).observe(document.documentElement,{childList:true,subtree:true});})();</script></body></html>
