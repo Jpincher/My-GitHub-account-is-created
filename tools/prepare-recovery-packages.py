@@ -8,7 +8,11 @@ def tracked():
  return [p for p in subprocess.check_output(["git","ls-files","-z"],cwd=ROOT).decode().split("\0") if p and (ROOT/p).is_file()]
 def data():
  text=(ROOT/"recovery/recovery-guide-data.js").read_text()
- return json.loads(text.split("=",1)[1].strip().rstrip(";"))
+ result=json.loads(text.split("=",1)[1].strip().rstrip(";"))
+ # Existing legacy workspace entry must also have a recovery instruction.
+ if not any(item["path"]=="lesson-studio/index.html" for item in result["files"]):
+  result["files"].append({"path":"lesson-studio/index.html","group":"Lesson Studio","instruction":"Legacy Lesson Studio launcher and browser-backup migration page. Keep for existing bookmarks; it opens the separately hosted workspace."})
+ return result
 def wrap(title,body):
  return '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+html.escape(title)+'</title><style>body{font:16px/1.65 Arial,sans-serif;background:#faf8ee;color:#284b37;max-width:1060px;margin:35px auto;padding:24px}h1,h2{font-family:Georgia,serif}h1{font-size:36px}h2{margin-top:35px}td,th{border:1px solid #bdcbb5;padding:10px;text-align:left;vertical-align:top}table{border-collapse:collapse;width:100%;font-size:14px}td:first-child{overflow-wrap:anywhere;min-width:180px}a{color:inherit}code{overflow-wrap:anywhere}.scroll{overflow:auto}</style></head><body><h1>'+html.escape(title)+'</h1>'+body+'</body></html>'
 def file_guide(mapping,source_paths,meta):
