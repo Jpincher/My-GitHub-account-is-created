@@ -958,6 +958,11 @@ globalThis.JP_RECOVERY_GUIDE={
       "path": "usability-tester.html",
       "group": "Learning",
       "instruction": "Live five-task 1–5 questionnaire, three language buttons, shared report and protected owner view. For another host edit both its embedded endpoint and project ROOT; API CORS must match."
+    },
+    {
+      "path": "learning-avatar-presence.js",
+      "group": "Learning",
+      "instruction": "Avatar-only entrance, fade-out and reserved-space collapse. Load before the shared learning runtime; keep playback controls available and preserve reduced-motion behaviour."
     }
   ],
   "routes": [
