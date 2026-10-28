@@ -93,4 +93,4 @@ render();
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>requestAnimationFrame(mount),{once:true});else requestAnimationFrame(mount);
 })();
-</script></body></html>
+</script><script data-support-close-return="true">(()=>{'use strict';function closeReturn(event){const hit=event.target.closest('#topProjectLink,#projectLink,header a[href*="interactive-learning"],footer a[href*="interactive-learning"]');if(!hit)return;event.preventDefault();event.stopImmediatePropagation();if(window.opener&&!window.opener.closed){try{window.opener.focus()}catch{}window.close();setTimeout(fallback,150);return;}fallback();}function fallback(){if(document.referrer&&history.length>1){history.back();return;}let previous=null;try{const data=JSON.parse(sessionStorage.getItem('jp-support-return-v1')||'null');if(data&&Date.now()-data.at<86400000){const u=new URL(data.url);if(u.origin===location.origin)previous=u.href;}}catch{}location.assign(previous||new URL('interactive-learning.html',location.href).href);}document.addEventListener('click',closeReturn,true);})();</script></body></html>
