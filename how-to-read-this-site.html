@@ -39,7 +39,7 @@ window.addEventListener('message',event=>{
 });
 render();
 })();</script><script data-home-links-removed="true">(()=>{'use strict';function clean(){for(const a of document.querySelectorAll('a[href]')){const raw=a.getAttribute('href')||'';const label=(a.textContent||'').trim().replace(/\s+/g,' ').toLowerCase();let portfolio=false;try{const u=new URL(raw,location.href);portfolio=/(?:^|\/)(?:index|education)\.html$/.test(u.pathname)||(u.hostname==='jpincher.github.io'&&/^\/My-GitHub-account-is-created\/?$/.test(u.pathname))}catch{}if(portfolio||/^(?:home|project home|inicio|inicio del proyecto|项目首页|首页)$/.test(label)){if(/^(?:home|project home|inicio|inicio del proyecto|项目首页|首页)$/.test(label))a.remove();else a.replaceWith(...a.childNodes)}}}clean();if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',clean,{once:true});new MutationObserver(clean).observe(document.documentElement,{childList:true,subtree:true});})();</script><script data-page-language-buttons="true">/* Restore guide entrance, exit and space collapse without changing voice playback. */
-(()=>{'use strict';function mount(){
+(()=>{'use strict';const nextFrame=window.requestAnimationFrame?.bind(window)||((fn)=>setTimeout(fn,0));function mount(){
  window.JP_AVATAR_PRESENCE_CLEANUP?.();
  document.querySelectorAll('#soundWelcome,#startExperienceSound').forEach(e=>e.remove());
  // Keep all language choices visible while retaining the existing translation handlers.
@@ -66,17 +66,17 @@ render();
  const set=(p,v)=>slot.style.setProperty(p,v,'important');
  function cancel(){clearTimeout(idle);clearTimeout(finish);clearTimeout(settle);}
  function restore(){for(const [p,[v,priority]]of Object.entries(saved)){if(v)slot.style.setProperty(p,v,priority);else slot.style.removeProperty(p);}if(band)for(const [p,[v,priority]]of Object.entries(bandStyles)){if(v)band.style.setProperty(p,v,priority);else band.style.removeProperty(p);}}
- function show(){cancel();restore();controlsVisible(true);slot.dataset.avatarPresence='visible';set('visibility','visible');set('opacity','0');set('transition','opacity '+fade+'ms ease');slot.getBoundingClientRect();requestAnimationFrame(()=>set('opacity','1'));}
+ function show(){cancel();restore();controlsVisible(true);slot.dataset.avatarPresence='visible';set('visibility','visible');set('opacity','0');set('transition','opacity '+fade+'ms ease');slot.getBoundingClientRect();nextFrame(()=>set('opacity','1'));}
  function hide(){cancel();slot.dataset.avatarPresence='fading';set('transition','opacity '+fade+'ms ease');set('opacity','0');finish=setTimeout(()=>{
   controlsVisible(false);set('border','0');set('outline','0');set('box-shadow','none');
   const height=slot.getBoundingClientRect().height;set('height',height+'px');set('min-height','0');set('max-height',height+'px');set('overflow','hidden');set('transition','height '+collapse+'ms ease,max-height '+collapse+'ms ease,margin '+collapse+'ms ease,padding '+collapse+'ms ease');
   if(band){for(const [p,v]of Object.entries({'min-height':'0','height':'auto','max-height':'none','overflow':'visible'}))band.style.setProperty(p,v,'important');}const actions=band?.querySelector('.guide-actions-row');if(actions)for(const [p,v]of Object.entries({'height':'auto','max-height':'none','overflow':'visible'}))actions.style.setProperty(p,v,'important');
-  requestAnimationFrame(()=>{set('height','0');set('max-height','0');set('margin','0');set('padding','0');});
+  nextFrame(()=>{set('height','0');set('max-height','0');set('margin','0');set('padding','0');});
   settle=setTimeout(()=>{set('visibility','hidden');slot.dataset.avatarPresence='collapsed';},collapse);
  },fade);}
  show();
  let linkedAudio=null,attempted=false,watch;
- const unmuted=()=>{try{return localStorage.getItem('jp-voice-muted')==='false'}catch{return window.JP_VOICE_MUTED===false}};
+ const unmuted=()=>{try{return !['true','1'].includes(localStorage.getItem('jp-voice-muted'))}catch{return window.JP_VOICE_MUTED===false}};
  function connect(){
   const audio=window.JP_SHARED_AUDIO;
   if(audio&&audio!==linkedAudio){linkedAudio=audio;audio.addEventListener('playing',show);audio.addEventListener('waiting',show);audio.addEventListener('ended',()=>{cancel();idle=setTimeout(hide,500)});}
@@ -91,6 +91,6 @@ render();
  document.addEventListener('click',event=>{if(event.target.closest('#guideReliablePlay,#sectionGuidePlay,#guidePlay,#startExperienceSound,#voiceMuteToggle'))show();},true);
  window.addEventListener('pagehide',cancel,{once:true});
 }
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>requestAnimationFrame(mount),{once:true});else requestAnimationFrame(mount);
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>nextFrame(mount),{once:true});else nextFrame(mount);
 })();
 </script><script data-support-close-return="true">(()=>{'use strict';function closeReturn(event){const hit=event.target.closest('#topProjectLink,#projectLink,header a[href*="interactive-learning"],footer a[href*="interactive-learning"]');if(!hit)return;event.preventDefault();event.stopImmediatePropagation();if(window.opener&&!window.opener.closed){try{window.opener.focus()}catch{}window.close();setTimeout(fallback,150);return;}fallback();}function fallback(){if(history.length>1){history.back();return;}let previous=null;try{const data=JSON.parse(sessionStorage.getItem('jp-support-return-v1')||'null');if(data&&Date.now()-data.at<86400000){const u=new URL(data.url);if(u.origin===location.origin)previous=u.href;}}catch{}location.assign(previous||new URL('interactive-learning.html',location.href).href);}document.addEventListener('click',closeReturn,true);})();</script></body></html>
