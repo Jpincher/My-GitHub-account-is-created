@@ -35,3 +35,5 @@ window.addEventListener('pagehide',stopAll);
 document.addEventListener('visibilitychange',()=>{if(document.hidden)stopAll()});
 window.JP_GUIDE_AUDIO_COORDINATOR={stop:stopAll,activeCount:()=>active.size};
 })();
+/* Align the dashboard explanation with the preceding paragraph in Interactive demos. */
+(()=>{if(window.JP_DASHBOARD_NOTE_ALIGN)return;window.JP_DASHBOARD_NOTE_ALIGN=true;const write=Document.prototype.write;Document.prototype.write=function(...chunks){return write.apply(this,chunks.map(chunk=>typeof chunk==='string'?chunk.replace('<p class="note">Dashboards include clearly labelled fictional submissions.','<p class="note" style="padding-left:0!important;margin-left:0!important;text-align:left!important">Dashboards include clearly labelled fictional submissions.'):chunk));};})();
